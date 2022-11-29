@@ -1,7 +1,7 @@
 package engine.support;// package
 
 import javafx.stage.Stage;
-import tic.App;
+import nin.App;
 
 public class FXApplication extends javafx.application.Application {
 		
