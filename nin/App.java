@@ -4,6 +4,7 @@ import engine.Application;
 import engine.GameResource;
 import engine.GameWorld;
 import engine.Screen;
+import engine.components.AudioComponent;
 import engine.components.PhysicsComponent;
 import engine.components.RayComponent;
 import engine.gameobjects.GameObject;
@@ -314,6 +315,12 @@ public class App extends Application {
         if (e.getCode() == KeyCode.O) {
             loadSavedState();
         }
+        if (e.getCode() == KeyCode.U) {
+            System.out.println("nin/audiofiles/Dramatic-suspense-background-music.mp3");
+            AudioComponent audioClip = new AudioComponent("nin/audiofiles/Dramatic-suspense-background-music.mp3", true);
+            audioClip.playAudio();
+        }
+
 
         this.getScreenArrayList().forEach(screen -> {
             if (screen.getScreenID() == this.getCurrentScreenId()) {
