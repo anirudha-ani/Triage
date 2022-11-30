@@ -7,6 +7,7 @@ import engine.Screen;
 import engine.components.AudioComponent;
 import engine.components.PhysicsComponent;
 import engine.components.RayComponent;
+import engine.components.VideoComponent;
 import engine.gameobjects.GameObject;
 import engine.resources.FileLoader;
 import engine.resources.MapLoader;
@@ -319,6 +320,12 @@ public class App extends Application {
             System.out.println("nin/audiofiles/Dramatic-suspense-background-music.mp3");
             AudioComponent audioClip = new AudioComponent("nin/audiofiles/Dramatic-suspense-background-music.mp3", true);
             audioClip.playAudio();
+        }
+
+        if (e.getCode() == KeyCode.Y) {
+            System.out.println("mp4");
+            VideoComponent videoComponent = new VideoComponent("nin/videofiles/file_example_MP4_640_3MG.mp4", false);
+            videoComponent.playVideo(getScene(), getStage());
         }
 
 
