@@ -20,6 +20,10 @@ public abstract class Component {
         this.gameObject = gameObject;
     }
 
+    public Component(String tag) {
+        this.tag = tag;
+    }
+
     public GameObject getGameObject() {
         return gameObject;
     }
