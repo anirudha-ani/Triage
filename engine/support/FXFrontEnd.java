@@ -266,4 +266,11 @@ public abstract class FXFrontEnd extends CS1971FrontEnd {
 		
 	}
 
+	public Stage getStage() {
+		return stage;
+	}
+
+	public Scene getScene() {
+		return scene;
+	}
 }
