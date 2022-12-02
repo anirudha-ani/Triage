@@ -1,0 +1,30 @@
+This project is tested on this configuration -
+
+1. Oracle OpenJDK version 11.0.16
+2. JavaFX SDK 19
+3. MacOS 12.2.1 Monterey
+4. IntelliJ Idea 2022.2.2 Build #IU-222.4167.29, built on September 13, 2022
+
+Running the Game -
+1. Open the project and make sure all the dependency is setup correctly
+2. Run the Main.java file located in <rootDirectory>/nin/.
+3. It should open a GameWindow with a player unit in the middle and couple of polygon, circle and AAB object.
+
+Movement -
+6. You can use W to jump and A and D for lateral movement
+7. If the player is on platform it can jump
+8. If the player is not on platform it can not jump but lateral movements work.
+
+Shooting-
+9. To shoot - first aim by pressing mouse right click, then release the button to shoot projectile
+
+Puzzle -
+10. Blue blocks can be destroyed by projectile
+11. Touching the Black blocks can kill you
+12. Shooting the black blocks turns it into normal red blocks
+13. Yellow blocks activate the traps
+14. Touching the teleport triggers next stage/end game
+
+Navigation -
+14. Press R anytime to go to main screen.
+15. Other save button, new game, load checkpoint etc are in the UI, they are mouse clickable

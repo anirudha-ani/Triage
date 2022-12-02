@@ -11,7 +11,7 @@ import engine.support.FXFrontEnd;
 public class Main {
 
     public static void main(String[] args) {
-        FXFrontEnd app = new App("Ninja");
+        FXFrontEnd app = new App("Terror In CIT");
         FXApplication application = new FXApplication();
         FXApplication.begin(app);
     }

@@ -398,7 +398,7 @@ public class GameWorldBluePrint {
         GameObject text = new GameObject("text", new TransformComponent(new Vec2d(this.gameWorld.getRefScreen().getCurrentWindowSize().x / 2 - 30, 150), new Vec2d(84, 32)));
         text.setzIndex(0);
         DrawableRectangleComponent drawableBackground = new DrawableRectangleComponent(text);
-        TextComponent textField = new TextComponent("textComponent", text, "NINJA", "Impact", 50, Color.BLACK, new Vec2d(this.gameWorld.getRefScreen().getCurrentWindowSize().x / 2 - 30, 150), new Vec2d(0, 0));
+        TextComponent textField = new TextComponent("textComponent", text, "TERROR IN CIT", "Impact", 50, Color.BLACK, new Vec2d(this.gameWorld.getRefScreen().getCurrentWindowSize().x / 2 - 30, 150), new Vec2d(0, 0));
         text.setDefaultColor(Color.TRANSPARENT);
         text.setHoverColor(Color.TRANSPARENT);
         text.setClickColor(Color.TRANSPARENT);
