@@ -26,3 +26,5 @@ When you run the game Nin, press Y to Play a video.
 Press U to play a background audio
 
 Other features can be seen if you play the Nin 2 which you can find in the Instrcutions file
+
+Playtest report is added to another file.
