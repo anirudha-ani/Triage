@@ -70,13 +70,36 @@ public class ScreenController {
         this.currentGameState.setBluePrint(new GameWorldBluePrint(currentGameState));
 
         // Invoking blueprint function to populate this particular screen
-        this.currentGameState.getBluePrint().populateStartScreen();
+        this.currentGameState.getBluePrint().populateMenuScreen();
 
         // Resetting the time counter
         currentGameState.setMicroSecondPassedLastMove(0);
     }
 
     public void switchToFirstLevelScreen() {
+        // This is necessary before switching to any new screen
+        resetScreen();
+
+        // Creating an instance of the new screen
+        currentGameState.setGameScreen(
+                new Screen(
+                        ScreensNames.LevelOne.toString(),
+                        this.currentGameState.getCurrentApp().getCurrentScreenSize(),
+                        currentGameState.getGameWorld(),
+                        false));
+
+        // App -> Application (parent) also saves this value
+        this.currentGameState.getCurrentApp().setCurrentScreenId(ScreensNames.LevelOne.toString());
+        this.currentGameState.getCurrentApp().setCurrentScreen(currentGameState.getGameScreen());
+
+        // Setting up the blueprint
+        this.currentGameState.setBluePrint(new GameWorldBluePrint(currentGameState));
+
+        // Invoking blueprint function to populate this particular screen
+        this.currentGameState.getBluePrint().populateFirstLevelScreen();
+
+        // Resetting the time counter
+        currentGameState.setMicroSecondPassedLastMove(0);
 
     }
 

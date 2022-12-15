@@ -28,7 +28,7 @@ public class InputSystem extends System {
     }
 
     public void addObject(GameObject g) {
-        if (g.getId().contains("button")) {
+        if (g.getId().contains("button") || g.getId().contains("BUTTON")) {
             mouseInputReactableObject.add(g);
         }
         if (g.getId() == "player") {

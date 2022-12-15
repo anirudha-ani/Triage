@@ -125,6 +125,7 @@ public class Application extends FXFrontEnd {
     @Override
     protected void onMouseClicked(MouseEvent e) {
 //        System.out.println("onMouseClicked called");
+        currentScreen.onMouseClicked(e);
     }
 
     /**

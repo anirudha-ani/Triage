@@ -14,7 +14,7 @@ public class BackgroundGenerator {
         this.currentGameState = currentGameState;
     }
 
-    public GameObject generate() {
+    public GameObject generate(SpriteSheetId backgroundSpriteId) {
 
         // Because the origin point is (0,0) and end corner point is (width, height)
         GameObject backGroundObject = new GameObject(
@@ -29,7 +29,7 @@ public class BackgroundGenerator {
                         currentGameState
                         .getGameAssets()
                         .getGameResource()
-                        .getSpriteSheet(SpriteSheetId.BACKGROUND_CITY.toString())
+                        .getSpriteSheet(backgroundSpriteId.toString())
                         , new Vec2d(0, 0)
                         , currentGameState.getScreenSize());
 

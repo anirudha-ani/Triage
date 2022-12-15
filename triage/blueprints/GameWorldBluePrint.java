@@ -3,9 +3,7 @@ package triage.blueprints;
 import engine.gameobjects.GameObject;
 import engine.support.Vec2d;
 import triage.GameState;
-import triage.generators.BackgroundGenerator;
-import triage.generators.HiddenRectangleHitboxGenerator;
-import triage.generators.PlayerGenerator;
+import triage.generators.*;
 
 public class GameWorldBluePrint {
 
@@ -15,18 +13,23 @@ public class GameWorldBluePrint {
         this.currentGameState = currentGameState;
     }
 
-    public void populateStartScreen() {
-        loadBackground();
-        loadPlatforms();
-        loadPlayer();
+    public void populateMenuScreen() {
+        loadBackground(SpriteSheetId.BACKGROUND_GALAXY);
+        loadButton();
+    }
+    public void populateFirstLevelScreen() {
+        loadBackground(SpriteSheetId.BACKGROUND_SPACE);
+        loadPlatformsLevelOne();
+        Vec2d playerPositionOnWorld = new Vec2d(200,308);
+        loadPlayer(playerPositionOnWorld);
     }
 
-    public void loadBackground() {
-        GameObject backgroundObject = new BackgroundGenerator(this.currentGameState).generate();
+    public void loadBackground(SpriteSheetId backgroundSpriteId) {
+        GameObject backgroundObject = new BackgroundGenerator(this.currentGameState).generate(backgroundSpriteId);
         currentGameState.getGameWorld().addGameObject(backgroundObject);
     }
 
-    public void loadPlatforms() {
+    public void loadPlatformsLevelOne() {
         GameObject hiddenHitboxForFirstPlatform = new HiddenRectangleHitboxGenerator
                 (this.currentGameState).generate(
                 new Vec2d(53, 337),
@@ -49,12 +52,20 @@ public class GameWorldBluePrint {
         currentGameState.getGameWorld().addGameObject(hiddenHitboxForFirstPlatform3);
     }
 
-    public void loadPlayer() {
-        GameObject player = new PlayerGenerator(this.currentGameState).generate(
-                new Vec2d(200,308)
-        );
+    public void loadPlayer(Vec2d playerPositionOnWorld) {
+        GameObject player = new PlayerGenerator(this.currentGameState).generate(playerPositionOnWorld);
 
         currentGameState.getGameWorld().addGameObject(player);
 
+    }
+
+    public void loadButton() {
+        GameObject startButton = new ButtonGenerator(this.currentGameState)
+                .generate(GameObjectId.START_BUTTON,
+                        new Vec2d(400,400),
+                        new Vec2d(60, 30),
+                        "Start",
+                        30);
+        currentGameState.getGameWorld().addGameObject(startButton);
     }
 }
