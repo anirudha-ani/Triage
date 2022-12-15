@@ -20,8 +20,8 @@ public class GameObject {
     private boolean viewPortSensitive = true;
     private String id = "";
     private Color defaultColor = Color.RED;
-    private Color hoverColor = Color.AQUA;
-    private Color clickColor = Color.BLACK;
+    private Color hoverColor = Color.TRANSPARENT;
+    private Color clickColor = Color.TRANSPARENT;
     private boolean deleted = false;
     private int counter = 0;
 

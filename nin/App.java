@@ -47,7 +47,6 @@ public class App extends Application {
     MapLoader map;
     char[][] mapLayoutArray;
     GameAssets gameAssets;
-
     FileLoader saveFile;
 
     public App(String title) {
