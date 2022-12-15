@@ -10,7 +10,7 @@ public class TransformComponent {
 
     private Vec2d positionOnWorld;
     private Vec2d sizeOnWorld;
-    private Color backGroundColor = Color.RED;
+    private Color backGroundColor = Color.TRANSPARENT;
     private boolean mouseHovering = false;
     private boolean mouseGrabbing = false;
     GameObject gameObject;

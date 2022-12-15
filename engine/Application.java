@@ -8,8 +8,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
-import java.util.ArrayList;
-
 /**
  * This is your main Application class that you will contain your
  * 'draws' and 'ticks'. This class is also used for controlling
@@ -17,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Application extends FXFrontEnd {
 
-    private ArrayList<Screen> screenArrayList = new ArrayList<>();
+    private Screen currentScreen = new Screen();
     private String currentScreenId;
     private Vec2d currentScreenSize = DEFAULT_STAGE_SIZE;
 
@@ -29,25 +27,15 @@ public class Application extends FXFrontEnd {
         super(title, windowSize, debugMode, fullscreen);
     }
 
-    public ArrayList<Screen> getScreenArrayList() {
-        return screenArrayList;
-    }
-
-    public void addScreen(Screen newScreen) {
-        this.screenArrayList.add(newScreen);
-    }
-
     public void removeScreen(String screenId) {
-        for (int i = screenArrayList.size() - 1; i >= 0; --i) {
-            if (screenArrayList.get(i).getScreenID() == screenId) {
-                screenArrayList.remove(i);
-            }
-        }
-
     }
 
     public void flushAllScreens() {
-        screenArrayList = new ArrayList<>();
+
+    }
+
+    public void setCurrentScreen(Screen currentScreen) {
+        this.currentScreen = currentScreen;
     }
 
     public String getCurrentScreenId() {
@@ -87,11 +75,8 @@ public class Application extends FXFrontEnd {
 //    g.setFill(Color.RED);
 //
 //    g.fillOval(0, 0, 200, 200);
-        this.getScreenArrayList().forEach(screen -> {
-            if (screen.getScreenID() == this.getCurrentScreenId()) {
-                screen.draw(g);
-            }
-        });
+        this.currentScreen.draw(g);
+
     }
 
     /**
@@ -114,12 +99,7 @@ public class Application extends FXFrontEnd {
         if (e.getCode() == KeyCode.ESCAPE) {
             System.exit(0);
         }
-
-        this.getScreenArrayList().forEach(screen -> {
-            if (screen.getScreenID() == this.getCurrentScreenId()) {
-                screen.onKeyPressed(e);
-            }
-        });
+        currentScreen.onKeyPressed(e);
 //    System.out.println("onKeyPressed called");
     }
 
@@ -133,12 +113,7 @@ public class Application extends FXFrontEnd {
         if (e.getCode() == KeyCode.ESCAPE) {
             System.exit(0);
         }
-
-        this.getScreenArrayList().forEach(screen -> {
-            if (screen.getScreenID() == this.getCurrentScreenId()) {
-                screen.onKeyReleased(e);
-            }
-        });
+        currentScreen.onKeyReleased(e);
 //    System.out.println("onKeyReleased called");
     }
 
@@ -150,6 +125,7 @@ public class Application extends FXFrontEnd {
     @Override
     protected void onMouseClicked(MouseEvent e) {
 //        System.out.println("onMouseClicked called");
+        currentScreen.onMouseClicked(e);
     }
 
     /**
@@ -169,11 +145,7 @@ public class Application extends FXFrontEnd {
      */
     @Override
     protected void onMouseReleased(MouseEvent e) {
-        this.getScreenArrayList().forEach(screen -> {
-            if (screen.getScreenID() == this.getCurrentScreenId()) {
-                screen.onMouseReleased(e);
-            }
-        });
+        currentScreen.onMouseReleased(e);
 //    System.out.println("onMouseReleased called");
     }
 
@@ -184,12 +156,7 @@ public class Application extends FXFrontEnd {
      */
     @Override
     protected void onMouseDragged(MouseEvent e) {
-        //  System.out.println("onMouseDragged called");
-        this.getScreenArrayList().forEach(screen -> {
-            if (screen.getScreenID() == this.getCurrentScreenId()) {
-                screen.onMouseDragged(e);
-            }
-        });
+        currentScreen.onMouseDragged(e);
     }
 
     /**
@@ -199,11 +166,7 @@ public class Application extends FXFrontEnd {
      */
     @Override
     protected void onMouseMoved(MouseEvent e) {
-        this.getScreenArrayList().forEach(screen -> {
-            if (screen.getScreenID() == this.getCurrentScreenId()) {
-                screen.onMouseMoved(e);
-            }
-        });
+        currentScreen.onMouseMoved(e);
     }
 
     /**
@@ -213,12 +176,7 @@ public class Application extends FXFrontEnd {
      */
     @Override
     protected void onMouseWheelMoved(ScrollEvent e) {
-        this.getScreenArrayList().forEach(screen -> {
-            if (screen.getScreenID() == this.getCurrentScreenId()) {
-                screen.onMouseWheelMoved(e);
-            }
-        });
-//    System.out.println("onMouseWheelMoved called");
+        currentScreen.onMouseWheelMoved(e);
     }
 
     /**
@@ -239,9 +197,7 @@ public class Application extends FXFrontEnd {
     @Override
     protected void onResize(Vec2d newSize) {
         currentScreenSize = newSize;
-        this.getScreenArrayList().forEach(screen -> {
-            screen.onResize(newSize);
-        });
+        currentScreen.onResize(newSize);
 //    System.out.println("onResize called");
     }
 
