@@ -25,7 +25,8 @@ public class BackgroundGenerator {
         // This is creating the sprite for the game object
         SpriteComponent backgroundSprite =
                 new SpriteComponent(
-                        backGroundObject,currentGameState
+                        backGroundObject,
+                        currentGameState
                         .getGameAssets()
                         .getGameResource()
                         .getSpriteSheet(SpriteSheetId.BACKGROUND_CITY.toString())

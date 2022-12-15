@@ -5,6 +5,7 @@ import engine.support.Vec2d;
 import triage.GameState;
 import triage.generators.BackgroundGenerator;
 import triage.generators.HiddenRectangleHitboxGenerator;
+import triage.generators.PlayerGenerator;
 
 public class GameWorldBluePrint {
 
@@ -17,6 +18,7 @@ public class GameWorldBluePrint {
     public void populateStartScreen() {
         loadBackground();
         loadPlatforms();
+        loadPlayer();
     }
 
     public void loadBackground() {
@@ -45,6 +47,14 @@ public class GameWorldBluePrint {
                 new Vec2d(150, 50)
         );
         currentGameState.getGameWorld().addGameObject(hiddenHitboxForFirstPlatform3);
+    }
+
+    public void loadPlayer() {
+        GameObject player = new PlayerGenerator(this.currentGameState).generate(
+                new Vec2d(200,308)
+        );
+
+        currentGameState.getGameWorld().addGameObject(player);
 
     }
 }
