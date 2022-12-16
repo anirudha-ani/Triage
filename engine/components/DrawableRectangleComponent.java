@@ -17,6 +17,9 @@ public class DrawableRectangleComponent extends DrawableComponent {
     public void drawRectangle(GraphicsContext g) {
         RectangleUI rect1 = new RectangleUI(getGameObject().getTransformComponent().getPositionOnWorld(), getGameObject().getTransformComponent().getSizeOnWorld());
         rect1.setBackGroundColor(getGameObject().getTransformComponent().getBackGroundColor());
+        rect1.setArcHeight(30);
+        rect1.setArcWidth(30);
+        rect1.setRoundedCorner(true);
         rect1.drawElement(g);
     }
 }

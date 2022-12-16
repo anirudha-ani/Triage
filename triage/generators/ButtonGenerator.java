@@ -13,7 +13,7 @@ public class ButtonGenerator {
         this.currentGameState = currentGameState;
     }
 
-    public GameObject generate(GameObjectId buttonId, Vec2d buttonPosition, Vec2d buttonSize, String buttonText, int fontSize) {
+    public GameObject generate(GameObjectId buttonId, Vec2d buttonPosition, Vec2d textPosition, Vec2d buttonSize, String buttonText, int fontSize) {
 
         GameObject button = new GameObject(
                 buttonId.toString(),
@@ -22,17 +22,17 @@ public class ButtonGenerator {
         button.setzIndex(0); // 0 gets drawn last so always stays on top
 
         DrawableRectangleComponent drawableBackgroundComponent = new DrawableRectangleComponent(button);
-        button.setDefaultColor(Color.BLUE);
+        button.setDefaultColor(Color.rgb(204,69,66));
         button.setHoverColor(Color.ORANGE);
         button.setClickColor(Color.RED);
 
         TextComponent textInsideButtonComponent = new TextComponent(
                 "textComponent",
                 button, buttonText,
-                "Impact",
+                "Courier New",
                 fontSize,
                 Color.BLACK,
-                new Vec2d(buttonPosition.x, buttonPosition.y + fontSize), // This is weird because the text is drawn on top of origin not below
+                new Vec2d(textPosition.x, textPosition.y), // This is weird because the text is drawn on top of origin not below
                 new Vec2d(0, 0));
 
         ClickableComponent clickableComponent = new ClickableComponent(button);

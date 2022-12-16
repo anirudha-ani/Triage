@@ -19,7 +19,7 @@ public class GameAssets {
         Image playerLeft = new Image("file:triage/spritesheets/player/ACharLeft.png", 48, 48, false, true);
         Image playerRight = new Image("file:triage/spritesheets/player/ACharRight.png", 48, 48, false, true);
         Image spaceBackground = new Image("file:triage/spritesheets/backgrounds/SpaceBackground.jpg", 6000, 3000, false, true);
-        Image galaxyBackground = new Image("file:triage/spritesheets/backgrounds/GalaxyBackground.jpg", 2000, 1125, false, true);
+        Image galaxyBackground = new Image("file:triage/spritesheets/backgrounds/newspace.png", 2000, 1125, false, true);
 
         // Sprite height and width indicates individual sprite height and width in a sprite sheet
         gameResource.addSpriteSheet(SpriteSheetId.PLAYER_LEFT.toString(), playerLeft, 2, 2, 24, 24);
