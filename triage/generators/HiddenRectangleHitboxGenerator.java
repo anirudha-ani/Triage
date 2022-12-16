@@ -22,8 +22,9 @@ public class HiddenRectangleHitboxGenerator {
 
         // Keeping this just for visualization while debugging
         // TODO: remove it in the final version
-        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(hiddenRectangleHitboxObject);
-        hiddenRectangleHitboxObject.setDefaultColor(Color.RED);
+        // DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(hiddenRectangleHitboxObject);
+        // hiddenRectangleHitboxObject.setDefaultColor(Color.RED);
+        // hiddenRectangleHitboxObject.addComponent(drawableComponent);
 
         // Hitboxes are a part of the collisionComponent
         // Collision behaviour static means it won't move after collision
@@ -31,7 +32,7 @@ public class HiddenRectangleHitboxGenerator {
         CollisionComponent collisionComponent = new CollisionComponent(hiddenRectangleHitboxObject, hitbox);
         collisionComponent.setCollisionBehaviour(CollisionBehaviour.STATIC);
 
-        hiddenRectangleHitboxObject.addComponent(drawableComponent);
+
         hiddenRectangleHitboxObject.addComponent(collisionComponent);
 
         return hiddenRectangleHitboxObject;

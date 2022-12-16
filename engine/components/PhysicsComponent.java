@@ -42,6 +42,10 @@ public class PhysicsComponent extends Component {
             applyForce(new Vec2d(-1 * vel.x, 0).smult(.13));
         }
 
+        if(gravityActivated) {
+            applyForce(new Vec2d(0, 0.1 * mass));
+        }
+
         pos = new Vec2d(getGameObject().getTransformComponent().getPositionOnWorld().x, getGameObject().getTransformComponent().getPositionOnWorld().y);
 
         vel = vel.plus(force.smult(t).sdiv(mass).plus(impulse.sdiv(mass)));

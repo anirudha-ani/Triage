@@ -2,6 +2,7 @@ package triage.controllers;
 
 import engine.GameWorld;
 import engine.Screen;
+import engine.components.AudioComponent;
 import triage.App;
 import triage.GameState;
 import triage.blueprints.GameAssets;
@@ -79,6 +80,9 @@ public class ScreenController {
     public void switchToFirstLevelScreen() {
         // This is necessary before switching to any new screen
         resetScreen();
+
+        AudioComponent audioClip = new AudioComponent("triage/audiofiles/Dramatic-suspense-background-music.mp3", true);
+        audioClip.playAudio();
 
         // Creating an instance of the new screen
         currentGameState.setGameScreen(

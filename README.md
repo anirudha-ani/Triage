@@ -1,10 +1,10 @@
-# Terror In CIT DEMO 2 Handin README
+# Terror In CIT DEMO 3 Handin README
 ---
 ### Banner ID: B01683175
 ### Banner ID2: B01694406
 
 ---
-### Already uploaded demo onto Slack: https://youtu.be/aH1RiU7_iYo
+### Already uploaded demo onto Slack: https://youtu.be/H5c77AuohRI
 ---
 
 ## Engine Requirements:
@@ -21,10 +21,8 @@
 Instructions on how to run: 
 New engine features are not integrated properly in game. 
 
-But for demo purpose - 
-When you run the game Nin, press Y to Play a video. 
-Press U to play a background audio
+Before running the game make sure to exclude the nin folder. Otherwise it won't compile.
 
-Other features can be seen if you play the Nin 2 which you can find in the Instrcutions file
+But some features can be seen if you play the triage which you can find in the Instrcutions file
 
 Playtest report is added to another file.
