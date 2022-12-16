@@ -2,6 +2,7 @@ package triage.blueprints;
 
 import engine.gameobjects.GameObject;
 import engine.support.Vec2d;
+import javafx.scene.text.Font;
 import triage.GameState;
 import triage.generators.*;
 
@@ -9,16 +10,19 @@ public class GameWorldBluePrint {
 
     GameState currentGameState;
 
+    int coinCount = 0;
+
     public GameWorldBluePrint(GameState currentGameState) {
         this.currentGameState = currentGameState;
     }
 
     public void populateMenuScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_GALAXY);
+        loadCoinText();
+        loadCoinImage();
         loadStartButton();
         loadSaveButton();
         loadSettingsButton();
-        loadCoinText();
 
 
     }
@@ -69,10 +73,10 @@ public class GameWorldBluePrint {
         GameObject startButton = new ButtonGenerator(this.currentGameState)
                 .generate(GameObjectId.START_BUTTON,
                         new Vec2d(currentGameState.getScreenSize().x/2.37,currentGameState.getScreenSize().y/2.4),
-                        new Vec2d(currentGameState.getScreenSize().x/2.37+10,currentGameState.getScreenSize().y/2.4+35),
+                        new Vec2d(currentGameState.getScreenSize().x/2.37+19,currentGameState.getScreenSize().y/2.4+35),
                         new Vec2d(170, 50),
                         "Start Game",
-                        25);
+                        20);
         currentGameState.getGameWorld().addGameObject(startButton);
     }
 
@@ -80,32 +84,43 @@ public class GameWorldBluePrint {
         System.out.println(currentGameState.getScreenSize());
         GameObject startButton = new ButtonGenerator(this.currentGameState)
                 .generate(GameObjectId.LOAD_BUTTON,
-                        new Vec2d(currentGameState.getScreenSize().x/2.35,currentGameState.getScreenSize().y/1.9),
-                        new Vec2d(currentGameState.getScreenSize().x/2.35+15,currentGameState.getScreenSize().y/1.9+35),
+                        new Vec2d(currentGameState.getScreenSize().x/2.33,currentGameState.getScreenSize().y/1.9),
+                        new Vec2d(currentGameState.getScreenSize().x/2.33+19,currentGameState.getScreenSize().y/1.9+35),
                         new Vec2d(160, 50),
                         "Load Game",
-                        25);
+                        20);
         currentGameState.getGameWorld().addGameObject(startButton);
     }
 
     public void loadSettingsButton() {
         GameObject startButton = new ButtonGenerator(this.currentGameState)
                 .generate(GameObjectId.SETTINGS_BUTTON,
-                        new Vec2d(currentGameState.getScreenSize().x/2.285,currentGameState.getScreenSize().y/1.58),
-                        new Vec2d(currentGameState.getScreenSize().x/2.285+10,currentGameState.getScreenSize().y/1.58+35),
+                        new Vec2d(currentGameState.getScreenSize().x/2.28,currentGameState.getScreenSize().y/1.58),
+                        new Vec2d(currentGameState.getScreenSize().x/2.28+19,currentGameState.getScreenSize().y/1.58+35),
                         new Vec2d(140, 50),
                         "Settings",
-                        25);
+                        20);
         currentGameState.getGameWorld().addGameObject(startButton);
     }
 
     public void loadCoinText(){
         GameObject coinText = new TextGenerator(this.currentGameState)
-                .generate(GameObjectId.COIN_COUNT,
-                        new Vec2d(currentGameState.getScreenSize().x-10,currentGameState.getScreenSize().y+10),
-                        30,"0"
+                .generate(GameObjectId.TEXT,
+                        new Vec2d(currentGameState.getScreenSize().x-120,55),
+                        Font.loadFont(getClass().getResourceAsStream("../fonts/Bungee-Regular.ttf"),45),45,String.valueOf(coinCount)
                         );
 
         currentGameState.getGameWorld().addGameObject(coinText);
+    }
+
+    public void loadCoinImage(){
+        GameObject coinImage = new ImageGenerator(this.currentGameState)
+                .generate(
+                        SpriteSheetId.COIN_IMAGE,
+                        new Vec2d(40,40),
+                        new Vec2d(currentGameState.getScreenSize().x-80,19)
+                );
+
+        currentGameState.getGameWorld().addGameObject(coinImage);
     }
 }

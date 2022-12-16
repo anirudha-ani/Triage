@@ -7,6 +7,8 @@ public enum GameObjectId {
     START_BUTTON, // Carefull to include either "BUTTON" or "button" in the id of a Button
     LOAD_BUTTON,
     SETTINGS_BUTTON,
-    COIN_COUNT,
+    TEXT,
+
+    IMAGE,
     BULLET,
 }

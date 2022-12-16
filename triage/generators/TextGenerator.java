@@ -5,6 +5,7 @@ import engine.components.TransformComponent;
 import engine.gameobjects.GameObject;
 import engine.support.Vec2d;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import triage.GameState;
 
 public class TextGenerator {
@@ -13,23 +14,23 @@ public class TextGenerator {
         this.currentGameState = currentGameState;
     }
 
-    public GameObject generate(GameObjectId textId, Vec2d textPosition, int fontSize, String coinText) {
-        GameObject coinCoint = new GameObject(
+    public GameObject generate(GameObjectId textId, Vec2d textPosition, Font font, double fontSize, String text) {
+        GameObject textObject = new GameObject(
                 textId.toString(),
                 new TransformComponent(textPosition, new Vec2d(fontSize,fontSize)));
 
         // 0 gets drawn last so always stays on top
+        textObject.setzIndex(0);
 
         TextComponent textComponent = new TextComponent(
                 "textComponent",
-                coinCoint, coinText,
-                "Courier New",
-                fontSize,
+                textObject, text,
+                font,
                 Color.WHITE,
                 new Vec2d(textPosition.x, textPosition.y), // This is weird because the text is drawn on top of origin not below
                 new Vec2d(0, 0));
 
-        coinCoint.addComponent(textComponent);
-        return coinCoint;
+        textObject.addComponent(textComponent);
+        return textObject;
     }
 }

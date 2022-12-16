@@ -4,6 +4,7 @@ import engine.components.*;
 import engine.gameobjects.GameObject;
 import engine.support.Vec2d;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import triage.GameState;
 import triage.blueprints.SpriteSheetId;
 
@@ -29,8 +30,7 @@ public class ButtonGenerator {
         TextComponent textInsideButtonComponent = new TextComponent(
                 "textComponent",
                 button, buttonText,
-                "Courier New",
-                fontSize,
+                Font.loadFont(getClass().getResourceAsStream("../fonts/Bungee-Regular.ttf"),fontSize),
                 Color.BLACK,
                 new Vec2d(textPosition.x, textPosition.y), // This is weird because the text is drawn on top of origin not below
                 new Vec2d(0, 0));

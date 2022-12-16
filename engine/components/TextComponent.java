@@ -7,30 +7,27 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class TextComponent extends Component {
-    private String fontName = "Impact";
-    private double fontSize = 30;
+//    private String fontName = "Impact";
+//    private double fontSize = 30;
+
+    private Font font;
     private Color fontColor = Color.BLACK;
     private Vec2d origin = new Vec2d(0, 0);
     private String content = "";
     private Vec2d offset = new Vec2d(0, 0);
 
 
-    public TextComponent(String tag, GameObject gameObject, String content, String fontName, double fontSize, Color fontColor, Vec2d origin, Vec2d padding) {
+    public TextComponent(String tag, GameObject gameObject, String content, Font font, Color fontColor, Vec2d origin, Vec2d padding) {
         super(tag, gameObject);
-        this.fontName = fontName;
-        this.fontSize = fontSize;
         this.fontColor = fontColor;
         this.origin = origin;
         this.content = content;
         this.offset = padding;
+        this.font = font;
     }
 
-    public void setFontName(String fontName) {
-        this.fontName = fontName;
-    }
-
-    public void setFontSize(double fontSize) {
-        this.fontSize = fontSize;
+    public Font getFont() {
+        return font;
     }
 
     public void setFontColor(Color fontColor) {
@@ -51,7 +48,7 @@ public class TextComponent extends Component {
 
     @Override
     public void draw(GraphicsContext g) {
-        g.setFont(new Font(this.fontName, this.fontSize));
+        g.setFont(font);
         g.setFill(this.fontColor);
         g.fillText(this.content, this.origin.x + this.offset.x, this.origin.y + this.offset.y);
     }
