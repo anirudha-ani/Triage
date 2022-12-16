@@ -22,8 +22,8 @@ public class PlayerGenerator {
                 new TransformComponent( new Vec2d(positionInWorld.x+10, positionInWorld.y+10), new Vec2d(32 - 20, 32 - 15)));
 
         player.setzIndex(0);
-        player.setDefaultColor(Color.RED);
-        player.setHoverColor(Color.ORANGE);
+//        player.setDefaultColor(Color.RED);
+//        player.setHoverColor(Color.ORANGE);
 
         DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(player);
 
@@ -57,7 +57,7 @@ public class PlayerGenerator {
         AABHitbox hitbox = new AABHitbox(new Vec2d(positionInWorld.x+10, positionInWorld.y+10), new Vec2d(32 - 20, 32 - 15));
         CollisionComponent collisionComponent = new CollisionComponent(player, hitbox);
 
-        AABHitbox gravityHitbox = new AABHitbox(new Vec2d(positionInWorld.x+10, positionInWorld.y+10+32-15+1), new Vec2d(3, 32-15));
+        AABHitbox gravityHitbox = new AABHitbox(new Vec2d(positionInWorld.x+10, positionInWorld.y+10+32-15+1), new Vec2d(32 - 20, 3));
         CollisionComponent gravityCollisionComponent = new CollisionComponent(player, gravityHitbox);
         gravityCollisionComponent.setTag("gravity");
 

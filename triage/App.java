@@ -36,7 +36,9 @@ public class App extends Application {
 
     @Override
     protected void onTick(long nanosSincePreviousTick) {
+
         screenController.onTick(nanosSincePreviousTick);
+        gameState.getGameWorld().tick(nanosSincePreviousTick);
     }
 
     @Override
