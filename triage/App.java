@@ -5,7 +5,7 @@ import engine.Screen;
 import engine.support.Vec2d;
 import javafx.scene.input.MouseEvent;
 import triage.controllers.ScreenController;
-import triage.gamelogics.ClickLogics;
+import triage.gamelogics.MouseInputLogics;
 
 import java.util.ArrayList;
 
@@ -44,7 +44,16 @@ public class App extends Application {
     @Override
     protected void onMouseClicked(MouseEvent e) {
         ArrayList<String> clickedObjects = getGameState().getGameScreen().onMouseClicked(e);
-        ClickLogics clickLogics = new ClickLogics(this);
-        clickLogics.executeLogic(clickedObjects);
+        MouseInputLogics clickLogics = new MouseInputLogics(this);
+        clickLogics.executeClickLogic(clickedObjects);
     }
+
+    @Override
+    protected void onMouseReleased(MouseEvent e) {
+        getGameState().getGameScreen().onMouseReleased(e);
+        MouseInputLogics clickLogics = new MouseInputLogics(this);
+        clickLogics.executeClickReleaseLogic(e);
+    }
+
+
 }

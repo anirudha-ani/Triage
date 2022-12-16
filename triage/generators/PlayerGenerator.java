@@ -25,7 +25,7 @@ public class PlayerGenerator {
 //        player.setDefaultColor(Color.RED);
 //        player.setHoverColor(Color.ORANGE);
 
-        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(player);
+//        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(player);
 
         RayComponent rayComponent = new RayComponent(player);
         rayComponent.setPositionOnWorld(player.getTransformComponent().getPositionOnWorld());
@@ -63,7 +63,7 @@ public class PlayerGenerator {
 
         player.setStatus("idle");
 
-        player.addComponent(drawableComponent);
+//        player.addComponent(drawableComponent);
         player.addComponent(rayComponent);
         player.addComponent(spriteComponent1);
         player.addComponent(spriteComponent2);
