@@ -41,6 +41,10 @@ public class RectangleUI {
         isStroke = stroke;
     }
 
+    public void setRoundedCorner(boolean roundedCorner) {
+        isRoundedCorner = roundedCorner;
+    }
+
     public void drawElement(GraphicsContext g) {
         g.setFill(this.backGroundColor);
         if (isRoundedCorner) {
