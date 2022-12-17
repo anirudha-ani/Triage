@@ -28,6 +28,9 @@ public class MouseInputLogics {
             if (clickedObjects.get(i).contains(GameObjectId.START_BUTTON.toString())) {
                 this.currentApp.getScreenController().switchToFirstLevelScreen();
             }
+            if (clickedObjects.get(i).contains(GameObjectId.SHOPPING_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToCartScreen();
+            }
         }
     }
 

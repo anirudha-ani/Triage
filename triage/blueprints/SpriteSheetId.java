@@ -8,5 +8,14 @@ public enum SpriteSheetId {
 
     SHOPPING_CART,
 
+    CART_BG,
+
+    SAMURAI,
+
+    HUNTRESS,
+
+    WIZARD,
+    WARRIOR,
+
     COIN_IMAGE
 }

@@ -27,6 +27,14 @@ public class GameWorldBluePrint {
 
 
     }
+
+    public void populateCartScreen() {
+        loadBackground(SpriteSheetId.BACKGROUND_GALAXY);
+        loadCart(SpriteSheetId.CART_BG,new Vec2d(180,0));
+        loadCoinText();
+        loadCoinImage();
+    }
+
     public void populateFirstLevelScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_SPACE);
         loadPlatformsLevelOne();
@@ -37,6 +45,19 @@ public class GameWorldBluePrint {
     public void loadBackground(SpriteSheetId backgroundSpriteId) {
         GameObject backgroundObject = new BackgroundGenerator(this.currentGameState).generate(backgroundSpriteId);
         currentGameState.getGameWorld().addGameObject(backgroundObject);
+    }
+
+    public void loadCart(SpriteSheetId backgroundSpriteId, Vec2d playerPositionOnWorld) {
+        GameObject backgroundObject = new ImageGenerator(this.currentGameState).generate(backgroundSpriteId,new Vec2d(600,450),new Vec2d(190,60));
+        GameObject samuraiObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld, GameObjectId.HUNTRESS,SpriteSheetId.HUNTRESS, new Vec2d(300,300), new Vec2d(280,100));
+        GameObject huntressObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(300,20),GameObjectId.SAMURAI,SpriteSheetId.SAMURAI, new Vec2d(300,280),new Vec2d(580,100));
+        GameObject wizardObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(50,280),GameObjectId.WIZARD,SpriteSheetId.WIZARD, new Vec2d(210,170),new Vec2d(280,310));
+        GameObject warriorObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(310,230),GameObjectId.WARRIOR,SpriteSheetId.WARRIOR, new Vec2d(280,280),new Vec2d(580,310));
+        currentGameState.getGameWorld().addGameObject(backgroundObject);
+        currentGameState.getGameWorld().addGameObject(samuraiObject);
+        currentGameState.getGameWorld().addGameObject(huntressObject);
+        currentGameState.getGameWorld().addGameObject(wizardObject);
+        currentGameState.getGameWorld().addGameObject(warriorObject);
     }
 
     public void loadPlatformsLevelOne() {
@@ -111,8 +132,8 @@ public class GameWorldBluePrint {
                         new Vec2d(50,20),
                         new Vec2d(50,50),
                         SpriteSheetId.SHOPPING_CART,
-                        new Vec2d(30,30),
-                        new Vec2d(60,30)
+                        new Vec2d(35,35),
+                        new Vec2d(57,28)
                 );
         currentGameState.getGameWorld().addGameObject(startButton);
     }
@@ -132,7 +153,7 @@ public class GameWorldBluePrint {
                 .generate(
                         SpriteSheetId.COIN_IMAGE,
                         new Vec2d(40,40),
-                        new Vec2d(currentGameState.getScreenSize().x-80,19)
+                        new Vec2d(currentGameState.getScreenSize().x-80,17)
                 );
 
         currentGameState.getGameWorld().addGameObject(coinImage);
