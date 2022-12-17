@@ -8,13 +8,13 @@ import javafx.scene.text.Font;
 import triage.GameState;
 import triage.blueprints.SpriteSheetId;
 
-public class ButtonGenerator {
+public class IconButtonGenerator {
     GameState currentGameState;
-    public ButtonGenerator(GameState currentGameState) {
+    public IconButtonGenerator(GameState currentGameState) {
         this.currentGameState = currentGameState;
     }
 
-    public GameObject generate(GameObjectId buttonId, Vec2d buttonPosition, Vec2d textPosition, Vec2d buttonSize, String buttonText, int fontSize) {
+    public GameObject generate(GameObjectId buttonId, Vec2d buttonPosition, Vec2d buttonSize, SpriteSheetId iconSpriteId, Vec2d iconSize, Vec2d iconPosition) {
 
         GameObject button = new GameObject(
                 buttonId.toString(),
@@ -27,19 +27,20 @@ public class ButtonGenerator {
         button.setHoverColor(Color.ORANGE);
         button.setClickColor(Color.RED);
 
-        TextComponent textInsideButtonComponent = new TextComponent(
-                "textComponent",
-                button, buttonText,
-                Font.loadFont(getClass().getResourceAsStream("../fonts/Digitaltech-rm0K.otf"),fontSize),
-                Color.BLACK,
-                new Vec2d(textPosition.x, textPosition.y), // This is weird because the text is drawn on top of origin not below
-                new Vec2d(0, 0));
+        SpriteComponent imageInsideButtonComponent = new SpriteComponent(
+                button,
+                currentGameState
+                        .getGameAssets()
+                        .getGameResource()
+                        .getSpriteSheet(iconSpriteId.toString())
+                , iconPosition
+                , iconSize);
 
         ClickableComponent clickableComponent = new ClickableComponent(button);
 
         // Adding the sprite to the game object
         button.addComponent(drawableBackgroundComponent);
-        button.addComponent(textInsideButtonComponent);
+        button.addComponent(imageInsideButtonComponent);
         button.addComponent(clickableComponent);
 
         return button;

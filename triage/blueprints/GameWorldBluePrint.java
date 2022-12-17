@@ -23,6 +23,7 @@ public class GameWorldBluePrint {
         loadStartButton();
         loadSaveButton();
         loadSettingsButton();
+        loadShoppingButton();
 
 
     }
@@ -73,10 +74,10 @@ public class GameWorldBluePrint {
         GameObject startButton = new ButtonGenerator(this.currentGameState)
                 .generate(GameObjectId.START_BUTTON,
                         new Vec2d(currentGameState.getScreenSize().x/2.37,currentGameState.getScreenSize().y/2.4),
-                        new Vec2d(currentGameState.getScreenSize().x/2.37+19,currentGameState.getScreenSize().y/2.4+35),
+                        new Vec2d(currentGameState.getScreenSize().x/2.37+15,currentGameState.getScreenSize().y/2.4+35),
                         new Vec2d(170, 50),
                         "Start Game",
-                        20);
+                        28);
         currentGameState.getGameWorld().addGameObject(startButton);
     }
 
@@ -85,10 +86,10 @@ public class GameWorldBluePrint {
         GameObject startButton = new ButtonGenerator(this.currentGameState)
                 .generate(GameObjectId.LOAD_BUTTON,
                         new Vec2d(currentGameState.getScreenSize().x/2.33,currentGameState.getScreenSize().y/1.9),
-                        new Vec2d(currentGameState.getScreenSize().x/2.33+19,currentGameState.getScreenSize().y/1.9+35),
+                        new Vec2d(currentGameState.getScreenSize().x/2.33+15,currentGameState.getScreenSize().y/1.9+35),
                         new Vec2d(160, 50),
                         "Load Game",
-                        20);
+                        28);
         currentGameState.getGameWorld().addGameObject(startButton);
     }
 
@@ -96,10 +97,23 @@ public class GameWorldBluePrint {
         GameObject startButton = new ButtonGenerator(this.currentGameState)
                 .generate(GameObjectId.SETTINGS_BUTTON,
                         new Vec2d(currentGameState.getScreenSize().x/2.28,currentGameState.getScreenSize().y/1.58),
-                        new Vec2d(currentGameState.getScreenSize().x/2.28+19,currentGameState.getScreenSize().y/1.58+35),
+                        new Vec2d(currentGameState.getScreenSize().x/2.28+15,currentGameState.getScreenSize().y/1.58+35),
                         new Vec2d(140, 50),
                         "Settings",
-                        20);
+                        28);
+        currentGameState.getGameWorld().addGameObject(startButton);
+    }
+
+    public void loadShoppingButton(){
+        GameObject startButton = new IconButtonGenerator(this.currentGameState)
+                .generate(
+                        GameObjectId.SHOPPING_BUTTON,
+                        new Vec2d(50,20),
+                        new Vec2d(50,50),
+                        SpriteSheetId.SHOPPING_CART,
+                        new Vec2d(30,30),
+                        new Vec2d(60,30)
+                );
         currentGameState.getGameWorld().addGameObject(startButton);
     }
 
@@ -107,7 +121,7 @@ public class GameWorldBluePrint {
         GameObject coinText = new TextGenerator(this.currentGameState)
                 .generate(GameObjectId.TEXT,
                         new Vec2d(currentGameState.getScreenSize().x-120,55),
-                        Font.loadFont(getClass().getResourceAsStream("../fonts/Bungee-Regular.ttf"),45),45,String.valueOf(coinCount)
+                        Font.loadFont(getClass().getResourceAsStream("../fonts/Bungee-Regular.ttf"),50),50,String.valueOf(coinCount)
                         );
 
         currentGameState.getGameWorld().addGameObject(coinText);

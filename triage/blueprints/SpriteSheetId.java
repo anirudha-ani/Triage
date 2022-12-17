@@ -6,5 +6,7 @@ public enum SpriteSheetId {
     BACKGROUND_SPACE,
     BACKGROUND_GALAXY,
 
+    SHOPPING_CART,
+
     COIN_IMAGE
 }
