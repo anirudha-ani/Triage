@@ -20,6 +20,9 @@ public class ImageGenerator {
                 GameObjectId.IMAGE.toString(),
                 new TransformComponent(imagePosition,
                         imageSize));
+
+        imageObject.setzIndex(0);
+
         SpriteComponent imageSprite =
                 new SpriteComponent(
                         imageObject,

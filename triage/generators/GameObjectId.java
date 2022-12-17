@@ -15,6 +15,9 @@ public enum GameObjectId {
     SETTINGS_BUTTON,
 
     SHOPPING_BUTTON,
+
+    USE_BUTTON,
+    UNLOCK_BUTTON,
     TEXT,
 
     IMAGE,

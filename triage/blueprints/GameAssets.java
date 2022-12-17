@@ -22,7 +22,7 @@ public class GameAssets {
         Image spaceBackground = new Image("file:triage/spritesheets/backgrounds/SpaceBackground.jpg", 6000, 3000, false, true);
         Image galaxyBackground = new Image("file:triage/spritesheets/backgrounds/newspace.png", 2048, 1153, false, true);
         Image coin = new Image("file:triage/spritesheets/coins/Gold/Gold_21.png", 563,564,false,true);
-        Image cart = new Image("file:triage/spritesheets/cart.png", 512,512,false,true);
+        Image cart = new Image("file:triage/spritesheets/cart1.png", 512,512,false,true);
         Image cartbg = new Image("file:triage/spritesheets/cart-bg.png", 683,384,false,true);
         Image samurai = new Image("file:triage/spritesheets/Martial Hero/Sprites/idle.png",1600,200,false,true);
         Image huntress = new Image("file:triage/spritesheets/Huntress/Sprites/idle.png",1200,150,false,true);

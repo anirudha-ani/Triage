@@ -14,7 +14,7 @@ public class TextGenerator {
         this.currentGameState = currentGameState;
     }
 
-    public GameObject generate(GameObjectId textId, Vec2d textPosition, Font font, double fontSize, String text) {
+    public GameObject generate(GameObjectId textId, Vec2d textPosition, Font font, double fontSize, String text, Color color) {
         GameObject textObject = new GameObject(
                 textId.toString(),
                 new TransformComponent(textPosition, new Vec2d(fontSize,fontSize)));
@@ -26,7 +26,7 @@ public class TextGenerator {
                 "textComponent",
                 textObject, text,
                 font,
-                Color.WHITE,
+                color,
                 new Vec2d(textPosition.x, textPosition.y), // This is weird because the text is drawn on top of origin not below
                 new Vec2d(0, 0));
 

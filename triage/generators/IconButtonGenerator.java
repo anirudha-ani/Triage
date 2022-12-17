@@ -22,8 +22,8 @@ public class IconButtonGenerator {
 
         button.setzIndex(0); // 0 gets drawn last so always stays on top
 
-        DrawableRectangleComponent drawableBackgroundComponent = new DrawableRectangleComponent(button);
-        button.setDefaultColor(Color.rgb(204,69,66));
+        DrawableRectangleComponent drawableBackgroundComponent = new DrawableRectangleComponent(button, true);
+        button.setDefaultColor(Color.WHITESMOKE);
         button.setHoverColor(Color.ORANGE);
         button.setClickColor(Color.RED);
 
