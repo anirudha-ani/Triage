@@ -7,6 +7,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import triage.App;
 import triage.GameState;
+import triage.blueprints.AudioId;
 import triage.generators.BulletGenerator;
 import triage.generators.GameObjectId;
 
@@ -47,7 +48,13 @@ public class MouseInputLogics {
 
                     GameObject bullet = bulletGenerator.generate(rayComponent);
                     currentApp.getGameState().getGameWorld().addGameObject(bullet);
+
+                    /**
+                     * The reason I am not registering it to the GameState is because
+                     * it is a small clip which plays immediately.
+                     */
                     AudioComponent audioClip = new AudioComponent("triage/audiofiles/heat-vision.mp3", false);
+                    audioClip.setLocalId(AudioId.BULLET.toString());
                     audioClip.playAudio();
                 }
             }

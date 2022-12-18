@@ -9,7 +9,10 @@ import javafx.util.Duration;
 public class AudioComponent extends Component {
     String source = null;
     boolean looping = false;
-    public AudioComponent(String source, Boolean looping, GameObject gameObject) {
+    String localId = "default";
+
+    MediaPlayer mediaPlayer;
+    public AudioComponent(GameObject gameObject) {
         super("audio", gameObject);
     }
     public AudioComponent(String source, Boolean looping) {
@@ -20,7 +23,7 @@ public class AudioComponent extends Component {
 
     public void playAudio() {
         Media mediaFile = new Media(new File(this.source).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(mediaFile);
+        mediaPlayer = new MediaPlayer(mediaFile);
         mediaPlayer.play();
         if(this.looping) {
             mediaPlayer.setOnEndOfMedia(new Runnable() {
@@ -31,5 +34,13 @@ public class AudioComponent extends Component {
                 }
             });
         }
+    }
+
+    public String getLocalId() {
+        return localId;
+    }
+
+    public void setLocalId(String localId) {
+        this.localId = localId;
     }
 }

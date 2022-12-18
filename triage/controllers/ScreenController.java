@@ -4,6 +4,7 @@ import engine.GameWorld;
 import engine.Screen;
 import engine.components.AudioComponent;
 import triage.GameState;
+import triage.blueprints.AudioId;
 import triage.blueprints.GameAssets;
 import triage.blueprints.GameWorldBluePrint;
 
@@ -106,8 +107,14 @@ public class ScreenController {
         // This is necessary before switching to any new screen
         resetScreen();
 
+        /**
+         * I am registering this audio clip in gamestate because it needs to stay alive for the entire time
+         * Otherwise it gets killed when the function finish execution and goes out of scope
+         */
         AudioComponent audioClip = new AudioComponent("triage/audiofiles/Dramatic-suspense-background-music.mp3", true);
+        audioClip.setLocalId(AudioId.BACKGROUND_STAGE1.toString());
         audioClip.playAudio();
+        currentGameState.addAudio(audioClip);
 
         // Creating an instance of the new screen
         currentGameState.setGameScreen(
@@ -138,6 +145,7 @@ public class ScreenController {
 
     public void resetScreen() {
         currentGameState.setGameWorld(new GameWorld());
+        currentGameState.removeAllAudio();
     }
 
 }
