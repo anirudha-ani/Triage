@@ -64,8 +64,8 @@ public class GameWorldBluePrint {
 
         loadUseButton(new Vec2d(280,250),true,true);
         loadUseButton(new Vec2d(570,250),false, coinCount>=200);
-        loadUseButton(new Vec2d(570,460),false, coinCount>=400);
-        loadUseButton(new Vec2d(270,460),false, coinCount>=600);
+        loadUseButton(new Vec2d(570,460),false, coinCount>=600);
+        loadUseButton(new Vec2d(270,460),false, coinCount>=400);
     }
 
     public void populateFirstLevelScreen() {
