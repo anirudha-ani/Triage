@@ -24,7 +24,7 @@ public class IconButtonGenerator {
 
         DrawableRectangleComponent drawableBackgroundComponent = new DrawableRectangleComponent(button, true);
         button.setDefaultColor(Color.WHITESMOKE);
-        button.setHoverColor(Color.ORANGE);
+        button.setHoverColor(Color.rgb(204,69,66));
         button.setClickColor(Color.RED);
 
         SpriteComponent imageInsideButtonComponent = new SpriteComponent(

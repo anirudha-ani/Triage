@@ -14,7 +14,7 @@ public class ButtonGenerator {
         this.currentGameState = currentGameState;
     }
 
-    public GameObject generate(GameObjectId buttonId, Vec2d buttonPosition, Vec2d textPosition, Vec2d buttonSize, String buttonText, int fontSize, Color color, Color hoverColor, Color textColor) {
+    public GameObject generate(GameObjectId buttonId, Vec2d buttonPosition, Vec2d textPosition, Vec2d buttonSize, String buttonText, int fontSize, Color color, Color hoverColor, Color textColor, boolean clickable) {
 
         GameObject button = new GameObject(
                 buttonId.toString(),
@@ -24,7 +24,12 @@ public class ButtonGenerator {
 
         DrawableRectangleComponent drawableBackgroundComponent = new DrawableRectangleComponent(button, true);
         button.setDefaultColor(color);
-        button.setHoverColor(hoverColor);
+        if(!clickable){
+            button.setHoverColor(color);
+        }
+        else {
+            button.setHoverColor(hoverColor);
+        }
         //button.setClickColor();
 
         TextComponent textInsideButtonComponent = new TextComponent(
@@ -35,12 +40,14 @@ public class ButtonGenerator {
                 new Vec2d(textPosition.x, textPosition.y), // This is weird because the text is drawn on top of origin not below
                 new Vec2d(0, 0));
 
-        ClickableComponent clickableComponent = new ClickableComponent(button);
+        if(clickable) {
+            ClickableComponent clickableComponent = new ClickableComponent(button);
+            button.addComponent(clickableComponent);
+        }
 
         // Adding the sprite to the game object
         button.addComponent(drawableBackgroundComponent);
         button.addComponent(textInsideButtonComponent);
-        button.addComponent(clickableComponent);
 
         return button;
     }

@@ -11,7 +11,7 @@ public class GameWorldBluePrint {
 
     GameState currentGameState;
 
-    int coinCount = 0;
+    int coinCount = 400;
 
     public GameWorldBluePrint(GameState currentGameState) {
         this.currentGameState = currentGameState;
@@ -19,8 +19,16 @@ public class GameWorldBluePrint {
 
     public void populateMenuScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_GALAXY);
-        loadCoinText(String.valueOf(coinCount),50,new Vec2d(currentGameState.getScreenSize().x-120,55), Color.WHITE);
-        loadCoinImage(new Vec2d(40,40), new Vec2d(currentGameState.getScreenSize().x-80,17));
+        double coinSpacing = 100;
+        if (coinCount>10 && coinCount<100){
+            coinSpacing = 120;
+        }
+        else if(coinCount>100){
+            coinSpacing = 150;
+        }
+
+        loadCoinText(String.valueOf(coinCount),40,new Vec2d(currentGameState.getScreenSize().x-coinSpacing,48), Color.WHITE);
+        loadCoinImage(new Vec2d(30,30), new Vec2d(currentGameState.getScreenSize().x-60,19));
         loadStartButton();
         loadSaveButton();
         loadSettingsButton();
@@ -31,6 +39,17 @@ public class GameWorldBluePrint {
 
     public void populateCartScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_GALAXY);
+        double coinSpacing = 100;
+        if (coinCount>10 && coinCount<100){
+            coinSpacing = 120;
+        }
+        else if(coinCount>100){
+            coinSpacing = 150;
+        }
+
+        loadCoinText(String.valueOf(coinCount),40,new Vec2d(currentGameState.getScreenSize().x-coinSpacing,48), Color.WHITE);
+        loadCoinImage(new Vec2d(30,30), new Vec2d(currentGameState.getScreenSize().x-60,19));
+
         loadCart(SpriteSheetId.CART_BG,new Vec2d(180,10));
 
         loadCoinText("200",12,new Vec2d(615,220), Color.BLACK);
@@ -42,10 +61,11 @@ public class GameWorldBluePrint {
         loadCoinText("400",12,new Vec2d(310,432), Color.BLACK);
         loadCoinImage(new Vec2d(10,10),new Vec2d(340,422));
 
-        loadUseButton(new Vec2d(280,250),true);
-        loadUseButton(new Vec2d(570,250),false);
-        loadUseButton(new Vec2d(570,460),false);
-        loadUseButton(new Vec2d(270,460),false);
+
+        loadUseButton(new Vec2d(280,250),true,true);
+        loadUseButton(new Vec2d(570,250),false, coinCount>=200);
+        loadUseButton(new Vec2d(570,460),false, coinCount>=400);
+        loadUseButton(new Vec2d(270,460),false, coinCount>=600);
     }
 
     public void populateFirstLevelScreen() {
@@ -122,7 +142,9 @@ public class GameWorldBluePrint {
                         28,
                         Color.rgb(204,69,66),
                         Color.ORANGE,
-                        Color.BLACK);
+                        Color.BLACK,
+                        true
+                        );
         currentGameState.getGameWorld().addGameObject(loadButton);
     }
 
@@ -136,7 +158,9 @@ public class GameWorldBluePrint {
                         28,
                         Color.rgb(204,69,66),
                         Color.ORANGE,
-                        Color.BLACK);
+                        Color.BLACK,
+                        true
+                        );
         currentGameState.getGameWorld().addGameObject(saveButton);
     }
 
@@ -150,7 +174,9 @@ public class GameWorldBluePrint {
                         28,
                         Color.rgb(204,69,66),
                         Color.ORANGE,
-                        Color.BLACK);
+                        Color.BLACK,
+                        true
+                        );
         currentGameState.getGameWorld().addGameObject(settingsButton);
     }
 
@@ -167,7 +193,7 @@ public class GameWorldBluePrint {
         currentGameState.getGameWorld().addGameObject(shopButton);
     }
 
-    public void loadUseButton(Vec2d buttonPosition, boolean boughtCharacter){
+    public void loadUseButton(Vec2d buttonPosition, boolean boughtCharacter, boolean unlocked){
         if(boughtCharacter) {
             GameObject useButton = new ButtonGenerator(this.currentGameState)
                     .generate(GameObjectId.USE_BUTTON,
@@ -178,7 +204,9 @@ public class GameWorldBluePrint {
                             20,
                             Color.rgb(45, 11, 37),
                             Color.ORANGE,
-                            Color.WHITE);
+                            Color.WHITE,
+                            true
+                            );
             currentGameState.getGameWorld().addGameObject(useButton);
         }
         else{
@@ -189,9 +217,11 @@ public class GameWorldBluePrint {
                             new Vec2d(125,40),
                             "UNLOCK",
                             20,
-                            Color.rgb(45, 11, 37),
-                            Color.ORANGE,
-                            Color.WHITE);
+                            unlocked?Color.rgb(45, 11, 37):Color.rgb(187, 191, 202),
+                            unlocked?Color.ORANGE:Color.rgb(187, 191, 202),
+                            unlocked?Color.WHITE:Color.rgb(73, 84, 100),
+                            unlocked
+                            );
             currentGameState.getGameWorld().addGameObject(useButton);
         }
 
