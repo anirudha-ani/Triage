@@ -1,10 +1,10 @@
 package triage;
 
 import engine.Application;
-import engine.Screen;
 import engine.support.Vec2d;
 import javafx.scene.input.MouseEvent;
 import triage.controllers.ScreenController;
+import triage.gamelogics.KeyboardInputLogics;
 import triage.gamelogics.MouseInputLogics;
 
 import java.util.ArrayList;
@@ -39,6 +39,8 @@ public class App extends Application {
 
         screenController.onTick(nanosSincePreviousTick);
         gameState.getGameWorld().tick(nanosSincePreviousTick);
+        KeyboardInputLogics keyboardInputLogics = new KeyboardInputLogics(this);
+        keyboardInputLogics.executeKeyInputLogic(getGameState().getGameWorld().getKeyEventHappened());
     }
 
     @Override
@@ -54,6 +56,4 @@ public class App extends Application {
         MouseInputLogics clickLogics = new MouseInputLogics(this);
         clickLogics.executeClickReleaseLogic(e);
     }
-
-
 }

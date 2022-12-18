@@ -2,10 +2,7 @@ package engine;
 
 import engine.UIElement.AffineWrapper;
 import engine.gameobjects.GameObject;
-import engine.systems.CollisionHappened;
-import engine.systems.CollisionSystem;
-import engine.systems.DrawSystem;
-import engine.systems.InputSystem;
+import engine.systems.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -45,7 +42,7 @@ public class GameWorld {
         collisionHappened.clear();
         collisionSystem.checkCollision(collisionHappened);
         drawSystem.onTick(nonosSinceLastTick);
-
+        inputSystem.onTick(nonosSinceLastTick);
     }
 
     public void draw(GraphicsContext g, AffineWrapper viewPointAffine) {
@@ -114,5 +111,9 @@ public class GameWorld {
 
     public ArrayList<GameObject> getGameObjects() {
         return gameObjects;
+    }
+
+    public KeyEventHappened getKeyEventHappened() {
+        return inputSystem.getKeyEventHappened();
     }
 }

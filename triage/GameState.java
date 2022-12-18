@@ -1,11 +1,11 @@
 package triage;
 
-import engine.GameResource;
 import engine.GameWorld;
 import engine.Screen;
 import engine.resources.FileLoader;
 import engine.resources.MapLoader;
 import engine.support.Vec2d;
+import engine.systems.KeyEventHappened;
 import triage.blueprints.GameAssets;
 import triage.blueprints.GameWorldBluePrint;
 
@@ -19,7 +19,8 @@ public class GameState {
     private Screen gameScreen = null;
 
     GameWorldBluePrint bluePrint = null;
-    private long microSecondPassedLastMove = 0;
+    private long microSecondPassedLastTick = 0;
+    private long microSecondPassedLastKeyExecution = 0;
     private boolean firstTickHappened = false;
     private MapLoader map;
     private GameAssets gameAssets;
@@ -46,12 +47,12 @@ public class GameState {
         this.gameScreen = gameScreen;
     }
 
-    public long getMicroSecondPassedLastMove() {
-        return microSecondPassedLastMove;
+    public long getMicroSecondPassedLastTick() {
+        return microSecondPassedLastTick;
     }
 
-    public void setMicroSecondPassedLastMove(long secondPassedLastMove) {
-        this.microSecondPassedLastMove = secondPassedLastMove;
+    public void setMicroSecondPassedLastTick(long secondPassedLastTick) {
+        this.microSecondPassedLastTick = secondPassedLastTick;
     }
 
     public boolean getFirstTickHappened() {
@@ -104,5 +105,13 @@ public class GameState {
 
     public void setCurrentApp(App currentApp) {
         this.currentApp = currentApp;
+    }
+
+    public long getMicroSecondPassedLastKeyExecution() {
+        return microSecondPassedLastKeyExecution;
+    }
+
+    public void setMicroSecondPassedLastKeyExecution(long microSecondPassedLastKeyExecution) {
+        this.microSecondPassedLastKeyExecution = microSecondPassedLastKeyExecution;
     }
 }
