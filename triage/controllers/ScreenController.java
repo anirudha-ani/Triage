@@ -3,7 +3,6 @@ package triage.controllers;
 import engine.GameWorld;
 import engine.Screen;
 import engine.components.AudioComponent;
-import triage.App;
 import triage.GameState;
 import triage.blueprints.GameAssets;
 import triage.blueprints.GameWorldBluePrint;
@@ -29,7 +28,7 @@ public class ScreenController {
             executeOnFirstTick();
             currentGameState.setFirstTickHappened(true);
         } else {
-            currentGameState.setMicroSecondPassedLastMove(nanosSincePreviousTick / 1000);
+            currentGameState.setMicroSecondPassedLastTick(nanosSincePreviousTick / 1000);
         }
     }
 
@@ -74,7 +73,7 @@ public class ScreenController {
         this.currentGameState.getBluePrint().populateMenuScreen();
 
         // Resetting the time counter
-        currentGameState.setMicroSecondPassedLastMove(0);
+        currentGameState.setMicroSecondPassedLastTick(0);
     }
 
     public void switchToCartScreen() {
@@ -100,7 +99,7 @@ public class ScreenController {
         this.currentGameState.getBluePrint().populateCartScreen();
 
         // Resetting the time counter
-        currentGameState.setMicroSecondPassedLastMove(0);
+        currentGameState.setMicroSecondPassedLastTick(0);
     }
 
     public void switchToFirstLevelScreen() {
@@ -129,7 +128,7 @@ public class ScreenController {
         this.currentGameState.getBluePrint().populateFirstLevelScreen();
 
         // Resetting the time counter
-        currentGameState.setMicroSecondPassedLastMove(0);
+        currentGameState.setMicroSecondPassedLastTick(0);
 
     }
 

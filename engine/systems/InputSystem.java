@@ -2,9 +2,7 @@ package engine.systems;
 
 import engine.GameWorld;
 import engine.UIElement.AffineWrapper;
-import engine.UIElement.Viewport;
 import engine.components.Component;
-import engine.components.PhysicsComponent;
 import engine.components.RayComponent;
 import engine.components.TransformComponent;
 import engine.gameobjects.GameObject;
@@ -15,10 +13,14 @@ import javafx.scene.transform.Affine;
 import javafx.scene.transform.NonInvertibleTransformException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class InputSystem extends System {
     private final ArrayList<GameObject> mouseInputReactableObject = new ArrayList<>();
     private final ArrayList<GameObject> keyinputReactableObject = new ArrayList<>();
+    private final Set<KeyCode> activeKeys = new HashSet<KeyCode>();
+    private KeyEventHappened keyEventHappened = new KeyEventHappened(keyinputReactableObject, activeKeys, null);
 
     private double currentMousePositionOnScreenX;
     private double currentMousePositionOnScreenY;
@@ -46,83 +48,20 @@ public class InputSystem extends System {
 
     }
 
+    // TODO: Viewport control on keypress is now removed.
+
     public void onKeyPressed(KeyEvent e, AffineWrapper viewPortAffine) {
         if (this.getRefGameWorld().getCurrentGraphicsContext() == null) {
             return;
         }
-        keyinputReactableObject.forEach(gameObject -> {
-            TransformComponent transform = gameObject.getTransformComponent();
-
-            Component collisionComponent = gameObject.getComponent("collisionComponent");
-
-            Affine affine;
-
-            AffineWrapper screenAffine = new AffineWrapper();
-            screenAffine.deepCopy(this.getRefGameWorld().getCurrentGraphicsContext().getTransform());
-
-            if (gameObject.isViewPortSensitive()) {
-                affine = viewPortAffine.getAffine();
-            } else {
-                affine = this.getRefGameWorld().getCurrentGraphicsContext().getTransform();
-            }
-
-            double deltaX = 0;
-            double deltaY = 0;
-
-            double prevX = transform.getPositionOnWorld().x;
-            double prevY = transform.getPositionOnWorld().y;
-            PhysicsComponent physicsComponent = (PhysicsComponent) gameObject.getComponent("physics");
-
-            if (physicsComponent == null) {
-                return;
-            }
-            if (e.getCode() == KeyCode.D) {
-                deltaX = 10;
-                gameObject.setStatus("right");
-                if (physicsComponent.getVel().x < 0) {
-                    physicsComponent.setVel(new Vec2d(0, physicsComponent.getVel().y));
-                }
-                physicsComponent.applyImpulse(new Vec2d(5, 0));
-            } else if (e.getCode() == KeyCode.A) {
-                deltaX = -10;
-                gameObject.setStatus("left");
-                if (physicsComponent.getVel().x > 0) {
-                    physicsComponent.setVel(new Vec2d(0, physicsComponent.getVel().y));
-                }
-                physicsComponent.applyImpulse(new Vec2d(-5, 0));
-            } else if (e.getCode() == KeyCode.S) {
-                deltaY = 10;
-                gameObject.setStatus("down");
-            } else if (e.getCode() == KeyCode.W) {
-                deltaY = -10;
-                if (physicsComponent.isGravityActivated()) {
-                    return;
-                }
-                if (physicsComponent.getVel().y > 0) {
-                    physicsComponent.setVel(new Vec2d(physicsComponent.getVel().x, 0));
-                }
-                physicsComponent.applyForce(new Vec2d(0, -10));
-                physicsComponent.setGravityActivated(true);
-                gameObject.setStatus("up");
-            }
-
-
-            Viewport viewport = getRefGameWorld().getRefScreen().getViewport();
-
-            if (viewport != null) {
-                getRefGameWorld().getRefScreen().getViewport().shiftViewPort(new Vec2d(-deltaX, -deltaY));
-            }
-        });
+        activeKeys.add(e.getCode());
+        keyEventHappened.setReleasedKey(null);
     }
 
     public void onKeyReleased(KeyEvent e, AffineWrapper viewPortAffine) {
-        keyinputReactableObject.forEach(gameObject -> {
-            gameObject.setStatus("idle");
-        });
-
-//    System.out.println("onKeyReleased called");
+        activeKeys.remove(e.getCode());
+        keyEventHappened.setReleasedKey(e.getCode());
     }
-
 
     public void onMouseWheelMoved(ScrollEvent e) {
 
@@ -317,5 +256,12 @@ public class InputSystem extends System {
         });
 
         return objectIDs;
+    }
+
+    public void onTick(long nonosSinceLastTick) {
+    }
+
+    public KeyEventHappened getKeyEventHappened() {
+        return keyEventHappened;
     }
 }
