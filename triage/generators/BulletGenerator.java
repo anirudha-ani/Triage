@@ -28,6 +28,7 @@ public class BulletGenerator {
         PhysicsComponent physicsComponent = new PhysicsComponent(bullet, 1);
         physicsComponent.setGravityActivated(false);
         physicsComponent.setFrictionActivated(false);
+        physicsComponent.setVelocityCapped(false);
         physicsComponent.setVel(rayComponent.getRay().dir.smult(10));
         AABHitbox hitbox = new AABHitbox(projectilePos, new Vec2d(5, 5));
 
