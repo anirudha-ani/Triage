@@ -3,6 +3,7 @@ package triage.controllers;
 import engine.GameWorld;
 import engine.Screen;
 import engine.components.AudioComponent;
+import engine.components.VideoComponent;
 import triage.GameState;
 import triage.blueprints.AudioId;
 import triage.blueprints.GameAssets;
@@ -41,6 +42,17 @@ public class ScreenController {
          and you should load this just one time because it is a heavy operation
          **/
         currentGameState.getGameAssets().LoadResources();
+        playIntroSequence();
+    }
+
+    public void playIntroSequence() {
+        resetScreen();
+        /**
+         * The reason playvideo is in state because I always one to keep just one instance
+         * of video component.
+         */
+
+        currentGameState.playVideo("triage/videofiles/Opening.mp4", false);
         switchToMenuScreen();
     }
 
