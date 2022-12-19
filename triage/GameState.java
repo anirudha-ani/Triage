@@ -2,12 +2,16 @@ package triage;
 
 import engine.GameWorld;
 import engine.Screen;
+import engine.components.AudioComponent;
 import engine.resources.FileLoader;
 import engine.resources.MapLoader;
 import engine.support.Vec2d;
 import engine.systems.KeyEventHappened;
+import triage.blueprints.AudioId;
 import triage.blueprints.GameAssets;
 import triage.blueprints.GameWorldBluePrint;
+
+import java.util.ArrayList;
 
 /**
  * I have introducing this object to hold all the necessary
@@ -26,6 +30,8 @@ public class GameState {
     private GameAssets gameAssets;
     private FileLoader saveFile;
     private App currentApp;
+
+    ArrayList<AudioComponent> runningAudio = new ArrayList<AudioComponent>();
 
     public GameState(App app) {
         currentApp = app;
@@ -113,5 +119,16 @@ public class GameState {
 
     public void setMicroSecondPassedLastKeyExecution(long microSecondPassedLastKeyExecution) {
         this.microSecondPassedLastKeyExecution = microSecondPassedLastKeyExecution;
+    }
+    public void addAudio(AudioComponent audioComponent) {
+        runningAudio.add(audioComponent);
+    }
+
+    public void removeAudio(AudioId audioId) {
+        runningAudio.removeIf(audioComponent -> (audioComponent.getLocalId() == audioId.toString()));
+    }
+
+    public void removeAllAudio() {
+        runningAudio.clear();
     }
 }
