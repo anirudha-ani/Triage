@@ -131,6 +131,9 @@ public class GameState {
     }
 
     public void removeAllAudio() {
+        runningAudio.forEach(audioComponent -> {
+            audioComponent.stopAudio();
+        });
         runningAudio.clear();
     }
 

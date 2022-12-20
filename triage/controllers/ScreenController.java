@@ -67,6 +67,11 @@ public class ScreenController {
         // This is necessary before switching to any new screen
         resetScreen();
 
+        AudioComponent audioClip = new AudioComponent("triage/audiofiles/MainMenu.mp3", true);
+        audioClip.setLocalId(AudioId.BACKGROUND_STAGE1.toString());
+        audioClip.playAudio();
+        currentGameState.addAudio(audioClip);
+
         // Creating an instance of the new screen
         currentGameState.setGameScreen(
                 new Screen(
@@ -91,7 +96,7 @@ public class ScreenController {
 
     public void switchToCartScreen() {
         // This is necessary before switching to any new screen
-        resetScreen();
+        resetScreenWithoutAudio();
 
         // Creating an instance of the new screen
         currentGameState.setGameScreen(
@@ -158,6 +163,9 @@ public class ScreenController {
     public void resetScreen() {
         currentGameState.setGameWorld(new GameWorld());
         currentGameState.removeAllAudio();
+    }
+    public void resetScreenWithoutAudio() {
+        currentGameState.setGameWorld(new GameWorld());
     }
 
 }
