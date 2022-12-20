@@ -6,9 +6,10 @@ import engine.gameobjects.GameObject;
 import engine.support.Vec2d;
 import javafx.scene.input.MouseEvent;
 import triage.controllers.ScreenController;
+import triage.gamelogics.CollisionLogics;
 import triage.gamelogics.KeyboardInputLogics;
 import triage.gamelogics.MouseInputLogics;
-import triage.generators.GameObjectId;
+import triage.generators.ObjectIds.GameObjectId;
 import triage.intelligence.AirSentryAI;
 import triage.intelligence.GroundSentryAI;
 
@@ -21,13 +22,22 @@ public class App extends Application {
 
     public App(String title) {
         super(title);
-        gameState = new GameState(this);
+        this.gameState = new GameState(this);
+        this.gameState.setSaveFile("triage/savefiles/savegame.xml");
         screenController = new ScreenController(gameState);
+
+        /**
+         * TO READ and WRITE to game file do this
+         */
+
+        // this.getGameState().getSaveFile().readElements(SaveFileTags.COINS.toString());
+        // this.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), "3");
     }
 
     public App(String title, Vec2d windowSize, boolean debugMode, boolean fullscreen) {
         super(title, windowSize, debugMode, fullscreen);
-        gameState = new GameState(this);
+        this.gameState = new GameState(this);
+        this.gameState.setSaveFile("triage/savefiles/savegame.xml");
         screenController = new ScreenController(gameState);
     }
 
@@ -46,7 +56,10 @@ public class App extends Application {
         gameState.getGameWorld().tick(nanosSincePreviousTick);
         KeyboardInputLogics keyboardInputLogics = new KeyboardInputLogics(this);
         keyboardInputLogics.executeKeyInputLogic(getGameState().getGameWorld().getKeyEventHappened());
+        CollisionLogics collisionLogics = new CollisionLogics(getGameState());
+        collisionLogics.executeCollisionLogic();
         triggeringAI(nanosSincePreviousTick);
+
     }
 
     @Override

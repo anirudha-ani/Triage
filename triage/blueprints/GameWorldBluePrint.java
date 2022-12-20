@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import triage.GameState;
 import triage.generators.*;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class GameWorldBluePrint {
 
@@ -134,16 +135,16 @@ public class GameWorldBluePrint {
 
     public void loadGroundSentryEnemy() {
         Vec2d sentryPositionOnWorld1 = new Vec2d(450,320);
-        GameObject sentry1 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld1);
-        currentGameState.getGameWorld().addGameObject(sentry1);
+        GameObject groundSentry1 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld1);
+        currentGameState.getGameWorld().addGameObject(groundSentry1);
 
-        Vec2d sentryPositionOnWorld2 = new Vec2d(800,272);
-        GameObject sentry2 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld2);
-        currentGameState.getGameWorld().addGameObject(sentry2);
+        Vec2d sentryPositionOnWorld2 = new Vec2d(800,270);
+        GameObject groundSentry2 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld2);
+        currentGameState.getGameWorld().addGameObject(groundSentry2);
 
         Vec2d sentryPositionOnWorld3 = new Vec2d(50,100);
-        GameObject sentry3 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld3);
-        currentGameState.getGameWorld().addGameObject(sentry3);
+        GameObject airSentry1 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld3);
+        currentGameState.getGameWorld().addGameObject(airSentry1);
     }
 
     public void loadStartButton() {

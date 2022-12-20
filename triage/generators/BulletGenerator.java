@@ -6,6 +6,7 @@ import engine.hitboxes.AABHitbox;
 import engine.support.Vec2d;
 import javafx.scene.paint.Color;
 import triage.GameState;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class BulletGenerator {
     GameState currentGameState;

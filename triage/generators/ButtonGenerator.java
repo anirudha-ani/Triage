@@ -6,7 +6,7 @@ import engine.support.Vec2d;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import triage.GameState;
-import triage.blueprints.SpriteSheetId;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class ButtonGenerator {
     GameState currentGameState;

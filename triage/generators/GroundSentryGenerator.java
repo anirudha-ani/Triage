@@ -6,7 +6,7 @@ import engine.hitboxes.AABHitbox;
 import engine.support.Vec2d;
 import triage.GameState;
 import javafx.scene.paint.Color;
-import triage.blueprints.SpriteSheetId;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class GroundSentryGenerator {
 
@@ -19,7 +19,7 @@ public class GroundSentryGenerator {
 
         GameObject sentry = new GameObject(
                 GameObjectId.GROUND_SENTRY.toString(),
-                new TransformComponent( new Vec2d(positionInWorld.x+10, positionInWorld.y+10), new Vec2d(32 - 20, 32 - 15)));
+                new TransformComponent( new Vec2d(positionInWorld.x, positionInWorld.y), new Vec2d(32, 32)));
 
         sentry.setzIndex(0);
         sentry.setDefaultColor(Color.RED);
@@ -27,12 +27,14 @@ public class GroundSentryGenerator {
 
         DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(sentry);
 
+        StatsComponent statsComponent = new StatsComponent(100, 100);
+
         PhysicsComponent physicsComponent = new PhysicsComponent(sentry, 5);
         physicsComponent.setVel(new Vec2d(.5,0));
         physicsComponent.setFrictionActivated(false);
         physicsComponent.setGravityActivated(false);
 
-        AABHitbox hitbox = new AABHitbox(new Vec2d(positionInWorld.x+10, positionInWorld.y+10), new Vec2d(32 - 20, 32 - 15));
+        AABHitbox hitbox = new AABHitbox(new Vec2d(positionInWorld.x, positionInWorld.y), new Vec2d(32, 32));
         CollisionComponent collisionComponent = new CollisionComponent(sentry, hitbox);
 
         AIComponent aiComponent = new AIComponent(sentry);
@@ -43,6 +45,7 @@ public class GroundSentryGenerator {
         sentry.addComponent(aiComponent);
         sentry.addComponent(physicsComponent);
         sentry.addComponent(collisionComponent);
+        sentry.addComponent(statsComponent);
 
         return sentry;
     }
