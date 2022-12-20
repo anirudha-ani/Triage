@@ -4,6 +4,7 @@ import engine.components.*;
 import engine.gameobjects.GameObject;
 import engine.hitboxes.AABHitbox;
 import engine.support.Vec2d;
+import javafx.scene.paint.Color;
 import triage.GameState;
 import triage.blueprints.SpriteSheetId;
 
@@ -21,10 +22,11 @@ public class SamuraiGenerator {
                     new TransformComponent( new Vec2d(positionInWorld.x+10, positionInWorld.y+10), new Vec2d(30 - 20, 30 - 15)));
 
             player.setzIndex(0);
-//        player.setDefaultColor(Color.RED);
-//        player.setHoverColor(Color.ORANGE);
+        //TODO: Comment out the drawable thing to remove bounding box.
+        player.setDefaultColor(Color.RED);
+        player.setHoverColor(Color.ORANGE);
 
-//        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(player);
+        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(player);
 
             RayComponent rayComponent = new RayComponent(player);
             rayComponent.setPositionOnWorld(player.getTransformComponent().getPositionOnWorld());
@@ -48,7 +50,9 @@ public class SamuraiGenerator {
                                     .getGameAssets()
                                     .getGameResource()
                                     .getSpriteSheet(SpriteSheetId.SAMURAI_RIGHT.toString()),
-                            positionInWorld,
+//                            positionInWorld,
+                            // Sprite position and object position might not be same all the time. 
+                            new Vec2d(positionInWorld.x-35, positionInWorld.y-35),
                             new Vec2d(100, 100));
 
             PhysicsComponent physicsComponent = new PhysicsComponent(player, 10);
@@ -62,7 +66,7 @@ public class SamuraiGenerator {
 
             player.setStatus("right");
 
-//        player.addComponent(drawableComponent);
+        player.addComponent(drawableComponent);
             player.addComponent(rayComponent);
             //player.addComponent(spriteComponent1);
             player.addComponent(spriteComponent2);
