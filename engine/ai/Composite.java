@@ -7,7 +7,7 @@ public abstract class Composite implements BehaviorTreeNode {
     ArrayList<BehaviorTreeNode> children = new ArrayList<>();
     BehaviorTreeNode lastRunning = null;
 
-    public abstract Status update(long seconds);
+    public abstract Status update(long nanoSecondSinceLastTick);
 
     public abstract void reset();
 
