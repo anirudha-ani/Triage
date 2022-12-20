@@ -6,6 +6,8 @@ public enum GameObjectId {
     player, // Intentionally lower case to make it compatible with legacy code
     GROUND_SENTRY,
 
+    AIR_SENTRY,
+
     SAMURAI,
     HUNTRESS,
 

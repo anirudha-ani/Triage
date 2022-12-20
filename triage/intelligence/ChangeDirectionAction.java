@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ChangeDirectionAction extends Action {
 
     GameObject self;
-    ArrayList<GameObject> platformObjects;
+    ArrayList<GameObject> platformObjects = null;
 
     double lastXVelocity = 0;
     int direction = 1; // 1 = right -1 = left
@@ -19,6 +19,12 @@ public class ChangeDirectionAction extends Action {
         super();
         this.self = enemy;
         this.platformObjects = platformObjects;
+    }
+
+    public ChangeDirectionAction(GameObject enemy) {
+        super();
+        this.self = enemy;
+        this.platformObjects = null;
     }
 
     @Override
@@ -30,13 +36,11 @@ public class ChangeDirectionAction extends Action {
         // Flag for unsafe position means getting out of platform
         boolean unsafe = false;
 
-        // Iterating over all platforms
-        for (int i = 0 ; i < platformObjects.size() ; i++) {
-            GameObject platform = platformObjects.get(i);
-            double platformMinXPos = platform.getTransformComponent().getPositionOnWorld().x;
-            double platformMaxXPos = platform.getTransformComponent().getPositionOnWorld().x + platform.getTransformComponent().getSizeOnWorld().x;
+        // If there is no platform
+        if(platformObjects == null) {
+            double platformMinXPos = 10;
+            double platformMaxXPos = 950;
 
-            // Checking if position getting out of platform
             if(selfMinXPos>= platformMinXPos && selfMinXPos<= platformMaxXPos && selfMaxXPos > platformMaxXPos) {
                 direction = -1;
                 unsafe = true;
@@ -44,6 +48,23 @@ public class ChangeDirectionAction extends Action {
             if(selfMaxXPos>= platformMinXPos && selfMaxXPos<= platformMaxXPos && selfMinXPos < platformMinXPos) {
                 direction = 1;
                 unsafe = true;
+            }
+        } else {
+            // Iterating over all platforms
+            for (int i = 0 ; i < platformObjects.size() ; i++) {
+                GameObject platform = platformObjects.get(i);
+                double platformMinXPos = platform.getTransformComponent().getPositionOnWorld().x;
+                double platformMaxXPos = platform.getTransformComponent().getPositionOnWorld().x + platform.getTransformComponent().getSizeOnWorld().x;
+
+                // Checking if position getting out of platform
+                if(selfMinXPos>= platformMinXPos && selfMinXPos<= platformMaxXPos && selfMaxXPos > platformMaxXPos) {
+                    direction = -1;
+                    unsafe = true;
+                }
+                if(selfMaxXPos>= platformMinXPos && selfMaxXPos<= platformMaxXPos && selfMinXPos < platformMinXPos) {
+                    direction = 1;
+                    unsafe = true;
+                }
             }
         }
 

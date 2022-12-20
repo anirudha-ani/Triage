@@ -140,6 +140,10 @@ public class GameWorldBluePrint {
         Vec2d sentryPositionOnWorld2 = new Vec2d(800,272);
         GameObject sentry2 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld2);
         currentGameState.getGameWorld().addGameObject(sentry2);
+
+        Vec2d sentryPositionOnWorld3 = new Vec2d(50,100);
+        GameObject sentry3 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld3);
+        currentGameState.getGameWorld().addGameObject(sentry3);
     }
 
     public void loadStartButton() {

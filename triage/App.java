@@ -9,6 +9,7 @@ import triage.controllers.ScreenController;
 import triage.gamelogics.KeyboardInputLogics;
 import triage.gamelogics.MouseInputLogics;
 import triage.generators.GameObjectId;
+import triage.intelligence.AirSentryAI;
 import triage.intelligence.GroundSentryAI;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class App extends Application {
 
         ArrayList<GameObject> gameObjects = getGameState().getGameWorld().getGameObjects();
         ArrayList<GameObject> platformObjects = getGameState().getGameWorld().getGameObjects(GameObjectId.HIDDEN_RECTANGLE_HITBOX.toString());
-        
+
         gameObjects.forEach(gameObject -> {
             if (gameObject.getId() == GameObjectId.GROUND_SENTRY.toString()) {
                 AIComponent aiComponent = (AIComponent) gameObject.getComponent("ai");
@@ -74,6 +75,18 @@ public class App extends Application {
                     GroundSentryAI sentryAI = (GroundSentryAI) aiComponent.getAi();
                     if (sentryAI == null) {
                         aiComponent.setAi(new GroundSentryAI(gameObject, platformObjects));
+                    } else {
+                        sentryAI.update(nanosSincePreviousTick);
+                    }
+                }
+            }
+
+            if (gameObject.getId() == GameObjectId.AIR_SENTRY.toString()) {
+                AIComponent aiComponent = (AIComponent) gameObject.getComponent("ai");
+                if (aiComponent != null) {
+                    AirSentryAI sentryAI = (AirSentryAI) aiComponent.getAi();
+                    if (sentryAI == null) {
+                        aiComponent.setAi(new AirSentryAI(gameObject));
                     } else {
                         sentryAI.update(nanosSincePreviousTick);
                     }
