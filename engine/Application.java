@@ -220,4 +220,8 @@ public class Application extends FXFrontEnd {
     public Vec2d getCurrentScreenSize() {
         return currentScreenSize;
     }
+
+    public Screen getCurrentScreen() {
+        return currentScreen;
+    }
 }
