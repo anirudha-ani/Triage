@@ -27,6 +27,8 @@ public class PlayerGenerator {
 
 //        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(player);
 
+        StatsComponent statsComponent = new StatsComponent(100, 100);
+
         RayComponent rayComponent = new RayComponent(player);
         rayComponent.setPositionOnWorld(player.getTransformComponent().getPositionOnWorld());
 
@@ -70,6 +72,7 @@ public class PlayerGenerator {
         player.addComponent(physicsComponent);
         player.addComponent(collisionComponent);
         player.addComponent(gravityCollisionComponent);
+        player.addComponent(statsComponent);
 
         return player;
     }
