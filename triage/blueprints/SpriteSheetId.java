@@ -27,5 +27,12 @@ public enum SpriteSheetId {
 
     SAMURAI_ATTACK,
 
+    MUMMY_LEFT,
+
+    MUMMY_RIGHT,
+
+    MUMMY,
+
+    UFO,
     COIN_IMAGE
 }

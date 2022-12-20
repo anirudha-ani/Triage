@@ -174,6 +174,7 @@ public class GameObject {
             }
         }
 
+
     }
 
     public void setPositionOnWorld(Vec2d newPosition) {

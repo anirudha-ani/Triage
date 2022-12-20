@@ -43,10 +43,12 @@ public class ChangeDirectionAction extends Action {
 
             if(selfMinXPos>= platformMinXPos && selfMinXPos<= platformMaxXPos && selfMaxXPos > platformMaxXPos) {
                 direction = -1;
+                this.self.setStatus("left");
                 unsafe = true;
             }
             if(selfMaxXPos>= platformMinXPos && selfMaxXPos<= platformMaxXPos && selfMinXPos < platformMinXPos) {
                 direction = 1;
+                this.self.setStatus("right");
                 unsafe = true;
             }
         } else {
@@ -59,10 +61,12 @@ public class ChangeDirectionAction extends Action {
                 // Checking if position getting out of platform
                 if(selfMinXPos>= platformMinXPos && selfMinXPos<= platformMaxXPos && selfMaxXPos > platformMaxXPos) {
                     direction = -1;
+                    this.self.setStatus("left");
                     unsafe = true;
                 }
                 if(selfMaxXPos>= platformMinXPos && selfMaxXPos<= platformMaxXPos && selfMinXPos < platformMinXPos) {
                     direction = 1;
+                    this.self.setStatus("right");
                     unsafe = true;
                 }
             }
