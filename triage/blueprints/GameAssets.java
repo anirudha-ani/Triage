@@ -28,7 +28,12 @@ public class GameAssets {
         Image huntress = new Image("file:triage/spritesheets/Huntress/Sprites/idle.png",1200,150,false,true);
         Image wizard = new Image("file:triage/spritesheets/Wizard Pack/idle.png",1386,190,false,true);
         Image warrior = new Image("file:triage/spritesheets/Fantasy Warrior/Sprites/idle.png",1620,162,false,true);
-        Image samuraiMoveRight = new Image("file:triage/spritesheets/Martial Hero/Sprites/Run.png",1600,200,false,true);
+        Image samuraiMoveRight = new Image("file:triage/spritesheets/Martial Hero/Sprites/Run_R.png",1600,200,false,true);
+        Image samuraiJump = new Image("file:triage/spritesheets/Martial Hero/Sprites/Jump.png",400,200,false,true);
+        Image samuraiMoveLeft = new Image("file:triage/spritesheets/Martial Hero/Sprites/Run_L.png",1600,200,false,true);
+        Image samuraiAttackRight = new Image("file:triage/spritesheets/Martial Hero/Sprites/Attack1.png",1200,200,false,true);
+        Image samuraiJumpLeft = new Image("file:triage/spritesheets/Martial Hero/Sprites/Jump_L.png",400,200,false,true);
+        Image samuraiAttackLeft = new Image("file:triage/spritesheets/Martial Hero/Sprites/Attack1_L.png",1200,200,false,true);
 
         // Sprite height and width indicates individual sprite height and width in a sprite sheet
         gameResource.addSpriteSheet(SpriteSheetId.PLAYER_LEFT.toString(), playerLeft, 2, 2, 24, 24);
@@ -43,6 +48,11 @@ public class GameAssets {
         gameResource.addSpriteSheet(SpriteSheetId.WIZARD.toString(),wizard,6,1,231,190);
         gameResource.addSpriteSheet(SpriteSheetId.WARRIOR.toString(),warrior,10,1,162,162);
         gameResource.addSpriteSheet(SpriteSheetId.SAMURAI_RIGHT.toString(),samuraiMoveRight,8,1,200,200);
+        gameResource.addSpriteSheet(SpriteSheetId.SAMURAI_JUMP.toString(),samuraiJump,2,1,200,200);
+        gameResource.addSpriteSheet(SpriteSheetId.SAMURAI_LEFT.toString(),samuraiMoveLeft,8,1,200,200);
+        gameResource.addSpriteSheet(SpriteSheetId.SAMURAI_ATTACK.toString(),samuraiAttackRight,6,1,200,200);
+        gameResource.addSpriteSheet(SpriteSheetId.SAMURAI_JUMP_LEFT.toString(),samuraiJumpLeft,2,1,200,200);
+        gameResource.addSpriteSheet(SpriteSheetId.SAMURAI_ATTACK_LEFT.toString(),samuraiAttackLeft,6,1,200,200);
     }
 
     public GameResource getGameResource() {

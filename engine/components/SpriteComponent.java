@@ -6,7 +6,7 @@ import engine.support.Vec2d;
 import javafx.scene.canvas.GraphicsContext;
 
 public class SpriteComponent extends Component {
-    private final SpriteSheet spriteSheet;
+    public final SpriteSheet spriteSheet;
     private Vec2d positionOnWorld;
     private Vec2d sizeOnWorld;
 
@@ -41,6 +41,10 @@ public class SpriteComponent extends Component {
 
     public void setSizeOnWorld(Vec2d sizeOnWorld) {
         this.sizeOnWorld = sizeOnWorld;
+    }
+
+    public SpriteSheet getSpriteSheet(){
+        return spriteSheet;
     }
 
     @Override

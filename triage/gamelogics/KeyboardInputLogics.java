@@ -3,7 +3,6 @@ package triage.gamelogics;
 import engine.components.PhysicsComponent;
 import engine.support.Vec2d;
 import engine.systems.KeyEventHappened;
-import engine.systems.System;
 import javafx.scene.input.KeyCode;
 import triage.App;
 import triage.generators.GameObjectId;
@@ -30,6 +29,7 @@ public class KeyboardInputLogics {
         }
 
         keyEventHappened.getKeyInputReactableObject().forEach(gameObject -> {
+
 
             // This logic is only applicable for player
             if (gameObject.getId() == GameObjectId.player.toString()) {
@@ -79,7 +79,7 @@ public class KeyboardInputLogics {
                     gameObject.setStatus("down");
                 }
 
-                if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.W)) {
+                if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.W) && keyEventHappened.getReleasedKey()==KeyCode.A) {
                     movementHappening = true;
                     if (physicsComponent.isGravityActivated()) {
                         return;
@@ -90,8 +90,46 @@ public class KeyboardInputLogics {
 
                     // Player will be on Air so activating gravity
                     physicsComponent.setGravityActivated(true);
-                    gameObject.setStatus("up");
+                    gameObject.setStatus("upLeft");
                 }
+
+               if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.W) && keyEventHappened.getReleasedKey()==KeyCode.D) {
+                    movementHappening = true;
+                    if (physicsComponent.isGravityActivated()) {
+                        return;
+                    }
+
+                    physicsComponent.setVel(new Vec2d(physicsComponent.getVel().x, 0));
+                    physicsComponent.applyImpulse(new Vec2d(0, -50));
+
+                    // Player will be on Air so activating gravity
+                    physicsComponent.setGravityActivated(true);
+                    gameObject.setStatus("upRight");
+                }
+
+                if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.L) && keyEventHappened.getReleasedKey()==KeyCode.A) {
+                    movementHappening = true;
+                    gameObject.setStatus("attackLeft");
+//                    if (physicsComponent.getVel().x < 0) {
+//                        physicsComponent.setVel(new Vec2d(0, physicsComponent.getVel().y));
+//                    }
+//
+//                    physicsComponent.applyImpulse(new Vec2d(5, 0));
+
+                }
+
+                if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.L) && keyEventHappened.getReleasedKey()==KeyCode.D) {
+                    movementHappening = true;
+                    gameObject.setStatus("attackRight");
+//                    if (physicsComponent.getVel().x < 0) {
+//                        physicsComponent.setVel(new Vec2d(0, physicsComponent.getVel().y));
+//                    }
+//
+//                    physicsComponent.applyImpulse(new Vec2d(5, 0));
+
+                }
+
+
                 if(!movementHappening) {
                     gameObject.setStatus("idle");
                 }

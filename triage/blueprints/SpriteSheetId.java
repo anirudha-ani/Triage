@@ -18,6 +18,14 @@ public enum SpriteSheetId {
     WARRIOR,
 
     SAMURAI_RIGHT,
+    SAMURAI_JUMP,
+
+    SAMURAI_JUMP_LEFT,
+
+    SAMURAI_ATTACK_LEFT,
+    SAMURAI_LEFT,
+
+    SAMURAI_ATTACK,
 
     COIN_IMAGE
 }

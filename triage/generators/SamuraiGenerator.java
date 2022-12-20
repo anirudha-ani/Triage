@@ -32,15 +32,19 @@ public class SamuraiGenerator {
             rayComponent.setPositionOnWorld(player.getTransformComponent().getPositionOnWorld());
 
             // SpriteId "left" and "right" is a legacy id, don't rename it. It will break some engine side code
-//            SpriteComponent spriteComponent1 = new SpriteComponent(
-//                    "left",
-//                    player,
-//                    currentGameState
-//                            .getGameAssets()
-//                            .getGameResource()
-//                            .getSpriteSheet(SpriteSheetId.PLAYER_LEFT.toString()),
-//                    positionInWorld,
-//                    new Vec2d(32, 32));
+
+            SpriteComponent spriteComponent1 =
+                    new SpriteComponent(
+                            "left",
+                            player,
+                            currentGameState
+                                    .getGameAssets()
+                                    .getGameResource()
+                                    .getSpriteSheet(SpriteSheetId.SAMURAI_LEFT.toString()),
+//                            positionInWorld,
+                            // Sprite position and object position might not be same all the time.
+                            new Vec2d(positionInWorld.x-50, positionInWorld.y-50),
+                            new Vec2d(125, 125));
 
             SpriteComponent spriteComponent2 =
                     new SpriteComponent(
@@ -52,8 +56,61 @@ public class SamuraiGenerator {
                                     .getSpriteSheet(SpriteSheetId.SAMURAI_RIGHT.toString()),
 //                            positionInWorld,
                             // Sprite position and object position might not be same all the time.
-                            new Vec2d(positionInWorld.x-35, positionInWorld.y-35),
-                            new Vec2d(100, 100));
+                            new Vec2d(positionInWorld.x-50, positionInWorld.y-50),
+                            new Vec2d(125, 125));
+
+            SpriteComponent spriteComponent3 =
+                    new SpriteComponent(
+                            "upRight",
+                            player,
+                            currentGameState
+                                    .getGameAssets()
+                                    .getGameResource()
+                                    .getSpriteSheet(SpriteSheetId.SAMURAI_JUMP.toString()),
+//                            positionInWorld,
+                            // Sprite position and object position might not be same all the time.
+                            new Vec2d(positionInWorld.x-50, positionInWorld.y-50),
+                            new Vec2d(125, 125));
+
+
+            SpriteComponent spriteComponent4 =
+                    new SpriteComponent(
+                            "attackRight",
+                            player,
+                            currentGameState
+                                    .getGameAssets()
+                                    .getGameResource()
+                                    .getSpriteSheet(SpriteSheetId.SAMURAI_ATTACK.toString()),
+//                            positionInWorld,
+                            // Sprite position and object position might not be same all the time.
+                            new Vec2d(positionInWorld.x-50, positionInWorld.y-50),
+                            new Vec2d(125, 125));
+
+            SpriteComponent spriteComponent5 =
+                    new SpriteComponent(
+                            "upLeft",
+                            player,
+                            currentGameState
+                                    .getGameAssets()
+                                    .getGameResource()
+                                    .getSpriteSheet(SpriteSheetId.SAMURAI_JUMP_LEFT.toString()),
+//                            positionInWorld,
+                            // Sprite position and object position might not be same all the time.
+                            new Vec2d(positionInWorld.x-50, positionInWorld.y-50),
+                            new Vec2d(125, 125));
+
+            SpriteComponent spriteComponent6 =
+                    new SpriteComponent(
+                            "attackLeft",
+                            player,
+                            currentGameState
+                                    .getGameAssets()
+                                    .getGameResource()
+                                    .getSpriteSheet(SpriteSheetId.SAMURAI_ATTACK_LEFT.toString()),
+//                            positionInWorld,
+                            // Sprite position and object position might not be same all the time.
+                            new Vec2d(positionInWorld.x-50, positionInWorld.y-50),
+                            new Vec2d(125, 125));
 
             PhysicsComponent physicsComponent = new PhysicsComponent(player, 10);
 
@@ -68,8 +125,12 @@ public class SamuraiGenerator {
 
         player.addComponent(drawableComponent);
             player.addComponent(rayComponent);
-            //player.addComponent(spriteComponent1);
+            player.addComponent(spriteComponent3);
             player.addComponent(spriteComponent2);
+            player.addComponent(spriteComponent4);
+            player.addComponent(spriteComponent5);
+            player.addComponent(spriteComponent6);
+            player.addComponent(spriteComponent1);
             player.addComponent(physicsComponent);
             player.addComponent(collisionComponent);
             player.addComponent(gravityCollisionComponent);
