@@ -91,8 +91,8 @@ public class GameState {
         return saveFile;
     }
 
-    public void setSaveFile(FileLoader saveFile) {
-        this.saveFile = saveFile;
+    public void setSaveFile(String filePath) {
+        this.saveFile = new FileLoader(filePath);
     }
 
     public Vec2d getScreenSize() {
