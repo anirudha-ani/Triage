@@ -79,7 +79,7 @@ public class KeyboardInputLogics {
                     gameObject.setStatus("down");
                 }
 
-                if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.W) && keyEventHappened.getReleasedKey()==KeyCode.A) {
+                if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.W)) {
                     movementHappening = true;
                     if (physicsComponent.isGravityActivated()) {
                         return;
@@ -93,19 +93,19 @@ public class KeyboardInputLogics {
                     gameObject.setStatus("upLeft");
                 }
 
-               if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.W) && keyEventHappened.getReleasedKey()==KeyCode.D) {
-                    movementHappening = true;
-                    if (physicsComponent.isGravityActivated()) {
-                        return;
-                    }
-
-                    physicsComponent.setVel(new Vec2d(physicsComponent.getVel().x, 0));
-                    physicsComponent.applyImpulse(new Vec2d(0, -50));
-
-                    // Player will be on Air so activating gravity
-                    physicsComponent.setGravityActivated(true);
-                    gameObject.setStatus("upRight");
-                }
+//               if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.W) && keyEventHappened.getReleasedKey()==KeyCode.D) {
+//                    movementHappening = true;
+//                    if (physicsComponent.isGravityActivated()) {
+//                        return;
+//                    }
+//
+//                    physicsComponent.setVel(new Vec2d(physicsComponent.getVel().x, 0));
+//                    physicsComponent.applyImpulse(new Vec2d(0, -50));
+//
+//                    // Player will be on Air so activating gravity
+//                    physicsComponent.setGravityActivated(true);
+//                    gameObject.setStatus("upRight");
+//                }
 
                 if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.L) && keyEventHappened.getReleasedKey()==KeyCode.A) {
                     movementHappening = true;
