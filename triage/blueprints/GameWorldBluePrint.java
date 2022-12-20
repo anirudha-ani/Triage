@@ -73,6 +73,7 @@ public class GameWorldBluePrint {
         loadPlatformsLevelOne();
         Vec2d playerPositionOnWorld = new Vec2d(200,308);
         loadPlayer(playerPositionOnWorld);
+        loadGroundSentryEnemy();
     }
 
     public void loadBackground(SpriteSheetId backgroundSpriteId) {
@@ -109,7 +110,6 @@ public class GameWorldBluePrint {
                 new Vec2d(297, 50)
         );
         currentGameState.getGameWorld().addGameObject(hiddenHitboxForFirstPlatform);
-
         GameObject hiddenHitboxForFirstPlatform2 = new HiddenRectangleHitboxGenerator
                 (this.currentGameState).generate(
                 new Vec2d(413, 352),
@@ -130,6 +130,16 @@ public class GameWorldBluePrint {
 
         currentGameState.getGameWorld().addGameObject(player);
 
+    }
+
+    public void loadGroundSentryEnemy() {
+        Vec2d sentryPositionOnWorld1 = new Vec2d(450,320);
+        GameObject sentry1 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld1);
+        currentGameState.getGameWorld().addGameObject(sentry1);
+
+        Vec2d sentryPositionOnWorld2 = new Vec2d(800,272);
+        GameObject sentry2 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld2);
+        currentGameState.getGameWorld().addGameObject(sentry2);
     }
 
     public void loadStartButton() {
