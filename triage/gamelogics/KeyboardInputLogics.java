@@ -3,6 +3,7 @@ package triage.gamelogics;
 import engine.components.PhysicsComponent;
 import engine.support.Vec2d;
 import engine.systems.KeyEventHappened;
+import engine.systems.System;
 import javafx.scene.input.KeyCode;
 import triage.App;
 import triage.generators.GameObjectId;

@@ -11,7 +11,7 @@ public class GameWorldBluePrint {
 
     GameState currentGameState;
 
-    int coinCount = 400;
+    int coinCount = 0;
 
     public GameWorldBluePrint(GameState currentGameState) {
         this.currentGameState = currentGameState;
@@ -71,8 +71,9 @@ public class GameWorldBluePrint {
     public void populateFirstLevelScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_SPACE);
         loadPlatformsLevelOne();
-        Vec2d playerPositionOnWorld = new Vec2d(200,308);
-        loadPlayer(playerPositionOnWorld);
+        Vec2d playerPositionOnWorld = new Vec2d(100,100);
+        //loadPlayer(playerPositionOnWorld);
+        loadSamurai(playerPositionOnWorld);
     }
 
     public void loadBackground(SpriteSheetId backgroundSpriteId) {
@@ -127,6 +128,13 @@ public class GameWorldBluePrint {
 
     public void loadPlayer(Vec2d playerPositionOnWorld) {
         GameObject player = new PlayerGenerator(this.currentGameState).generate(playerPositionOnWorld);
+
+        currentGameState.getGameWorld().addGameObject(player);
+
+    }
+
+    public void loadSamurai(Vec2d playerPositionOnWorld) {
+        GameObject player = new SamuraiGenerator(this.currentGameState).generate(playerPositionOnWorld);
 
         currentGameState.getGameWorld().addGameObject(player);
 

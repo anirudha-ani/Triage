@@ -17,5 +17,7 @@ public enum SpriteSheetId {
     WIZARD,
     WARRIOR,
 
+    SAMURAI_RIGHT,
+
     COIN_IMAGE
 }
