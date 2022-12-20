@@ -28,7 +28,7 @@ public class GameAssets {
         Image huntress = new Image("file:triage/spritesheets/Huntress/Sprites/idle.png",1200,150,false,true);
         Image wizard = new Image("file:triage/spritesheets/Wizard Pack/idle.png",1386,190,false,true);
         Image warrior = new Image("file:triage/spritesheets/Fantasy Warrior/Sprites/idle.png",1620,162,false,true);
-        Image samuraiMoveRight = new Image("file:triage/spritesheets/Martial Hero/Sprites/idle.png",1600,200,false,true);
+        Image samuraiMoveRight = new Image("file:triage/spritesheets/Martial Hero/Sprites/Run.png",1600,200,false,true);
 
         // Sprite height and width indicates individual sprite height and width in a sprite sheet
         gameResource.addSpriteSheet(SpriteSheetId.PLAYER_LEFT.toString(), playerLeft, 2, 2, 24, 24);

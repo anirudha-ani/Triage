@@ -51,7 +51,7 @@ public class SamuraiGenerator {
                                     .getGameResource()
                                     .getSpriteSheet(SpriteSheetId.SAMURAI_RIGHT.toString()),
 //                            positionInWorld,
-                            // Sprite position and object position might not be same all the time. 
+                            // Sprite position and object position might not be same all the time.
                             new Vec2d(positionInWorld.x-35, positionInWorld.y-35),
                             new Vec2d(100, 100));
 
@@ -64,7 +64,7 @@ public class SamuraiGenerator {
             CollisionComponent gravityCollisionComponent = new CollisionComponent(player, gravityHitbox);
             gravityCollisionComponent.setTag("gravity");
 
-            player.setStatus("right");
+            player.setStatus("idle");
 
         player.addComponent(drawableComponent);
             player.addComponent(rayComponent);

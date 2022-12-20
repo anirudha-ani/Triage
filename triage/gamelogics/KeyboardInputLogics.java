@@ -33,6 +33,7 @@ public class KeyboardInputLogics {
 
             // This logic is only applicable for player
             if (gameObject.getId() == GameObjectId.player.toString()) {
+                boolean movementHappening = false;
                 PhysicsComponent physicsComponent = (PhysicsComponent) gameObject.getComponent("physics");
 
                 // For any reason if the physics component is not there
@@ -41,6 +42,7 @@ public class KeyboardInputLogics {
                 }
 
                 if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.D)) {
+                    movementHappening = true;
                     gameObject.setStatus("right");
 
                     /**
@@ -56,6 +58,7 @@ public class KeyboardInputLogics {
                 }
 
                 if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.A)) {
+                    movementHappening = true;
                     gameObject.setStatus("left");
 
                     /**
@@ -72,10 +75,12 @@ public class KeyboardInputLogics {
                 }
 
                 if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.S)) {
+                    movementHappening = true;
                     gameObject.setStatus("down");
                 }
 
                 if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.W)) {
+                    movementHappening = true;
                     if (physicsComponent.isGravityActivated()) {
                         return;
                     }
@@ -87,6 +92,10 @@ public class KeyboardInputLogics {
                     physicsComponent.setGravityActivated(true);
                     gameObject.setStatus("up");
                 }
+                if(!movementHappening) {
+                    gameObject.setStatus("idle");
+                }
+
             }
 
         });
