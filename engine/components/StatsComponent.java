@@ -6,6 +6,7 @@ public class StatsComponent extends Component {
 
     private double health = 100 ;
     private double attack = 100 ;
+    private String facing = "right"; // Keep the value only between left and right
 
     public StatsComponent(GameObject gameObject) {
         super("stats", gameObject);
@@ -39,5 +40,16 @@ public class StatsComponent extends Component {
 
     public void setAttack(double attack) {
         this.attack = attack;
+    }
+
+    public String getFacing() {
+        return facing;
+    }
+
+    public void setFacing(String facing) {
+        if(facing != "left" && facing != "right") {
+            return;
+        }
+        this.facing = facing;
     }
 }

@@ -1,6 +1,7 @@
 package triage.gamelogics;
 
 import engine.components.PhysicsComponent;
+import engine.components.StatsComponent;
 import engine.support.Vec2d;
 import engine.systems.KeyEventHappened;
 import javafx.scene.input.KeyCode;
@@ -35,6 +36,7 @@ public class KeyboardInputLogics {
             if (gameObject.getId() == GameObjectId.player.toString()) {
                 boolean movementHappening = false;
                 PhysicsComponent physicsComponent = (PhysicsComponent) gameObject.getComponent("physics");
+                StatsComponent statsComponent = (StatsComponent) gameObject.getComponent("stats");
 
                 // For any reason if the physics component is not there
                 if (physicsComponent == null) {
@@ -44,6 +46,7 @@ public class KeyboardInputLogics {
                 if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.D)) {
                     movementHappening = true;
                     gameObject.setStatus("right");
+                    statsComponent.setFacing("right");
 
                     /**
                      *  If the player is going on the opposite direction
@@ -60,6 +63,7 @@ public class KeyboardInputLogics {
                 if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.A)) {
                     movementHappening = true;
                     gameObject.setStatus("left");
+                    statsComponent.setFacing("left");
 
                     /**
                      *  If the player is going on the opposite direction
@@ -90,52 +94,24 @@ public class KeyboardInputLogics {
 
                     // Player will be on Air so activating gravity
                     physicsComponent.setGravityActivated(true);
-                    gameObject.setStatus("upLeft");
+                    gameObject.setStatus("up");
                 }
 
-//               if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.W) && keyEventHappened.getReleasedKey()==KeyCode.D) {
-//                    movementHappening = true;
-//                    if (physicsComponent.isGravityActivated()) {
-//                        return;
-//                    }
-//
-//                    physicsComponent.setVel(new Vec2d(physicsComponent.getVel().x, 0));
-//                    physicsComponent.applyImpulse(new Vec2d(0, -50));
-//
-//                    // Player will be on Air so activating gravity
-//                    physicsComponent.setGravityActivated(true);
-//                    gameObject.setStatus("upRight");
-//                }
-
-                if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.L) && keyEventHappened.getReleasedKey()==KeyCode.A) {
+                if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.L) && statsComponent.getFacing() == "left") {
                     movementHappening = true;
                     gameObject.setStatus("attackLeft");
-//                    if (physicsComponent.getVel().x < 0) {
-//                        physicsComponent.setVel(new Vec2d(0, physicsComponent.getVel().y));
-//                    }
-//
-//                    physicsComponent.applyImpulse(new Vec2d(5, 0));
-
                 }
 
-                if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.L) && keyEventHappened.getReleasedKey()==KeyCode.D) {
+                if (keyEventHappened.getActiveKeyEvents().contains(KeyCode.L) && statsComponent.getFacing() == "right") {
                     movementHappening = true;
                     gameObject.setStatus("attackRight");
-//                    if (physicsComponent.getVel().x < 0) {
-//                        physicsComponent.setVel(new Vec2d(0, physicsComponent.getVel().y));
-//                    }
-//
-//                    physicsComponent.applyImpulse(new Vec2d(5, 0));
-
                 }
 
 
                 if(!movementHappening) {
                     gameObject.setStatus("idle");
                 }
-
             }
-
         });
     }
 }
