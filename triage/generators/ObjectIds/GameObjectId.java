@@ -1,4 +1,4 @@
-package triage.generators;
+package triage.generators.ObjectIds;
 
 public enum GameObjectId {
     BACKGROUND,

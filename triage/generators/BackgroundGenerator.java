@@ -6,6 +6,7 @@ import engine.gameobjects.GameObject;
 import engine.support.Vec2d;
 import triage.GameState;
 import triage.blueprints.SpriteSheetId;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class BackgroundGenerator {
 

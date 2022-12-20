@@ -6,12 +6,12 @@ import engine.gameobjects.GameObject;
 import engine.support.Vec2d;
 import javafx.scene.input.MouseEvent;
 import triage.controllers.ScreenController;
+import triage.gamelogics.CollisionLogics;
 import triage.gamelogics.KeyboardInputLogics;
 import triage.gamelogics.MouseInputLogics;
-import triage.generators.GameObjectId;
+import triage.generators.ObjectIds.GameObjectId;
 import triage.intelligence.AirSentryAI;
 import triage.intelligence.GroundSentryAI;
-import triage.savefiles.SaveFileTags;
 
 import java.util.ArrayList;
 
@@ -56,7 +56,10 @@ public class App extends Application {
         gameState.getGameWorld().tick(nanosSincePreviousTick);
         KeyboardInputLogics keyboardInputLogics = new KeyboardInputLogics(this);
         keyboardInputLogics.executeKeyInputLogic(getGameState().getGameWorld().getKeyEventHappened());
+        CollisionLogics collisionLogics = new CollisionLogics(getGameState());
+        collisionLogics.executeCollisionLogic();
         triggeringAI(nanosSincePreviousTick);
+
     }
 
     @Override

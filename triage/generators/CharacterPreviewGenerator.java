@@ -2,11 +2,11 @@ package triage.generators;
 
 import engine.components.*;
 import engine.gameobjects.GameObject;
-import engine.hitboxes.AABHitbox;
 import engine.support.Vec2d;
 import javafx.scene.paint.Color;
 import triage.GameState;
 import triage.blueprints.SpriteSheetId;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class CharacterPreviewGenerator {
 
