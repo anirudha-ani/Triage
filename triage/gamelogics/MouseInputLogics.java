@@ -6,10 +6,9 @@ import engine.gameobjects.GameObject;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import triage.App;
-import triage.GameState;
 import triage.blueprints.AudioId;
 import triage.generators.BulletGenerator;
-import triage.generators.GameObjectId;
+import triage.generators.ObjectIds.GameObjectId;
 
 import java.util.ArrayList;
 

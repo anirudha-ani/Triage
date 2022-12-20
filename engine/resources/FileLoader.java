@@ -22,43 +22,58 @@ import java.io.IOException;
 
 public class FileLoader {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder docBuilder = factory.newDocumentBuilder();
+    DocumentBuilder docBuilder;
     Document doc;
     String filePath;
 
 
-    public FileLoader(String filePath) throws ParserConfigurationException, IOException, SAXException {
+    public FileLoader(String filePath) {
         try {
-            this.filePath = filePath;
-            doc = docBuilder.parse(filePath);
-            doc.getDocumentElement().normalize();
-        } catch (Exception e) {
-            System.out.println("Can't load file " + e);
-        }
-
-    }
-
-    public String readElements(String tag) throws XPathExpressionException {
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        Node level = (Node) xPath.compile("/data/" + tag).evaluate(doc, XPathConstants.NODE);
-        return level.getTextContent();
-    }
-
-    public void modifyElements(String tag, String value) throws XPathExpressionException {
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        Node field = (Node) xPath.compile("/data/" + tag).evaluate(doc, XPathConstants.NODE);
-        field.setTextContent(value);
-        try {
-            Transformer tf = TransformerFactory.newInstance().newTransformer();
-            DOMSource domSource = new DOMSource(doc);
-            StreamResult sr = new StreamResult(new File(this.filePath));
+            docBuilder = factory.newDocumentBuilder();
             try {
-                tf.transform(domSource, sr);
-            } catch (TransformerException e) {
-                throw new RuntimeException(e);
+                this.filePath = filePath;
+                doc = docBuilder.parse(filePath);
+                doc.getDocumentElement().normalize();
+            } catch (Exception e) {
+                System.out.println("Can't load file " + e);
             }
-        } catch (TransformerConfigurationException e) {
+        } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String readElements(String tag)  {
+        String desiredElement = null;
+        try {
+            XPath xPath = XPathFactory.newInstance().newXPath();
+            Node level = (Node) xPath.compile("/data/" + tag).evaluate(doc, XPathConstants.NODE);
+            desiredElement = level.getTextContent();
+        } catch (XPathExpressionException e) {
+            throw new RuntimeException(e);
+        }
+        return desiredElement;
+    }
+
+    public void modifyElements(String tag, String value) {
+        try {
+            XPath xPath = XPathFactory.newInstance().newXPath();
+            Node field = (Node) xPath.compile("/data/" + tag).evaluate(doc, XPathConstants.NODE);
+            field.setTextContent(value);
+            try {
+                Transformer tf = TransformerFactory.newInstance().newTransformer();
+                DOMSource domSource = new DOMSource(doc);
+                StreamResult sr = new StreamResult(new File(this.filePath));
+                try {
+                    tf.transform(domSource, sr);
+                } catch (TransformerException e) {
+                    throw new RuntimeException(e);
+                }
+            } catch (TransformerConfigurationException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (XPathExpressionException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

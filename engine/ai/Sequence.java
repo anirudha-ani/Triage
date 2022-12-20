@@ -2,13 +2,15 @@ package engine.ai;
 
 import java.util.ArrayList;
 
+/**
+ * Returns SUCCESS if the entire sequence completes, else FAIL
+ */
 public class Sequence extends Composite {
     public long microSecondSinceLastExectution = 0;
     Status status;
 
     @Override
-    public Status update(long seconds) {
-
+    public Status update(long nanoSecondSinceLastTick) {
         if (status == null) {
             lastRunning = null;
             status = Status.RUNNING;
@@ -16,7 +18,7 @@ public class Sequence extends Composite {
                 BehaviorTreeNode node = children.get(i);
 
                 lastRunning = node;
-                Status childstatus = node.update(seconds);
+                Status childstatus = node.update(nanoSecondSinceLastTick);
 
                 if (childstatus.equals(Status.FAIL)) {
                     lastRunning = null;

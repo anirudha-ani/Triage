@@ -36,6 +36,10 @@ public class AudioComponent extends Component {
         }
     }
 
+    public void stopAudio() {
+        mediaPlayer.stop();
+    }
+
     public String getLocalId() {
         return localId;
     }

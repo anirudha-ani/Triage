@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import triage.GameState;
 import triage.generators.*;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class GameWorldBluePrint {
 
@@ -74,6 +75,9 @@ public class GameWorldBluePrint {
         Vec2d playerPositionOnWorld = new Vec2d(100,100);
         //loadPlayer(playerPositionOnWorld);
         loadSamurai(playerPositionOnWorld);
+        // Vec2d playerPositionOnWorld = new Vec2d(200,308);
+        // loadPlayer(playerPositionOnWorld);
+        loadGroundSentryEnemy();
     }
 
     public void loadBackground(SpriteSheetId backgroundSpriteId) {
@@ -110,7 +114,6 @@ public class GameWorldBluePrint {
                 new Vec2d(297, 50)
         );
         currentGameState.getGameWorld().addGameObject(hiddenHitboxForFirstPlatform);
-
         GameObject hiddenHitboxForFirstPlatform2 = new HiddenRectangleHitboxGenerator
                 (this.currentGameState).generate(
                 new Vec2d(413, 352),
@@ -137,7 +140,20 @@ public class GameWorldBluePrint {
         GameObject player = new SamuraiGenerator(this.currentGameState).generate(playerPositionOnWorld);
 
         currentGameState.getGameWorld().addGameObject(player);
+    }
 
+    public void loadGroundSentryEnemy() {
+        Vec2d sentryPositionOnWorld1 = new Vec2d(450,320);
+        GameObject groundSentry1 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld1);
+        currentGameState.getGameWorld().addGameObject(groundSentry1);
+
+        Vec2d sentryPositionOnWorld2 = new Vec2d(800,270);
+        GameObject groundSentry2 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld2);
+        currentGameState.getGameWorld().addGameObject(groundSentry2);
+
+        Vec2d sentryPositionOnWorld3 = new Vec2d(50,100);
+        GameObject airSentry1 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld3);
+        currentGameState.getGameWorld().addGameObject(airSentry1);
     }
 
     public void loadStartButton() {

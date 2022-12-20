@@ -4,9 +4,9 @@ import engine.components.*;
 import engine.gameobjects.GameObject;
 import engine.support.Vec2d;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import triage.GameState;
 import triage.blueprints.SpriteSheetId;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class IconButtonGenerator {
     GameState currentGameState;

@@ -4,9 +4,9 @@ import engine.components.*;
 import engine.gameobjects.GameObject;
 import engine.hitboxes.AABHitbox;
 import engine.support.Vec2d;
-import javafx.scene.paint.Color;
 import triage.GameState;
 import triage.blueprints.SpriteSheetId;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class PlayerGenerator {
 
@@ -26,6 +26,8 @@ public class PlayerGenerator {
 //        player.setHoverColor(Color.ORANGE);
 
 //        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(player);
+
+        StatsComponent statsComponent = new StatsComponent(100, 100);
 
         RayComponent rayComponent = new RayComponent(player);
         rayComponent.setPositionOnWorld(player.getTransformComponent().getPositionOnWorld());
@@ -70,6 +72,7 @@ public class PlayerGenerator {
         player.addComponent(physicsComponent);
         player.addComponent(collisionComponent);
         player.addComponent(gravityCollisionComponent);
+        player.addComponent(statsComponent);
 
         return player;
     }

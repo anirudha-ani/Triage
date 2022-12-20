@@ -3,6 +3,7 @@ package triage.controllers;
 import engine.GameWorld;
 import engine.Screen;
 import engine.components.AudioComponent;
+import engine.components.VideoComponent;
 import triage.GameState;
 import triage.blueprints.AudioId;
 import triage.blueprints.GameAssets;
@@ -41,6 +42,17 @@ public class ScreenController {
          and you should load this just one time because it is a heavy operation
          **/
         currentGameState.getGameAssets().LoadResources();
+        playIntroSequence();
+    }
+
+    public void playIntroSequence() {
+        resetScreen();
+        /**
+         * The reason playvideo is in state because I always one to keep just one instance
+         * of video component.
+         */
+
+        currentGameState.playVideo("triage/videofiles/Opening.mp4", false);
         switchToMenuScreen();
     }
 
@@ -54,6 +66,11 @@ public class ScreenController {
     public void switchToMenuScreen() {
         // This is necessary before switching to any new screen
         resetScreen();
+
+        AudioComponent audioClip = new AudioComponent("triage/audiofiles/MainMenu.mp3", true);
+        audioClip.setLocalId(AudioId.BACKGROUND_STAGE1.toString());
+        audioClip.playAudio();
+        currentGameState.addAudio(audioClip);
 
         // Creating an instance of the new screen
         currentGameState.setGameScreen(
@@ -79,7 +96,7 @@ public class ScreenController {
 
     public void switchToCartScreen() {
         // This is necessary before switching to any new screen
-        resetScreen();
+        resetScreenWithoutAudio();
 
         // Creating an instance of the new screen
         currentGameState.setGameScreen(
@@ -146,6 +163,9 @@ public class ScreenController {
     public void resetScreen() {
         currentGameState.setGameWorld(new GameWorld());
         currentGameState.removeAllAudio();
+    }
+    public void resetScreenWithoutAudio() {
+        currentGameState.setGameWorld(new GameWorld());
     }
 
 }

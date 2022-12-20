@@ -7,6 +7,7 @@ import engine.support.Vec2d;
 import javafx.scene.paint.Color;
 import triage.GameState;
 import triage.blueprints.SpriteSheetId;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class SamuraiGenerator {
 

@@ -28,7 +28,7 @@ public class DrawableRectangleComponent extends DrawableComponent {
             rect1.setArcHeight(30);
             rect1.setArcWidth(30);
         }
-        rect1.setRoundedCorner(true);
+        rect1.setRoundedCorner(hasRoundedCorners);
         rect1.drawElement(g);
     }
 }

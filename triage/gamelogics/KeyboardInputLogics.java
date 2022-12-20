@@ -5,7 +5,7 @@ import engine.support.Vec2d;
 import engine.systems.KeyEventHappened;
 import javafx.scene.input.KeyCode;
 import triage.App;
-import triage.generators.GameObjectId;
+import triage.generators.ObjectIds.GameObjectId;
 
 public class KeyboardInputLogics {
     App currentApp;

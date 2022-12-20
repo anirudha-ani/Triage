@@ -88,6 +88,17 @@ public class GameWorld {
         return null;
     }
 
+    // Returns all the objects with same ID
+    public ArrayList<GameObject> getGameObjects(String id) {
+        ArrayList <GameObject> queriedGameObjets = new ArrayList<>();
+        for (int i = 0; i < gameObjects.size(); i++) {
+            if (gameObjects.get(i).getId() == id) {
+                queriedGameObjets.add(gameObjects.get(i));
+            }
+        }
+        return queriedGameObjets;
+    }
+
 
     public void onMouseWheelMoved(ScrollEvent e) {
     }

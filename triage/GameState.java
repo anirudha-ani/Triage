@@ -3,6 +3,7 @@ package triage;
 import engine.GameWorld;
 import engine.Screen;
 import engine.components.AudioComponent;
+import engine.components.VideoComponent;
 import engine.resources.FileLoader;
 import engine.resources.MapLoader;
 import engine.support.Vec2d;
@@ -30,6 +31,7 @@ public class GameState {
     private GameAssets gameAssets;
     private FileLoader saveFile;
     private App currentApp;
+    private VideoComponent videoPlayer = new VideoComponent();
 
     ArrayList<AudioComponent> runningAudio = new ArrayList<AudioComponent>();
 
@@ -89,8 +91,8 @@ public class GameState {
         return saveFile;
     }
 
-    public void setSaveFile(FileLoader saveFile) {
-        this.saveFile = saveFile;
+    public void setSaveFile(String filePath) {
+        this.saveFile = new FileLoader(filePath);
     }
 
     public Vec2d getScreenSize() {
@@ -129,6 +131,19 @@ public class GameState {
     }
 
     public void removeAllAudio() {
+        runningAudio.forEach(audioComponent -> {
+            audioComponent.stopAudio();
+        });
         runningAudio.clear();
+    }
+
+    public void playVideo(String source, boolean isLooping) {
+        videoPlayer.setSource(source);
+        videoPlayer.setLooping(isLooping);
+        videoPlayer.playVideo(
+                getCurrentApp().getScene(),
+                getCurrentApp().getStage(),
+                getCurrentApp().getCurrentScreenSize().x,
+                getCurrentApp().getCurrentScreenSize().y);
     }
 }

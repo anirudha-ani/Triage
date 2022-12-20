@@ -1,7 +1,7 @@
 package engine.ai;
 
 public interface BehaviorTreeNode {
-    Status update(long seconds);
+    Status update(long nanoSecondSinceLastTick);
 
     void reset();
 }
