@@ -32,6 +32,7 @@ public class MouseInputLogics {
                 this.currentApp.getScreenController().switchToCartScreen();
             }
             if (clickedObjects.get(i).contains(GameObjectId.PAUSE_BUTTON.toString())) {
+                this.currentApp.getScreenController().resetScreen();
                 this.currentApp.getScreenController().switchToFirstLevelScreen();
             }
             if (clickedObjects.get(i).contains(GameObjectId.EXIT_BUTTON.toString())) {
@@ -51,7 +52,7 @@ public class MouseInputLogics {
         if (e.getButton() == MouseButton.SECONDARY) {
             GameObject player = currentApp.getGameState().getGameWorld().getGameObject("player");
 
-            if (player != null) {
+            if (player != null && currentApp.getGameState().isBoughtItem()) {
                 RayComponent rayComponent = (RayComponent) player.getComponent("ray");
 
                 if (rayComponent != null) {

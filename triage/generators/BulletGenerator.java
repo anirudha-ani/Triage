@@ -6,6 +6,7 @@ import engine.hitboxes.AABHitbox;
 import engine.support.Vec2d;
 import javafx.scene.paint.Color;
 import triage.GameState;
+import triage.blueprints.SpriteSheetId;
 import triage.generators.ObjectIds.GameObjectId;
 
 public class BulletGenerator {
@@ -24,6 +25,16 @@ public class BulletGenerator {
         bullet.setDefaultColor(Color.RED);
         bullet.setHoverColor(Color.RED);
 
+        SpriteComponent bulletSprite =
+                new SpriteComponent(
+                        bullet,
+                        currentGameState
+                                .getGameAssets()
+                                .getGameResource()
+                                .getSpriteSheet(SpriteSheetId.SHURIKEN.toString())
+                        , projectilePos
+                        ,  new Vec2d(10, 10));
+
         DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(bullet);
 
         PhysicsComponent physicsComponent = new PhysicsComponent(bullet, 1);
@@ -31,11 +42,12 @@ public class BulletGenerator {
         physicsComponent.setFrictionActivated(false);
         physicsComponent.setVelocityCapped(false);
         physicsComponent.setVel(rayComponent.getRay().dir.smult(10));
-        AABHitbox hitbox = new AABHitbox(projectilePos, new Vec2d(5, 5));
+        AABHitbox hitbox = new AABHitbox(projectilePos, new Vec2d(10, 10));
 
         CollisionComponent collisionComponent5 = new CollisionComponent(bullet, hitbox);
 
-        bullet.addComponent(drawableComponent);
+        //bullet.addComponent(drawableComponent);
+        bullet.addComponent(bulletSprite);
         bullet.addComponent(physicsComponent);
         bullet.addComponent(collisionComponent5);
         bullet.setStatus("idle");

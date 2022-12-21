@@ -7,7 +7,7 @@ import engine.support.Vec2d;
 import javafx.scene.canvas.GraphicsContext;
 
 public class RayComponent extends DrawableComponent {
-    LineUI line = new LineUI();
+    LineUI line = new LineUI(true);
     Ray ray = null;
     private boolean show;
     private Vec2d start = null;

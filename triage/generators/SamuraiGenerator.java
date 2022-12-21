@@ -32,8 +32,11 @@ public class SamuraiGenerator {
         StatsComponent statsComponent = new StatsComponent(100, 100);
         statsComponent.setFacing("right");
 
-        RayComponent rayComponent = new RayComponent(player);
-        rayComponent.setPositionOnWorld(player.getTransformComponent().getPositionOnWorld());
+        if(currentGameState.isBoughtItem()) {
+            RayComponent rayComponent = new RayComponent(player);
+            rayComponent.setPositionOnWorld(player.getTransformComponent().getPositionOnWorld());
+            player.addComponent(rayComponent);
+        }
 
         // SpriteId "left" and "right" is a legacy id, don't rename it. It will break some engine side code
 
@@ -70,7 +73,7 @@ public class SamuraiGenerator {
         player.setStatus("idle");
 
 
-        player.addComponent(rayComponent);
+
         //player.addComponent(spriteComponent3);
 
         player.addComponent(runningRightSprite);
