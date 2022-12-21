@@ -45,7 +45,8 @@ public class CollisionLogics {
     public void handleBullet(GameObject impactedObject, GameObject bullet) {
         StatsComponent impactedObjectStats = (StatsComponent) impactedObject.getComponent("stats");
 
-        if(impactedObjectStats != null) {
+        if(impactedObjectStats != null && (impactedObject.getId() == GameObjectId.AIR_SENTRY.toString()
+                ||impactedObject.getId() == GameObjectId.GROUND_SENTRY.toString() )) {
             impactedObjectStats.setHealth(impactedObjectStats.getHealth() - 50);
 
             if(impactedObjectStats.getHealth() <= 0) {
