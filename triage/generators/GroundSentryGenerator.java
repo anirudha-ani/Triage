@@ -43,7 +43,7 @@ public class GroundSentryGenerator {
                         // Sprite position and object position might not be same all the time.
                         new Vec2d(positionInWorld.x, positionInWorld.y-40),
                         new Vec2d(70, 70));
-
+        spriteComponent1.setVisibile(true);
         SpriteComponent spriteComponent2 =
                 new SpriteComponent(
                         "left",
@@ -57,7 +57,7 @@ public class GroundSentryGenerator {
                         new Vec2d(positionInWorld.x-35, positionInWorld.y-40),
                         new Vec2d(70, 70));
 
-
+        spriteComponent2.setVisibile(false);
 
         PhysicsComponent physicsComponent = new PhysicsComponent(sentry, 5);
         physicsComponent.setVel(new Vec2d(.5,0));
@@ -70,7 +70,7 @@ public class GroundSentryGenerator {
         AIComponent aiComponent = new AIComponent(sentry);
 
 
-        sentry.setStatus("idle");
+        sentry.setStatus("right");
 
         sentry.addComponent(drawableComponent);
         sentry.addComponent(spriteComponent1);
