@@ -65,6 +65,7 @@ public class GameWorldBluePrint {
         loadBackgroundCart(SpriteSheetId.CART_BG);
         loadLevel1Button(new Vec2d(430,200), true);
         loadLevel2Button(new Vec2d(430,250),currentGameState.isLevel2Saved());
+        loadExitButton(new Vec2d(720,30));
 
     }
 
@@ -124,6 +125,7 @@ public class GameWorldBluePrint {
         currentGameState.getGameWorld().addGameObject(textLine3);
         currentGameState.getGameWorld().addGameObject(textLine4);
         currentGameState.getGameWorld().addGameObject(textLine5);
+        loadExitButton(new Vec2d(720,30));
     }
 
     public void loadBackgroundCart(SpriteSheetId backgroundSpriteId) {
