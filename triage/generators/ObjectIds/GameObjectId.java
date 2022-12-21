@@ -25,7 +25,7 @@ public enum GameObjectId {
 
     EXIT_BUTTON,
 
-    USE_BUTTON,
+    USEITEM_BUTTON,
     UNLOCK_BUTTON,
     TEXT,
 

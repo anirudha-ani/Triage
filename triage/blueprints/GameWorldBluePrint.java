@@ -65,7 +65,7 @@ public class GameWorldBluePrint {
     public void populateFirstLevelScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_SPACE);
         loadPlatformsLevelOne();
-        Vec2d playerPositionOnWorld = new Vec2d(100,100);
+        Vec2d playerPositionOnWorld = new Vec2d(100,300);
         loadSamurai(playerPositionOnWorld);
         loadGroundSentryEnemy();
         loadPauseButton();
@@ -143,7 +143,7 @@ public class GameWorldBluePrint {
         GameObject groundSentry2 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld2);
         currentGameState.getGameWorld().addGameObject(groundSentry2);
 
-        Vec2d sentryPositionOnWorld3 = new Vec2d(50,100);
+        Vec2d sentryPositionOnWorld3 = new Vec2d(50,200);
         GameObject airSentry1 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld3);
         currentGameState.getGameWorld().addGameObject(airSentry1);
     }
@@ -246,7 +246,7 @@ public class GameWorldBluePrint {
     public void loadUseButton(Vec2d buttonPosition, boolean boughtCharacter, boolean unlocked){
         if(boughtCharacter) {
             GameObject useButton = new ButtonGenerator(this.currentGameState)
-                    .generate(GameObjectId.USE_BUTTON,
+                    .generate(GameObjectId.USEITEM_BUTTON,
                             buttonPosition.plus(10,0),
                             buttonPosition.plus(40, 25),
                             new Vec2d(100,40),

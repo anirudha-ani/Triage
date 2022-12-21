@@ -74,6 +74,8 @@ public class ScreenController {
         // This is necessary before switching to any new screen
         resetScreen();
 
+        currentScreen = ScreensNames.MenuScreen;
+
         AudioComponent audioClip = new AudioComponent("triage/audiofiles/MainMenu.mp3", true);
         audioClip.setLocalId(AudioId.BACKGROUND_STAGE1.toString());
 //        audioClip.playAudio();
@@ -104,6 +106,8 @@ public class ScreenController {
     public void switchToCartScreen() {
         // This is necessary before switching to any new screen
         resetScreenWithoutAudio();
+
+        currentScreen = ScreensNames.CartScreen;
 
         // Creating an instance of the new screen
         currentGameState.setGameScreen(

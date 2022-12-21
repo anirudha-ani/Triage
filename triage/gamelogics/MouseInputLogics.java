@@ -42,7 +42,7 @@ public class MouseInputLogics {
                 this.currentApp.getGameState().setBoughtItem(true);
                 this.currentApp.getScreenController().switchToCartScreen();
             }
-            if (clickedObjects.get(i).contains(GameObjectId.USE_BUTTON.toString())) {
+            if (clickedObjects.get(i).contains(GameObjectId.USEITEM_BUTTON.toString())) {
                 this.currentApp.getScreenController().switchToMenuScreen();
             }
         }

@@ -49,7 +49,10 @@ public class AudioComponent extends Component {
 
     public void stopAudio() {
         isPlaying = false;
-        mediaPlayer.stop();
+        if(mediaPlayer != null) {
+            mediaPlayer.stop();
+        }
+
     }
 
     public String getLocalId() {
