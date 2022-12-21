@@ -209,7 +209,7 @@ public class ScreenController {
          * I am registering this audio clip in gamestate because it needs to stay alive for the entire time
          * Otherwise it gets killed when the function finish execution and goes out of scope
          */
-        AudioComponent audioClip = new AudioComponent("triage/audiofiles/Dramatic-suspense-background-music.mp3", true);
+        AudioComponent audioClip = new AudioComponent("triage/audiofiles/itachi.mp3", true);
         audioClip.setLocalId(AudioId.BACKGROUND_STAGE1.toString());
         // audioClip.playAudio();
         currentGameState.addAudio(audioClip);
