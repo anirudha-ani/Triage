@@ -56,19 +56,15 @@ public class CollisionLogics {
     }
 
     public void handlePlayerCollision(GameObject impactedObject, GameObject player) {
-//        if(impactedObject.getId() == GameObjectId.GROUND_SENTRY.toString()) {
-//
-//        }
-//        StatsComponent impactedObjectStats = (StatsComponent) player.getComponent("stats");
-//
-//        if(impactedObjectStats != null) {
-//            impactedObjectStats.setHealth(impactedObjectStats.getHealth() - 50);
-//
-//            if(impactedObjectStats.getHealth() <= 0) {
-//                this.gameState.getGameWorld().removeGameObject(impactedObject);
-//            }
-//        }
-//
-//        this.gameState.getGameWorld().removeGameObject(bullet);
+        if(impactedObject.getId() == GameObjectId.GROUND_SENTRY.toString() ||
+                impactedObject.getId() == GameObjectId.AIR_SENTRY.toString()) {
+            StatsComponent impactedObjectStats = (StatsComponent) impactedObject.getComponent("stats");
+            StatsComponent playerStats = (StatsComponent) player.getComponent("stats");
+
+            if(impactedObjectStats != null && playerStats != null) {
+                playerStats.setHealth(playerStats.getHealth() - impactedObjectStats.getAttack());
+            }
+        }
+
     }
 }

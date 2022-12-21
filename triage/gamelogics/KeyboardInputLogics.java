@@ -111,6 +111,8 @@ public class KeyboardInputLogics {
                     GameObject player = gameObject;
                     if(player != null ) {
                         ArrayList<GameObject> groundSentries = this.currentApp.getGameState().getGameWorld().getGameObjects(GameObjectId.GROUND_SENTRY.toString());
+                        ArrayList<GameObject> airSentries = this.currentApp.getGameState().getGameWorld().getGameObjects(GameObjectId.AIR_SENTRY.toString());
+
                         boolean contact = false;
                         StatsComponent playerStats = (StatsComponent) player.getComponent("stats");
                         for (int i = 0 ; i < groundSentries.size() ; i++) {
@@ -125,6 +127,24 @@ public class KeyboardInputLogics {
                             }
                         }
                         groundSentries.forEach(sentry->{
+                            StatsComponent stats = (StatsComponent) sentry.getComponent("stats");
+                            if(stats.getHealth() <= 0) {
+                                currentApp.getGameState().getGameWorld().removeGameObject(sentry);
+                            }
+                        });
+
+                        for (int i = 0 ; i < airSentries.size() ; i++) {
+                            Double maxX = airSentries.get(i).getTransformComponent().getPositionOnWorld().x + airSentries.get(i).getTransformComponent().getSizeOnWorld().x;
+                            if(player.getTransformComponent().getPositionOnWorld().x-40 <= maxX && player.getTransformComponent().getPositionOnWorld().x + player.getTransformComponent().getSizeOnWorld().x > maxX) {
+                                AudioComponent audioClip = new AudioComponent("triage/audiofiles/slash.mp3", false);
+                                audioClip.setLocalId(AudioId.BULLET.toString());
+                                audioClip.playAudio();
+                                contact = true;
+                                StatsComponent stats = (StatsComponent) airSentries.get(i).getComponent("stats");
+                                stats.setHealth(stats.getHealth() - playerStats.getAttack());
+                            }
+                        }
+                        airSentries.forEach(sentry->{
                             StatsComponent stats = (StatsComponent) sentry.getComponent("stats");
                             if(stats.getHealth() <= 0) {
                                 currentApp.getGameState().getGameWorld().removeGameObject(sentry);
@@ -146,6 +166,8 @@ public class KeyboardInputLogics {
                     GameObject player = this.currentApp.getGameState().getGameWorld().getGameObject(GameObjectId.player.toString());
                     if(player != null && player.status == "attackRight") {
                         ArrayList<GameObject> groundSentries = this.currentApp.getGameState().getGameWorld().getGameObjects(GameObjectId.GROUND_SENTRY.toString());
+                        ArrayList<GameObject> airSentries = this.currentApp.getGameState().getGameWorld().getGameObjects(GameObjectId.AIR_SENTRY.toString());
+
                         boolean contact = false;
                         StatsComponent playerStats = (StatsComponent) player.getComponent("stats");
 
@@ -162,6 +184,24 @@ public class KeyboardInputLogics {
                         }
 
                         groundSentries.forEach(sentry->{
+                            StatsComponent stats = (StatsComponent) sentry.getComponent("stats");
+                            if(stats.getHealth() <= 0) {
+                                currentApp.getGameState().getGameWorld().removeGameObject(sentry);
+                            }
+                        });
+
+                        for (int i = 0 ; i < airSentries.size() ; i++) {
+                            Double maxX = airSentries.get(i).getTransformComponent().getPositionOnWorld().x + airSentries.get(i).getTransformComponent().getSizeOnWorld().x;
+                            if(player.getTransformComponent().getPositionOnWorld().x-40 <= maxX && player.getTransformComponent().getPositionOnWorld().x + player.getTransformComponent().getSizeOnWorld().x > maxX) {
+                                AudioComponent audioClip = new AudioComponent("triage/audiofiles/slash.mp3", false);
+                                audioClip.setLocalId(AudioId.BULLET.toString());
+                                audioClip.playAudio();
+                                contact = true;
+                                StatsComponent stats = (StatsComponent) airSentries.get(i).getComponent("stats");
+                                stats.setHealth(stats.getHealth() - playerStats.getAttack());
+                            }
+                        }
+                        airSentries.forEach(sentry->{
                             StatsComponent stats = (StatsComponent) sentry.getComponent("stats");
                             if(stats.getHealth() <= 0) {
                                 currentApp.getGameState().getGameWorld().removeGameObject(sentry);
