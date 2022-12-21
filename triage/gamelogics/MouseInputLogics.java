@@ -41,6 +41,8 @@ public class MouseInputLogics {
             }
             if (clickedObjects.get(i).contains(GameObjectId.UNLOCK_BUTTON.toString())) {
                 currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.SHURIKEN.toString(), Integer.toString(1));
+                currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(currentApp.getGameState().getCoinCount()-300));
+                this.currentApp.getGameState().setCoinCount(currentApp.getGameState().getCoinCount()-300);
                 this.currentApp.getGameState().setBoughtItem(true);
                 this.currentApp.getScreenController().switchToCartScreen();
             }
@@ -55,6 +57,9 @@ public class MouseInputLogics {
             }
             if (clickedObjects.get(i).contains(GameObjectId.LEVEL2_BUTTON.toString())) {
                 this.currentApp.getScreenController().switchToSecondLevelScreen();
+            }
+            if (clickedObjects.get(i).contains(GameObjectId.SETTINGS_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToInstructionScreen();
             }
         }
     }

@@ -68,6 +68,13 @@ public class GameWorldBluePrint {
 
     }
 
+    public void populateInstructionScreen() {
+        loadBackground(SpriteSheetId.BACKGROUND_GALAXY);
+        loadBackgroundCart(SpriteSheetId.CART_BG);
+        loadText();
+
+    }
+
     public void populateFirstLevelScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_SPACE);
         double coinSpacing = 70;
@@ -102,6 +109,21 @@ public class GameWorldBluePrint {
     public void loadBackground(SpriteSheetId backgroundSpriteId) {
         GameObject backgroundObject = new BackgroundGenerator(this.currentGameState).generate(backgroundSpriteId);
         currentGameState.getGameWorld().addGameObject(backgroundObject);
+    }
+
+    public void loadText() {
+        GameObject textHeader = new TextGenerator(currentGameState).generate(GameObjectId.TEXT,new Vec2d(410,80),Font.loadFont(getClass().getResourceAsStream("../fonts/Digitaltech-rm0K.otf"),35),35, "Instructions",Color.rgb(45,11,37));
+        GameObject textLine1 = new TextGenerator(currentGameState).generate(GameObjectId.TEXT,new Vec2d(300,130),Font.loadFont(getClass().getResourceAsStream("../fonts/Digitaltech-rm0K.otf"),25),25, "The controls for the game are :",Color.WHITE);
+        GameObject textLine2 = new TextGenerator(currentGameState).generate(GameObjectId.TEXT,new Vec2d(300,180),Font.loadFont(getClass().getResourceAsStream("../fonts/Bungee-Regular.ttf"),18),18, "1) Use A, D to move",Color.WHITE);
+        GameObject textLine3 = new TextGenerator(currentGameState).generate(GameObjectId.TEXT,new Vec2d(300,230),Font.loadFont(getClass().getResourceAsStream("../fonts/Bungee-Regular.ttf"),18),18, "2) Use W to jump",Color.WHITE);
+        GameObject textLine4 = new TextGenerator(currentGameState).generate(GameObjectId.TEXT,new Vec2d(300,280),Font.loadFont(getClass().getResourceAsStream("../fonts/Bungee-Regular.ttf"),18),18, "3) Use L to attack",Color.WHITE);
+        GameObject textLine5 = new TextGenerator(currentGameState).generate(GameObjectId.TEXT,new Vec2d(300,330),Font.loadFont(getClass().getResourceAsStream("../fonts/Bungee-Regular.ttf"),18),18, "4) Right click to use Shuriken if unlocked",Color.WHITE);
+        currentGameState.getGameWorld().addGameObject(textHeader);
+        currentGameState.getGameWorld().addGameObject(textLine1);
+        currentGameState.getGameWorld().addGameObject(textLine2);
+        currentGameState.getGameWorld().addGameObject(textLine3);
+        currentGameState.getGameWorld().addGameObject(textLine4);
+        currentGameState.getGameWorld().addGameObject(textLine5);
     }
 
     public void loadBackgroundCart(SpriteSheetId backgroundSpriteId) {
