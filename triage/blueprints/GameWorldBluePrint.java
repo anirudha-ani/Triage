@@ -88,6 +88,16 @@ public class GameWorldBluePrint {
         loadPauseButton();
         loadExitButton(new Vec2d(810,20));
     }
+    public void populateSecondLevelScreen() {
+        loadBackground(SpriteSheetId.BACKGROUND_SPACE);
+        loadPlatformsLevelOne();
+//        loadPlatformsLevelOne();
+        Vec2d playerPositionOnWorld = new Vec2d(100,300);
+        loadSamurai(playerPositionOnWorld);
+        loadAirSentryEnemy();
+        loadPauseButton();
+        loadExitButton(new Vec2d(810,20));
+    }
 
     public void loadBackground(SpriteSheetId backgroundSpriteId) {
         GameObject backgroundObject = new BackgroundGenerator(this.currentGameState).generate(backgroundSpriteId);
@@ -168,6 +178,20 @@ public class GameWorldBluePrint {
         Vec2d sentryPositionOnWorld3 = new Vec2d(50,200);
         GameObject airSentry1 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld3);
         currentGameState.getGameWorld().addGameObject(airSentry1);
+    }
+
+    public void loadAirSentryEnemy() {
+        Vec2d sentryPositionOnWorld1 = new Vec2d(350,100);
+        GameObject airSentry1 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld1);
+        currentGameState.getGameWorld().addGameObject(airSentry1);
+
+        Vec2d sentryPositionOnWorld2 = new Vec2d(150,150);
+        GameObject airSentry2 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld2);
+        currentGameState.getGameWorld().addGameObject(airSentry2);
+
+        Vec2d sentryPositionOnWorld3 = new Vec2d(50,200);
+        GameObject airSentry3 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld3);
+        currentGameState.getGameWorld().addGameObject(airSentry3);
     }
 
     public void loadStartButton() {

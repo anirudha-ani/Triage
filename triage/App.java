@@ -86,6 +86,13 @@ public class App extends Application {
         if(isGameOver() == true) {
             screenController.reloadLevel();
         }
+        if(isLevelFinished() == true) {
+            if(screenController.getCurrentScreen() == ScreensNames.LevelOne) {
+                screenController.switchToSecondLevelScreen();
+            } else if(screenController.getCurrentScreen() == ScreensNames.LevelTwo) {
+                screenController.playEndCredit();
+            }
+        }
 
     }
 
@@ -115,6 +122,18 @@ public class App extends Application {
                 if(playerStat.getHealth()<=0) {
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    public boolean isLevelFinished() {
+        if(screenController.getCurrentScreen() == ScreensNames.LevelOne || screenController.getCurrentScreen() == ScreensNames.LevelTwo ) {
+            ArrayList<GameObject> groundSentry = getGameState().getGameWorld().getGameObjects(GameObjectId.GROUND_SENTRY.toString());
+            ArrayList<GameObject> airSentry = getGameState().getGameWorld().getGameObjects(GameObjectId.AIR_SENTRY.toString());
+
+            if(groundSentry.size() == 0 && airSentry.size() == 0) {
+                return true;
             }
         }
         return false;

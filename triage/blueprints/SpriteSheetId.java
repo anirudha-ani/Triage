@@ -5,6 +5,7 @@ public enum SpriteSheetId {
     PLAYER_RIGHT,
     BACKGROUND_SPACE,
     BACKGROUND_GALAXY,
+    BACKGROUND_PLATFORM,
 
     SHOPPING_CART,
 
