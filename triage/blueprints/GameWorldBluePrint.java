@@ -24,7 +24,7 @@ public class GameWorldBluePrint {
         if (currentGameState.getCoinCount()>10 && currentGameState.getCoinCount()<100){
             coinSpacing = 120;
         }
-        else if(currentGameState.getCoinCount()>100){
+        else if(currentGameState.getCoinCount()>=100){
             coinSpacing = 150;
         }
 
