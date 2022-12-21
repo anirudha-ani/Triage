@@ -160,6 +160,34 @@ public class ScreenController {
         currentGameState.setMicroSecondPassedLastTick(0);
     }
 
+    public void switchToInstructionScreen() {
+        // This is necessary before switching to any new screen
+        resetScreenWithoutAudio();
+
+        currentScreen = ScreensNames.InstructionScreen;
+
+        // Creating an instance of the new screen
+        currentGameState.setGameScreen(
+                new Screen(
+                        ScreensNames.InstructionScreen.toString(),
+                        this.currentGameState.getCurrentApp().getCurrentScreenSize(),
+                        currentGameState.getGameWorld(),
+                        false));
+
+        // App -> Application (parent) also saves this value
+        this.currentGameState.getCurrentApp().setCurrentScreenId(ScreensNames.InstructionScreen.toString());
+        this.currentGameState.getCurrentApp().setCurrentScreen(currentGameState.getGameScreen());
+
+        // Setting up the blueprint
+        this.currentGameState.setBluePrint(new GameWorldBluePrint(currentGameState));
+
+        // Invoking blueprint function to populate this particular screen
+        this.currentGameState.getBluePrint().populateInstructionScreen();
+
+        // Resetting the time counter
+        currentGameState.setMicroSecondPassedLastTick(0);
+    }
+
 
     public void switchToFirstLevelScreen() {
         // This is necessary before switching to any new screen
@@ -204,6 +232,7 @@ public class ScreenController {
         currentScreen = ScreensNames.LevelTwo;
 
         currentGameState.getSaveFile().modifyElements(SaveFileTags.LEVEL.toString(), Integer.toString(2));
+        currentGameState.setLevel2Saved(true);
 
         /**
          * I am registering this audio clip in gamestate because it needs to stay alive for the entire time
@@ -236,6 +265,8 @@ public class ScreenController {
         currentGameState.setMicroSecondPassedLastTick(0);
 
     }
+
+
 
     public void resetScreen() {
         currentGameState.setGameWorld(new GameWorld());
