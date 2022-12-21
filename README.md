@@ -9,20 +9,16 @@
 
 ## Engine Requirements:
 
-| Requirement         | Location in code or steps to view in game    |
-|---------------------|----------------------------------------------|
-| Video support       | ```Added VideoComponent in engine```         |
-| Audio support       | ```Added AudioComponent in engine```         |
-| Friction support    | ```PhysicsComponent has friction property``` |
-| Saving and loading  | ```Saving and loading feature is there```       ||
+| Requirement         | Location in code or steps to view in game                                                                                   |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Video support       | ```Added VideoComponent in engine. The game has a starting video and an ending video```                                     |
+| Audio support       | ```Added AudioComponent in engine. Some position based different sound logic was added in the keyboardinputlogic section``` |
+| Friction support    | ```PhysicsComponent has friction property and it is effective on player```                                                  |
+| Saving and loading  | ```Saving and loading feature is there. It saves coin, it saves store bought items and it saves the level as checkpoint```  ||
 
 --------------------------------------------------------------
 
 Instructions on how to run: 
-New engine features are not integrated properly in game. 
-
-Before running the game make sure to exclude the nin folder. Otherwise it won't compile.
-
-But some features can be seen if you play the triage which you can find in the Instrcutions file
+You can find details in the Instructions file
 
 Playtest report is added to another file.
