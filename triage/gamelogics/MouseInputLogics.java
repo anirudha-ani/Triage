@@ -37,6 +37,13 @@ public class MouseInputLogics {
             if (clickedObjects.get(i).contains(GameObjectId.EXIT_BUTTON.toString())) {
                 this.currentApp.getScreenController().switchToMenuScreen();
             }
+            if (clickedObjects.get(i).contains(GameObjectId.UNLOCK_BUTTON.toString())) {
+                this.currentApp.getGameState().setBoughtItem(true);
+                this.currentApp.getScreenController().switchToCartScreen();
+            }
+            if (clickedObjects.get(i).contains(GameObjectId.USE_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToMenuScreen();
+            }
         }
     }
 

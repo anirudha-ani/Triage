@@ -12,7 +12,9 @@ public class GameWorldBluePrint {
 
     GameState currentGameState;
 
-    int coinCount = 0;
+    int coinCount = 300;
+
+
 
     public GameWorldBluePrint(GameState currentGameState) {
         this.currentGameState = currentGameState;
@@ -51,35 +53,23 @@ public class GameWorldBluePrint {
         loadCoinText(String.valueOf(coinCount),40,new Vec2d(currentGameState.getScreenSize().x-coinSpacing,48), Color.WHITE);
         loadCoinImage(new Vec2d(30,30), new Vec2d(currentGameState.getScreenSize().x-60,19));
 
-        loadCart(SpriteSheetId.CART_BG,new Vec2d(180,10));
+        loadCart(SpriteSheetId.CART_BG,new Vec2d(440,190));
 
-        loadCoinText("200",12,new Vec2d(615,220), Color.BLACK);
-        loadCoinImage(new Vec2d(10,10),new Vec2d(645,210));
+        loadCoinText("300",12,new Vec2d(475,305), Color.BLACK);
+        loadCoinImage(new Vec2d(10,10),new Vec2d(503,295));
 
-        loadCoinText("600",12,new Vec2d(615,432), Color.BLACK);
-        loadCoinImage(new Vec2d(10,10),new Vec2d(645,422));
-
-        loadCoinText("400",12,new Vec2d(310,432), Color.BLACK);
-        loadCoinImage(new Vec2d(10,10),new Vec2d(340,422));
-
-
-        loadUseButton(new Vec2d(280,250),true,true);
-        loadUseButton(new Vec2d(570,250),false, coinCount>=200);
-        loadUseButton(new Vec2d(570,460),false, coinCount>=600);
-        loadUseButton(new Vec2d(270,460),false, coinCount>=400);
+        loadUseButton(new Vec2d(430,350),currentGameState.isBoughtItem(), coinCount>=300);
+        loadExitButton(new Vec2d(720,30));
     }
 
     public void populateFirstLevelScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_SPACE);
         loadPlatformsLevelOne();
         Vec2d playerPositionOnWorld = new Vec2d(100,100);
-        //loadPlayer(playerPositionOnWorld);
         loadSamurai(playerPositionOnWorld);
-        // Vec2d playerPositionOnWorld = new Vec2d(200,308);
-        // loadPlayer(playerPositionOnWorld);
         loadGroundSentryEnemy();
         loadPauseButton();
-        loadExitButton();
+        loadExitButton(new Vec2d(810,20));
     }
 
     public void loadBackground(SpriteSheetId backgroundSpriteId) {
@@ -89,10 +79,10 @@ public class GameWorldBluePrint {
 
     public void loadCart(SpriteSheetId backgroundSpriteId, Vec2d playerPositionOnWorld) {
         GameObject backgroundObject = new ImageGenerator(this.currentGameState).generate(backgroundSpriteId,new Vec2d(600,500),new Vec2d(190,20));
-        GameObject samuraiObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld, GameObjectId.HUNTRESS,SpriteSheetId.HUNTRESS, new Vec2d(300,300), new Vec2d(280,110));
-        GameObject huntressObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(300,20),GameObjectId.SAMURAI,SpriteSheetId.SAMURAI, new Vec2d(300,280),new Vec2d(580,110));
-        GameObject wizardObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(50,280),GameObjectId.WIZARD,SpriteSheetId.WIZARD, new Vec2d(210,170),new Vec2d(280,320));
-        GameObject warriorObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(310,230),GameObjectId.WARRIOR,SpriteSheetId.WARRIOR, new Vec2d(280,280),new Vec2d(580,320));
+        //GameObject samuraiObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld, GameObjectId.HUNTRESS,SpriteSheetId.HUNTRESS, new Vec2d(300,300), new Vec2d(280,110));
+        GameObject huntressObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld,GameObjectId.SHURIKEN,SpriteSheetId.SHURIKEN, new Vec2d(100,100),new Vec2d(439,190), true);
+        //GameObject wizardObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(50,280),GameObjectId.WIZARD,SpriteSheetId.WIZARD, new Vec2d(210,170),new Vec2d(280,320));
+        //GameObject warriorObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(310,230),GameObjectId.WARRIOR,SpriteSheetId.WARRIOR, new Vec2d(280,280),new Vec2d(580,320));
         GameObject cartText = new TextGenerator(this.currentGameState)
                 .generate(GameObjectId.TEXT,
                         new Vec2d(340,60),
@@ -102,10 +92,10 @@ public class GameWorldBluePrint {
 
 
         currentGameState.getGameWorld().addGameObject(backgroundObject);
-        currentGameState.getGameWorld().addGameObject(samuraiObject);
+        //currentGameState.getGameWorld().addGameObject(samuraiObject);
         currentGameState.getGameWorld().addGameObject(huntressObject);
-        currentGameState.getGameWorld().addGameObject(wizardObject);
-        currentGameState.getGameWorld().addGameObject(warriorObject);
+        //currentGameState.getGameWorld().addGameObject(wizardObject);
+        //currentGameState.getGameWorld().addGameObject(warriorObject);
         currentGameState.getGameWorld().addGameObject(cartText);
     }
 
@@ -170,7 +160,7 @@ public class GameWorldBluePrint {
                         Color.ORANGE,
                         Color.BLACK,
                         true
-                        );
+                );
         currentGameState.getGameWorld().addGameObject(loadButton);
     }
 
@@ -186,7 +176,7 @@ public class GameWorldBluePrint {
                         Color.ORANGE,
                         Color.BLACK,
                         true
-                        );
+                );
         currentGameState.getGameWorld().addGameObject(saveButton);
     }
 
@@ -202,7 +192,7 @@ public class GameWorldBluePrint {
                         Color.ORANGE,
                         Color.BLACK,
                         true
-                        );
+                );
         currentGameState.getGameWorld().addGameObject(settingsButton);
     }
 
@@ -236,15 +226,15 @@ public class GameWorldBluePrint {
         currentGameState.getGameWorld().addGameObject(pauseButton);
     }
 
-    public void loadExitButton(){
+    public void loadExitButton(Vec2d buttonPos){
         GameObject pauseButton = new IconButtonGenerator(this.currentGameState)
                 .generate(
                         GameObjectId.EXIT_BUTTON,
-                        new Vec2d(810,20),
+                        buttonPos,
                         new Vec2d(50,50),
                         SpriteSheetId.EXIT,
                         new Vec2d(35,35),
-                        new Vec2d(817,28),
+                        buttonPos.plus(7,8),
                         Color.TRANSPARENT,
                         Color.WHITE
                 );
@@ -257,8 +247,8 @@ public class GameWorldBluePrint {
         if(boughtCharacter) {
             GameObject useButton = new ButtonGenerator(this.currentGameState)
                     .generate(GameObjectId.USE_BUTTON,
-                            buttonPosition,
-                            buttonPosition.plus(30, 25),
+                            buttonPosition.plus(10,0),
+                            buttonPosition.plus(40, 25),
                             new Vec2d(100,40),
                             "USE",
                             20,
@@ -266,7 +256,7 @@ public class GameWorldBluePrint {
                             Color.ORANGE,
                             Color.WHITE,
                             true
-                            );
+                    );
             currentGameState.getGameWorld().addGameObject(useButton);
         }
         else{
@@ -281,7 +271,7 @@ public class GameWorldBluePrint {
                             unlocked?Color.ORANGE:Color.rgb(187, 191, 202),
                             unlocked?Color.WHITE:Color.rgb(73, 84, 100),
                             unlocked
-                            );
+                    );
             currentGameState.getGameWorld().addGameObject(useButton);
         }
 
@@ -294,7 +284,7 @@ public class GameWorldBluePrint {
                 .generate(GameObjectId.TEXT,
                         textPosition,
                         Font.loadFont(getClass().getResourceAsStream("../fonts/Bungee-Regular.ttf"),fontSize),fontSize,coinCountText, color
-                        );
+                );
 
         currentGameState.getGameWorld().addGameObject(coinText);
     }

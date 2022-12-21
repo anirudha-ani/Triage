@@ -33,6 +33,8 @@ public class GameState {
     private GameAssets gameAssets;
     private FileLoader saveFile;
     private App currentApp;
+
+    private boolean boughtItem = false;
     private VideoComponent videoPlayer = new VideoComponent();
 
     ArrayList<AudioComponent> runningAudio = new ArrayList<AudioComponent>();
@@ -63,6 +65,14 @@ public class GameState {
 
     public void setMicroSecondPassedLastTick(long secondPassedLastTick) {
         this.microSecondPassedLastTick = secondPassedLastTick;
+    }
+
+    public void setBoughtItem(boolean boughtItem) {
+        this.boughtItem = boughtItem;
+    }
+
+    public boolean isBoughtItem() {
+        return boughtItem;
     }
 
     public boolean getFirstTickHappened() {

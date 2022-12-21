@@ -38,5 +38,8 @@ public enum SpriteSheetId {
     EXIT,
 
     UFO,
+
+    SHURIKEN,
+
     COIN_IMAGE
 }
