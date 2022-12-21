@@ -133,6 +133,7 @@ public class KeyboardInputLogics {
                                 currentApp.getGameState().getGameWorld().removeGameObject(sentry);
                                 int noOfCoins = Integer.parseInt(currentApp.getGameState().getSaveFile().readElements(SaveFileTags.COINS.toString()));
                                 currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(noOfCoins+20));
+                                currentApp.getGameState().setCoinCount(currentApp.getGameState().getCoinCount()+20);
                             }
                         });
 
@@ -153,6 +154,7 @@ public class KeyboardInputLogics {
                                 currentApp.getGameState().getGameWorld().removeGameObject(sentry);
                                 int noOfCoins = Integer.parseInt(currentApp.getGameState().getSaveFile().readElements(SaveFileTags.COINS.toString()));
                                 currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(noOfCoins+20));
+                                currentApp.getGameState().setCoinCount(currentApp.getGameState().getCoinCount()+20);
                             }
                         });
 
@@ -194,6 +196,7 @@ public class KeyboardInputLogics {
                                 currentApp.getGameState().getGameWorld().removeGameObject(sentry);
                                 int noOfCoins = Integer.parseInt(currentApp.getGameState().getSaveFile().readElements(SaveFileTags.COINS.toString()));
                                 currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(noOfCoins+20));
+                                currentApp.getGameState().setCoinCount(currentApp.getGameState().getCoinCount()+20);
                             }
                         });
 
@@ -213,6 +216,7 @@ public class KeyboardInputLogics {
                             if(stats.getHealth() <= 0) {
                                 int noOfCoins = Integer.parseInt(currentApp.getGameState().getSaveFile().readElements(SaveFileTags.COINS.toString()));
                                 currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(noOfCoins+20));
+                                currentApp.getGameState().setCoinCount(currentApp.getGameState().getCoinCount()+20);
                                 currentApp.getGameState().getGameWorld().removeGameObject(sentry);
                             }
                         });

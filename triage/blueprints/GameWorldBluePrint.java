@@ -78,17 +78,6 @@ public class GameWorldBluePrint {
 
     public void populateFirstLevelScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_SPACE);
-        double coinSpacing = 70;
-        if (currentGameState.getCoinCount()>10 && currentGameState.getCoinCount()<100){
-            coinSpacing = 90;
-        }
-        else if(currentGameState.getCoinCount()>100){
-            coinSpacing = 120;
-        }
-
-        loadCoinText(String.valueOf(currentGameState.getCoinCount()),40,new Vec2d(30,48), Color.WHITE);
-        loadCoinImage(new Vec2d(30,30), new Vec2d(coinSpacing,19));
-
         loadPlatformsLevelOne();
         Vec2d playerPositionOnWorld = new Vec2d(100,300);
         loadSamurai(playerPositionOnWorld);
