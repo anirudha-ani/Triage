@@ -51,7 +51,7 @@ public class CollisionLogics {
             if(impactedObjectStats.getHealth() <= 0) {
                 this.gameState.getGameWorld().removeGameObject(impactedObject);
                 int noOfCoins = Integer.parseInt(this.gameState.getSaveFile().readElements(SaveFileTags.COINS.toString()));
-                this.gameState.getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(noOfCoins+100));
+                this.gameState.getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(noOfCoins+20));
             }
         }
 
