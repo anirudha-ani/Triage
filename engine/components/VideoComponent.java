@@ -1,7 +1,6 @@
 package engine.components;
 
 import engine.gameobjects.GameObject;
-import engine.support.Vec2d;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,6 +10,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import triage.GameState;
 
 import java.io.File;
 
@@ -43,7 +43,7 @@ public class VideoComponent extends Component {
      * @param stage
      */
 
-    public void playVideo(Scene scene, Stage stage, double width , double height) {
+    public void playVideo(GameState currentState, Scene scene, Stage stage, double width , double height) {
         this.scene = scene;
         this.stage = stage;
 
@@ -65,7 +65,7 @@ public class VideoComponent extends Component {
         newscene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                stopVideo();
+                stopVideo(currentState);
             }
         });
 
@@ -100,18 +100,20 @@ public class VideoComponent extends Component {
                 public void run() {
                     isPlaying = false;
                     stage.setScene(scene);
+                    currentState.isVideoPlaying = false;
                 }
             });
         }
     }
 
-    public void stopVideo() {
+    public void stopVideo(GameState currentState) {
         System.out.println("Stop video");
         if(!isPlaying) {
             return;
         }
         if(mediaPlayer != null) {
             mediaPlayer.stop();
+            currentState.isVideoPlaying = false;
         }
         if(stage != null && scene != null) {
             stage.setScene(scene);

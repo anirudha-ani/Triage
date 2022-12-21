@@ -12,7 +12,7 @@ public class GameWorldBluePrint {
 
     GameState currentGameState;
 
-    int coinCount = 400;
+
 
     public GameWorldBluePrint(GameState currentGameState) {
         this.currentGameState = currentGameState;
@@ -21,14 +21,14 @@ public class GameWorldBluePrint {
     public void populateMenuScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_GALAXY);
         double coinSpacing = 100;
-        if (coinCount>10 && coinCount<100){
+        if (currentGameState.getCoinCount()>10 && currentGameState.getCoinCount()<100){
             coinSpacing = 120;
         }
-        else if(coinCount>100){
+        else if(currentGameState.getCoinCount()>100){
             coinSpacing = 150;
         }
 
-        loadCoinText(String.valueOf(coinCount),40,new Vec2d(currentGameState.getScreenSize().x-coinSpacing,48), Color.WHITE);
+        loadCoinText(String.valueOf(currentGameState.getCoinCount()),40,new Vec2d(currentGameState.getScreenSize().x-coinSpacing,48), Color.WHITE);
         loadCoinImage(new Vec2d(30,30), new Vec2d(currentGameState.getScreenSize().x-60,19));
         loadStartButton();
         loadSaveButton();
@@ -41,40 +41,62 @@ public class GameWorldBluePrint {
     public void populateCartScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_GALAXY);
         double coinSpacing = 100;
-        if (coinCount>10 && coinCount<100){
+        if (currentGameState.getCoinCount()>10 && currentGameState.getCoinCount()<100){
             coinSpacing = 120;
         }
-        else if(coinCount>100){
+        else if(currentGameState.getCoinCount()>100){
             coinSpacing = 150;
         }
 
-        loadCoinText(String.valueOf(coinCount),40,new Vec2d(currentGameState.getScreenSize().x-coinSpacing,48), Color.WHITE);
+        loadCoinText(String.valueOf(currentGameState.getCoinCount()),40,new Vec2d(currentGameState.getScreenSize().x-coinSpacing,48), Color.WHITE);
         loadCoinImage(new Vec2d(30,30), new Vec2d(currentGameState.getScreenSize().x-60,19));
 
-        loadCart(SpriteSheetId.CART_BG,new Vec2d(180,10));
+        loadCart(SpriteSheetId.CART_BG,new Vec2d(440,190));
 
-        loadCoinText("200",12,new Vec2d(615,220), Color.BLACK);
-        loadCoinImage(new Vec2d(10,10),new Vec2d(645,210));
+        loadCoinText("300",12,new Vec2d(475,305), Color.BLACK);
+        loadCoinImage(new Vec2d(10,10),new Vec2d(503,295));
 
-        loadCoinText("600",12,new Vec2d(615,432), Color.BLACK);
-        loadCoinImage(new Vec2d(10,10),new Vec2d(645,422));
+        loadUseButton(new Vec2d(430,350),currentGameState.isBoughtItem(), currentGameState.getCoinCount()>=300);
+        loadExitButton(new Vec2d(720,30));
+    }
 
-        loadCoinText("400",12,new Vec2d(310,432), Color.BLACK);
-        loadCoinImage(new Vec2d(10,10),new Vec2d(340,422));
+    public void populateLoadScreen() {
+        loadBackground(SpriteSheetId.BACKGROUND_GALAXY);
+        loadBackgroundCart(SpriteSheetId.CART_BG);
+        loadLevel1Button(new Vec2d(430,200), true);
+        loadLevel2Button(new Vec2d(430,250),currentGameState.isLevel2Saved());
 
-
-        loadUseButton(new Vec2d(280,250),true,true);
-        loadUseButton(new Vec2d(570,250),false, coinCount>=200);
-        loadUseButton(new Vec2d(570,460),false, coinCount>=600);
-        loadUseButton(new Vec2d(270,460),false, coinCount>=400);
     }
 
     public void populateFirstLevelScreen() {
         loadBackground(SpriteSheetId.BACKGROUND_SPACE);
+        double coinSpacing = 70;
+        if (currentGameState.getCoinCount()>10 && currentGameState.getCoinCount()<100){
+            coinSpacing = 90;
+        }
+        else if(currentGameState.getCoinCount()>100){
+            coinSpacing = 120;
+        }
+
+        loadCoinText(String.valueOf(currentGameState.getCoinCount()),40,new Vec2d(30,48), Color.WHITE);
+        loadCoinImage(new Vec2d(30,30), new Vec2d(coinSpacing,19));
+
         loadPlatformsLevelOne();
-        Vec2d playerPositionOnWorld = new Vec2d(200,308);
-        loadPlayer(playerPositionOnWorld);
+        Vec2d playerPositionOnWorld = new Vec2d(100,300);
+        loadSamurai(playerPositionOnWorld);
         loadGroundSentryEnemy();
+        loadPauseButton();
+        loadExitButton(new Vec2d(810,20));
+    }
+    public void populateSecondLevelScreen() {
+        loadBackground(SpriteSheetId.BACKGROUND_SPACE);
+        loadPlatformsLevelOne();
+//        loadPlatformsLevelOne();
+        Vec2d playerPositionOnWorld = new Vec2d(100,300);
+        loadSamurai(playerPositionOnWorld);
+        loadAirSentryEnemy();
+        loadPauseButton();
+        loadExitButton(new Vec2d(810,20));
     }
 
     public void loadBackground(SpriteSheetId backgroundSpriteId) {
@@ -82,12 +104,17 @@ public class GameWorldBluePrint {
         currentGameState.getGameWorld().addGameObject(backgroundObject);
     }
 
+    public void loadBackgroundCart(SpriteSheetId backgroundSpriteId) {
+        GameObject backgroundObject = new ImageGenerator(this.currentGameState).generate(backgroundSpriteId,new Vec2d(600,500),new Vec2d(190,20));
+        currentGameState.getGameWorld().addGameObject(backgroundObject);
+    }
+
     public void loadCart(SpriteSheetId backgroundSpriteId, Vec2d playerPositionOnWorld) {
         GameObject backgroundObject = new ImageGenerator(this.currentGameState).generate(backgroundSpriteId,new Vec2d(600,500),new Vec2d(190,20));
-        GameObject samuraiObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld, GameObjectId.HUNTRESS,SpriteSheetId.HUNTRESS, new Vec2d(300,300), new Vec2d(280,110));
-        GameObject huntressObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(300,20),GameObjectId.SAMURAI,SpriteSheetId.SAMURAI, new Vec2d(300,280),new Vec2d(580,110));
-        GameObject wizardObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(50,280),GameObjectId.WIZARD,SpriteSheetId.WIZARD, new Vec2d(210,170),new Vec2d(280,320));
-        GameObject warriorObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(310,230),GameObjectId.WARRIOR,SpriteSheetId.WARRIOR, new Vec2d(280,280),new Vec2d(580,320));
+        //GameObject samuraiObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld, GameObjectId.HUNTRESS,SpriteSheetId.HUNTRESS, new Vec2d(300,300), new Vec2d(280,110));
+        GameObject huntressObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld,GameObjectId.SHURIKEN,SpriteSheetId.SHURIKEN, new Vec2d(100,100),new Vec2d(439,190), true);
+        //GameObject wizardObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(50,280),GameObjectId.WIZARD,SpriteSheetId.WIZARD, new Vec2d(210,170),new Vec2d(280,320));
+        //GameObject warriorObject =  new CharacterPreviewGenerator(this.currentGameState).generate(playerPositionOnWorld.plus(310,230),GameObjectId.WARRIOR,SpriteSheetId.WARRIOR, new Vec2d(280,280),new Vec2d(580,320));
         GameObject cartText = new TextGenerator(this.currentGameState)
                 .generate(GameObjectId.TEXT,
                         new Vec2d(340,60),
@@ -97,10 +124,10 @@ public class GameWorldBluePrint {
 
 
         currentGameState.getGameWorld().addGameObject(backgroundObject);
-        currentGameState.getGameWorld().addGameObject(samuraiObject);
+        //currentGameState.getGameWorld().addGameObject(samuraiObject);
         currentGameState.getGameWorld().addGameObject(huntressObject);
-        currentGameState.getGameWorld().addGameObject(wizardObject);
-        currentGameState.getGameWorld().addGameObject(warriorObject);
+        //currentGameState.getGameWorld().addGameObject(wizardObject);
+        //currentGameState.getGameWorld().addGameObject(warriorObject);
         currentGameState.getGameWorld().addGameObject(cartText);
     }
 
@@ -133,6 +160,12 @@ public class GameWorldBluePrint {
 
     }
 
+    public void loadSamurai(Vec2d playerPositionOnWorld) {
+        GameObject player = new SamuraiGenerator(this.currentGameState).generate(playerPositionOnWorld);
+
+        currentGameState.getGameWorld().addGameObject(player);
+    }
+
     public void loadGroundSentryEnemy() {
         Vec2d sentryPositionOnWorld1 = new Vec2d(450,320);
         GameObject groundSentry1 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld1);
@@ -142,9 +175,23 @@ public class GameWorldBluePrint {
         GameObject groundSentry2 = new GroundSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld2);
         currentGameState.getGameWorld().addGameObject(groundSentry2);
 
-        Vec2d sentryPositionOnWorld3 = new Vec2d(50,100);
+        Vec2d sentryPositionOnWorld3 = new Vec2d(50,200);
         GameObject airSentry1 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld3);
         currentGameState.getGameWorld().addGameObject(airSentry1);
+    }
+
+    public void loadAirSentryEnemy() {
+        Vec2d sentryPositionOnWorld1 = new Vec2d(350,100);
+        GameObject airSentry1 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld1);
+        currentGameState.getGameWorld().addGameObject(airSentry1);
+
+        Vec2d sentryPositionOnWorld2 = new Vec2d(150,150);
+        GameObject airSentry2 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld2);
+        currentGameState.getGameWorld().addGameObject(airSentry2);
+
+        Vec2d sentryPositionOnWorld3 = new Vec2d(50,200);
+        GameObject airSentry3 = new AirSentryGenerator(this.currentGameState).generate(sentryPositionOnWorld3);
+        currentGameState.getGameWorld().addGameObject(airSentry3);
     }
 
     public void loadStartButton() {
@@ -159,7 +206,7 @@ public class GameWorldBluePrint {
                         Color.ORANGE,
                         Color.BLACK,
                         true
-                        );
+                );
         currentGameState.getGameWorld().addGameObject(loadButton);
     }
 
@@ -175,7 +222,7 @@ public class GameWorldBluePrint {
                         Color.ORANGE,
                         Color.BLACK,
                         true
-                        );
+                );
         currentGameState.getGameWorld().addGameObject(saveButton);
     }
 
@@ -185,13 +232,13 @@ public class GameWorldBluePrint {
                         new Vec2d(currentGameState.getScreenSize().x/2.28,currentGameState.getScreenSize().y/1.58),
                         new Vec2d(currentGameState.getScreenSize().x/2.28+15,currentGameState.getScreenSize().y/1.58+35),
                         new Vec2d(140, 50),
-                        "Settings",
-                        28,
+                        "Instructions",
+                        20,
                         Color.rgb(204,69,66),
                         Color.ORANGE,
                         Color.BLACK,
                         true
-                        );
+                );
         currentGameState.getGameWorld().addGameObject(settingsButton);
     }
 
@@ -203,17 +250,51 @@ public class GameWorldBluePrint {
                         new Vec2d(50,50),
                         SpriteSheetId.SHOPPING_CART,
                         new Vec2d(35,35),
-                        new Vec2d(57,28)
+                        new Vec2d(57,28),
+                        Color.WHITESMOKE,
+                        Color.rgb(204,69,66)
                 );
         currentGameState.getGameWorld().addGameObject(shopButton);
     }
 
+    public void loadPauseButton(){
+        GameObject pauseButton = new IconButtonGenerator(this.currentGameState)
+                .generate(
+                        GameObjectId.PAUSE_BUTTON,
+                        new Vec2d(870,20),
+                        new Vec2d(50,50),
+                        SpriteSheetId.PAUSE,
+                        new Vec2d(35,35),
+                        new Vec2d(877,28),
+                        Color.TRANSPARENT,
+                        Color.WHITE
+                );
+        currentGameState.getGameWorld().addGameObject(pauseButton);
+    }
+
+    public void loadExitButton(Vec2d buttonPos){
+        GameObject pauseButton = new IconButtonGenerator(this.currentGameState)
+                .generate(
+                        GameObjectId.EXIT_BUTTON,
+                        buttonPos,
+                        new Vec2d(50,50),
+                        SpriteSheetId.EXIT,
+                        new Vec2d(35,35),
+                        buttonPos.plus(7,8),
+                        Color.TRANSPARENT,
+                        Color.WHITE
+                );
+        currentGameState.getGameWorld().addGameObject(pauseButton);
+    }
+
+
+
     public void loadUseButton(Vec2d buttonPosition, boolean boughtCharacter, boolean unlocked){
         if(boughtCharacter) {
             GameObject useButton = new ButtonGenerator(this.currentGameState)
-                    .generate(GameObjectId.USE_BUTTON,
-                            buttonPosition,
-                            buttonPosition.plus(30, 25),
+                    .generate(GameObjectId.USEITEM_BUTTON,
+                            buttonPosition.plus(10,0),
+                            buttonPosition.plus(40, 25),
                             new Vec2d(100,40),
                             "USE",
                             20,
@@ -221,7 +302,7 @@ public class GameWorldBluePrint {
                             Color.ORANGE,
                             Color.WHITE,
                             true
-                            );
+                    );
             currentGameState.getGameWorld().addGameObject(useButton);
         }
         else{
@@ -236,20 +317,54 @@ public class GameWorldBluePrint {
                             unlocked?Color.ORANGE:Color.rgb(187, 191, 202),
                             unlocked?Color.WHITE:Color.rgb(73, 84, 100),
                             unlocked
-                            );
+                    );
             currentGameState.getGameWorld().addGameObject(useButton);
         }
 
     }
 
+    public void loadLevel1Button(Vec2d buttonPosition,  boolean saved){
+            GameObject useButton = new ButtonGenerator(this.currentGameState)
+                    .generate(GameObjectId.LEVEL1_BUTTON,
+                            buttonPosition,
+                            buttonPosition.plus(30, 25),
+                            new Vec2d(125,40),
+                            "LEVEL 1",
+                            20,
+                            saved?Color.rgb(45, 11, 37):Color.rgb(187, 191, 202),
+                            saved?Color.ORANGE:Color.rgb(187, 191, 202),
+                            saved?Color.WHITE:Color.rgb(73, 84, 100),
+                            saved
+                    );
+            currentGameState.getGameWorld().addGameObject(useButton);
 
+
+    }
+
+    public void loadLevel2Button(Vec2d buttonPosition,  boolean saved){
+        GameObject useButton = new ButtonGenerator(this.currentGameState)
+                .generate(GameObjectId.LEVEL2_BUTTON,
+                        buttonPosition,
+                        buttonPosition.plus(30, 25),
+                        new Vec2d(125,40),
+                        "LEVEL 2",
+                        20,
+                        saved?Color.rgb(45, 11, 37):Color.rgb(187, 191, 202),
+                        saved?Color.ORANGE:Color.rgb(187, 191, 202),
+                        saved?Color.WHITE:Color.rgb(73, 84, 100),
+                        saved
+                );
+        currentGameState.getGameWorld().addGameObject(useButton);
+
+
+    }
 
     public void loadCoinText(String coinCountText, double fontSize, Vec2d textPosition, Color color){
         GameObject coinText = new TextGenerator(this.currentGameState)
                 .generate(GameObjectId.TEXT,
                         textPosition,
                         Font.loadFont(getClass().getResourceAsStream("../fonts/Bungee-Regular.ttf"),fontSize),fontSize,coinCountText, color
-                        );
+                );
 
         currentGameState.getGameWorld().addGameObject(coinText);
     }

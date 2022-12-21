@@ -14,7 +14,7 @@ public class IconButtonGenerator {
         this.currentGameState = currentGameState;
     }
 
-    public GameObject generate(GameObjectId buttonId, Vec2d buttonPosition, Vec2d buttonSize, SpriteSheetId iconSpriteId, Vec2d iconSize, Vec2d iconPosition) {
+    public GameObject generate(GameObjectId buttonId, Vec2d buttonPosition, Vec2d buttonSize, SpriteSheetId iconSpriteId, Vec2d iconSize, Vec2d iconPosition, Color bgColor, Color hoverColor) {
 
         GameObject button = new GameObject(
                 buttonId.toString(),
@@ -23,8 +23,8 @@ public class IconButtonGenerator {
         button.setzIndex(0); // 0 gets drawn last so always stays on top
 
         DrawableRectangleComponent drawableBackgroundComponent = new DrawableRectangleComponent(button, true);
-        button.setDefaultColor(Color.WHITESMOKE);
-        button.setHoverColor(Color.rgb(204,69,66));
+        button.setDefaultColor(bgColor);
+        button.setHoverColor(hoverColor);
         button.setClickColor(Color.RED);
 
         SpriteComponent imageInsideButtonComponent = new SpriteComponent(

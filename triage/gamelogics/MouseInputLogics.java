@@ -9,6 +9,7 @@ import triage.App;
 import triage.blueprints.AudioId;
 import triage.generators.BulletGenerator;
 import triage.generators.ObjectIds.GameObjectId;
+import triage.savefiles.SaveFileTags;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,30 @@ public class MouseInputLogics {
             if (clickedObjects.get(i).contains(GameObjectId.SHOPPING_BUTTON.toString())) {
                 this.currentApp.getScreenController().switchToCartScreen();
             }
+            if (clickedObjects.get(i).contains(GameObjectId.PAUSE_BUTTON.toString())) {
+                this.currentApp.getScreenController().resetScreen();
+                this.currentApp.getScreenController().switchToFirstLevelScreen();
+            }
+            if (clickedObjects.get(i).contains(GameObjectId.EXIT_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToMenuScreen();
+            }
+            if (clickedObjects.get(i).contains(GameObjectId.UNLOCK_BUTTON.toString())) {
+                currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.SHURIKEN.toString(), Integer.toString(1));
+                this.currentApp.getGameState().setBoughtItem(true);
+                this.currentApp.getScreenController().switchToCartScreen();
+            }
+            if (clickedObjects.get(i).contains(GameObjectId.USEITEM_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToMenuScreen();
+            }
+            if (clickedObjects.get(i).contains(GameObjectId.LOAD_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToLoadScreen();
+            }
+            if (clickedObjects.get(i).contains(GameObjectId.LEVEL1_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToFirstLevelScreen();
+            }
+            if (clickedObjects.get(i).contains(GameObjectId.LEVEL2_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToSecondLevelScreen();
+            }
         }
     }
 
@@ -38,7 +63,7 @@ public class MouseInputLogics {
         if (e.getButton() == MouseButton.SECONDARY) {
             GameObject player = currentApp.getGameState().getGameWorld().getGameObject("player");
 
-            if (player != null) {
+            if (player != null && currentApp.getGameState().isBoughtItem()) {
                 RayComponent rayComponent = (RayComponent) player.getComponent("ray");
 
                 if (rayComponent != null) {

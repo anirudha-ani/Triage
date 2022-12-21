@@ -23,14 +23,23 @@ public class GameState {
     private GameWorld gameWorld = null;
     private Screen gameScreen = null;
 
+    public boolean isVideoPlaying = false;
+
     GameWorldBluePrint bluePrint = null;
     private long microSecondPassedLastTick = 0;
+
+    private int coinCount=0;
+
+    private boolean isLevel2Saved;
+
     private long microSecondPassedLastKeyExecution = 0;
     private boolean firstTickHappened = false;
     private MapLoader map;
     private GameAssets gameAssets;
     private FileLoader saveFile;
     private App currentApp;
+
+    private boolean boughtItem = false;
     private VideoComponent videoPlayer = new VideoComponent();
 
     ArrayList<AudioComponent> runningAudio = new ArrayList<AudioComponent>();
@@ -51,8 +60,18 @@ public class GameState {
         return gameScreen;
     }
 
+
+
     public void setGameScreen(Screen gameScreen) {
         this.gameScreen = gameScreen;
+    }
+
+    public void setCoinCount(int coinCount) {
+        this.coinCount = coinCount;
+    }
+
+    public int getCoinCount() {
+        return coinCount;
     }
 
     public long getMicroSecondPassedLastTick() {
@@ -61,6 +80,22 @@ public class GameState {
 
     public void setMicroSecondPassedLastTick(long secondPassedLastTick) {
         this.microSecondPassedLastTick = secondPassedLastTick;
+    }
+
+    public boolean isLevel2Saved() {
+        return isLevel2Saved;
+    }
+
+    public void setLevel2Saved(boolean level2Saved) {
+        isLevel2Saved = level2Saved;
+    }
+
+    public void setBoughtItem(boolean boughtItem) {
+        this.boughtItem = boughtItem;
+    }
+
+    public boolean isBoughtItem() {
+        return boughtItem;
     }
 
     public boolean getFirstTickHappened() {
@@ -126,6 +161,10 @@ public class GameState {
         runningAudio.add(audioComponent);
     }
 
+    public ArrayList<AudioComponent> getRunningAudio() {
+        return runningAudio;
+    }
+
     public void removeAudio(AudioId audioId) {
         runningAudio.removeIf(audioComponent -> (audioComponent.getLocalId() == audioId.toString()));
     }
@@ -138,9 +177,11 @@ public class GameState {
     }
 
     public void playVideo(String source, boolean isLooping) {
+        this.isVideoPlaying = true;
         videoPlayer.setSource(source);
         videoPlayer.setLooping(isLooping);
         videoPlayer.playVideo(
+                this,
                 getCurrentApp().getScene(),
                 getCurrentApp().getStage(),
                 getCurrentApp().getCurrentScreenSize().x,

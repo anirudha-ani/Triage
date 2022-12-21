@@ -3,6 +3,7 @@ package engine.systems;
 import engine.GameWorld;
 import engine.UIElement.AffineWrapper;
 import engine.components.Component;
+import engine.components.SpriteComponent;
 import engine.gameobjects.GameObject;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -43,23 +44,34 @@ public class DrawSystem extends System {
     public void onTick(long nonosSinceLastTick) {
         secondPassedLastMove += (nonosSinceLastTick / 1000);
         int index = 0;
-        if (secondPassedLastMove >= 1000000) {
-            index = 0;
-            secondPassedLastMove = 0;
-        } else if (secondPassedLastMove >= 750000) {
-            index = 3;
-        } else if (secondPassedLastMove >= 500000) {
-            index = 2;
-        } else if (secondPassedLastMove >= 250000) {
-            index = 1;
-        }
+//        if (secondPassedLastMove >= 1000000) {
+//            index = 0;
+//            secondPassedLastMove = 0;
+//        } else if (secondPassedLastMove >= 750000) {
+//            index = 3;
+//        } else if (secondPassedLastMove >= 500000) {
+//            index = 2;
+//        } else if (secondPassedLastMove >= 250000) {
+//            index = 1;
+//        }
         for (int j = 0; j < drawableObjects.size(); j++) {
             if (drawableObjects.get(j).isDeleted() || drawableObjects.get(j).status == "idle") {
                 continue;
             }
-            Component playerSprite = drawableObjects.get(j).getComponent(drawableObjects.get(j).status);
+            SpriteComponent playerSprite = (SpriteComponent) drawableObjects.get(j).getComponent(drawableObjects.get(j).status);
+            index = (int) secondPassedLastMove/250000;
             if (playerSprite != null) {
-                playerSprite.setSpriteIndexToLoad(index);
+                if(index/(playerSprite.getSpriteSheet().getNoOfSpritePerRow()*playerSprite.getSpriteSheet().getNoOfSpritePerColumn())<=1)
+                {
+                    playerSprite.setSpriteIndexToLoad(index);
+                    if (index/(playerSprite.getSpriteSheet().getNoOfSpritePerRow()*playerSprite.getSpriteSheet().getNoOfSpritePerColumn())==1){
+                        playerSprite.setSpriteIndexToLoad(0);
+                        secondPassedLastMove=0;
+                    }
+                }
+                else{
+                    secondPassedLastMove=0;
+                }
             }
         }
 

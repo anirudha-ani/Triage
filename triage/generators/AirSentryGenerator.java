@@ -6,6 +6,7 @@ import engine.hitboxes.AABHitbox;
 import engine.support.Vec2d;
 import triage.GameState;
 import javafx.scene.paint.Color;
+import triage.blueprints.SpriteSheetId;
 import triage.generators.ObjectIds.GameObjectId;
 
 public class AirSentryGenerator {
@@ -22,12 +23,26 @@ public class AirSentryGenerator {
                 new TransformComponent( new Vec2d(positionInWorld.x, positionInWorld.y), new Vec2d(32, 32)));
 
         sentry.setzIndex(0);
-        sentry.setDefaultColor(Color.RED);
-        sentry.setHoverColor(Color.ORANGE);
-
-        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(sentry);
+//        sentry.setDefaultColor(Color.RED);
+//        sentry.setHoverColor(Color.ORANGE);
+//
+//        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(sentry);
+//        sentry.addComponent(drawableComponent);
 
         StatsComponent statsComponent = new StatsComponent(50, 100);
+
+        SpriteComponent spriteComponent1 =
+                new SpriteComponent(
+                        "right",
+                        sentry,
+                        currentGameState
+                                .getGameAssets()
+                                .getGameResource()
+                                .getSpriteSheet(SpriteSheetId.UFO.toString()),
+//                            positionInWorld,
+                        // Sprite position and object position might not be same all the time.
+                        new Vec2d(positionInWorld.x-20, positionInWorld.y-15),
+                        new Vec2d(70, 70));
 
         PhysicsComponent physicsComponent = new PhysicsComponent(sentry, 5);
         physicsComponent.setVel(new Vec2d(.5,0));
@@ -41,11 +56,14 @@ public class AirSentryGenerator {
 
         sentry.setStatus("idle");
 
-        sentry.addComponent(drawableComponent);
+
+        sentry.addComponent(spriteComponent1);
         sentry.addComponent(aiComponent);
         sentry.addComponent(physicsComponent);
         sentry.addComponent(collisionComponent);
         sentry.addComponent(statsComponent);
+
+
 
         return sentry;
     }

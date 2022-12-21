@@ -8,10 +8,12 @@ import triage.GameState;
 import triage.blueprints.AudioId;
 import triage.blueprints.GameAssets;
 import triage.blueprints.GameWorldBluePrint;
+import triage.savefiles.SaveFileTags;
 
 public class ScreenController {
 
     GameState currentGameState;
+    ScreensNames currentScreen = null;
 
     public ScreenController(GameState state) {
         this.currentGameState = state;
@@ -56,6 +58,12 @@ public class ScreenController {
         switchToMenuScreen();
     }
 
+    public void playEndCredit() {
+        currentGameState.playVideo("triage/videofiles/EndCredit.mp4", false);
+
+        switchToMenuScreen();
+    }
+
     /**
      * These switch screen methods do three things
      * Reset the current screen/GameWorld
@@ -67,9 +75,11 @@ public class ScreenController {
         // This is necessary before switching to any new screen
         resetScreen();
 
+        currentScreen = ScreensNames.MenuScreen;
+
         AudioComponent audioClip = new AudioComponent("triage/audiofiles/MainMenu.mp3", true);
         audioClip.setLocalId(AudioId.BACKGROUND_STAGE1.toString());
-        audioClip.playAudio();
+//        audioClip.playAudio();
         currentGameState.addAudio(audioClip);
 
         // Creating an instance of the new screen
@@ -98,6 +108,8 @@ public class ScreenController {
         // This is necessary before switching to any new screen
         resetScreenWithoutAudio();
 
+        currentScreen = ScreensNames.CartScreen;
+
         // Creating an instance of the new screen
         currentGameState.setGameScreen(
                 new Screen(
@@ -120,9 +132,39 @@ public class ScreenController {
         currentGameState.setMicroSecondPassedLastTick(0);
     }
 
+    public void switchToLoadScreen() {
+        // This is necessary before switching to any new screen
+        resetScreenWithoutAudio();
+
+        currentScreen = ScreensNames.LoadScreen;
+
+        // Creating an instance of the new screen
+        currentGameState.setGameScreen(
+                new Screen(
+                        ScreensNames.LoadScreen.toString(),
+                        this.currentGameState.getCurrentApp().getCurrentScreenSize(),
+                        currentGameState.getGameWorld(),
+                        false));
+
+        // App -> Application (parent) also saves this value
+        this.currentGameState.getCurrentApp().setCurrentScreenId(ScreensNames.LoadScreen.toString());
+        this.currentGameState.getCurrentApp().setCurrentScreen(currentGameState.getGameScreen());
+
+        // Setting up the blueprint
+        this.currentGameState.setBluePrint(new GameWorldBluePrint(currentGameState));
+
+        // Invoking blueprint function to populate this particular screen
+        this.currentGameState.getBluePrint().populateLoadScreen();
+
+        // Resetting the time counter
+        currentGameState.setMicroSecondPassedLastTick(0);
+    }
+
+
     public void switchToFirstLevelScreen() {
         // This is necessary before switching to any new screen
         resetScreen();
+        currentScreen = ScreensNames.LevelOne;
 
         /**
          * I am registering this audio clip in gamestate because it needs to stay alive for the entire time
@@ -130,7 +172,7 @@ public class ScreenController {
          */
         AudioComponent audioClip = new AudioComponent("triage/audiofiles/Dramatic-suspense-background-music.mp3", true);
         audioClip.setLocalId(AudioId.BACKGROUND_STAGE1.toString());
-        audioClip.playAudio();
+        // audioClip.playAudio();
         currentGameState.addAudio(audioClip);
 
         // Creating an instance of the new screen
@@ -157,6 +199,41 @@ public class ScreenController {
     }
 
     public void switchToSecondLevelScreen() {
+        // This is necessary before switching to any new screen
+        resetScreen();
+        currentScreen = ScreensNames.LevelTwo;
+
+        currentGameState.getSaveFile().modifyElements(SaveFileTags.LEVEL.toString(), Integer.toString(2));
+
+        /**
+         * I am registering this audio clip in gamestate because it needs to stay alive for the entire time
+         * Otherwise it gets killed when the function finish execution and goes out of scope
+         */
+        AudioComponent audioClip = new AudioComponent("triage/audiofiles/itachi.mp3", true);
+        audioClip.setLocalId(AudioId.BACKGROUND_STAGE1.toString());
+        // audioClip.playAudio();
+        currentGameState.addAudio(audioClip);
+
+        // Creating an instance of the new screen
+        currentGameState.setGameScreen(
+                new Screen(
+                        ScreensNames.LevelTwo.toString(),
+                        this.currentGameState.getCurrentApp().getCurrentScreenSize(),
+                        currentGameState.getGameWorld(),
+                        false));
+
+        // App -> Application (parent) also saves this value
+        this.currentGameState.getCurrentApp().setCurrentScreenId(ScreensNames.LevelTwo.toString());
+        this.currentGameState.getCurrentApp().setCurrentScreen(currentGameState.getGameScreen());
+
+        // Setting up the blueprint
+        this.currentGameState.setBluePrint(new GameWorldBluePrint(currentGameState));
+
+        // Invoking blueprint function to populate this particular screen
+        this.currentGameState.getBluePrint().populateSecondLevelScreen();
+
+        // Resetting the time counter
+        currentGameState.setMicroSecondPassedLastTick(0);
 
     }
 
@@ -168,4 +245,16 @@ public class ScreenController {
         currentGameState.setGameWorld(new GameWorld());
     }
 
+    public void reloadLevel() {
+        if(currentScreen == ScreensNames.LevelOne) {
+            switchToFirstLevelScreen();
+        }
+        if(currentScreen == ScreensNames.LevelTwo) {
+            switchToSecondLevelScreen();
+        }
+    }
+
+    public ScreensNames getCurrentScreen() {
+        return currentScreen;
+    }
 }

@@ -4,5 +4,6 @@ public enum ScreensNames {
     MenuScreen,
     CartScreen,
     LevelOne,
-    LevelTwo
+    LevelTwo,
+    LoadScreen
 }

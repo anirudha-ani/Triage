@@ -5,6 +5,7 @@ public enum SpriteSheetId {
     PLAYER_RIGHT,
     BACKGROUND_SPACE,
     BACKGROUND_GALAXY,
+    BACKGROUND_PLATFORM,
 
     SHOPPING_CART,
 
@@ -16,6 +17,30 @@ public enum SpriteSheetId {
 
     WIZARD,
     WARRIOR,
+
+    SAMURAI_RIGHT,
+    SAMURAI_JUMP,
+
+    SAMURAI_JUMP_LEFT,
+
+    SAMURAI_ATTACK_LEFT,
+    SAMURAI_LEFT,
+
+    SAMURAI_ATTACK,
+
+    MUMMY_LEFT,
+
+    MUMMY_RIGHT,
+
+    MUMMY,
+
+    PAUSE,
+
+    EXIT,
+
+    UFO,
+
+    SHURIKEN,
 
     COIN_IMAGE
 }

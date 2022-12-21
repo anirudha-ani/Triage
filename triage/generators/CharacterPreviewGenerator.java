@@ -15,7 +15,7 @@ public class CharacterPreviewGenerator {
         this.currentGameState = currentGameState;
     }
 
-    public GameObject generate(Vec2d positionInWorld, GameObjectId gameID, SpriteSheetId spriteId, Vec2d playerSize, Vec2d boxPosition) {
+    public GameObject generate(Vec2d positionInWorld, GameObjectId gameID, SpriteSheetId spriteId, Vec2d playerSize, Vec2d boxPosition, boolean hasRounded) {
 
         GameObject player = new GameObject(
                 gameID.toString(),
@@ -23,7 +23,7 @@ public class CharacterPreviewGenerator {
 
         player.setzIndex(0);
 
-        DrawableRectangleComponent drawableBackgroundComponent = new DrawableRectangleComponent(player);
+        DrawableRectangleComponent drawableBackgroundComponent = new DrawableRectangleComponent(player, hasRounded);
         player.setDefaultColor(Color.WHITESMOKE);
 
         // SpriteId "left" and "right" is a legacy id, don't rename it. It will break some engine side code

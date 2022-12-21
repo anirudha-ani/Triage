@@ -13,14 +13,23 @@ public enum GameObjectId {
 
     WIZARD,
     WARRIOR,
+    MUMMY,
+    SHURIKEN,
     START_BUTTON, // Carefull to include either "BUTTON" or "button" in the id of a Button
     LOAD_BUTTON,
     SETTINGS_BUTTON,
 
     SHOPPING_BUTTON,
 
-    USE_BUTTON,
+    PAUSE_BUTTON,
+
+    EXIT_BUTTON,
+
+    USEITEM_BUTTON,
     UNLOCK_BUTTON,
+
+    LEVEL1_BUTTON,
+    LEVEL2_BUTTON,
     TEXT,
 
     IMAGE,

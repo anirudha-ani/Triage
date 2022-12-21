@@ -4,6 +4,7 @@ import engine.components.*;
 import engine.gameobjects.GameObject;
 import engine.hitboxes.AABHitbox;
 import engine.support.Vec2d;
+import javafx.scene.paint.Color;
 import triage.GameState;
 import triage.generators.ObjectIds.GameObjectId;
 
@@ -21,9 +22,9 @@ public class HiddenRectangleHitboxGenerator {
 
         // Keeping this just for visualization while debugging
         // TODO: remove it in the final version
-        // DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(hiddenRectangleHitboxObject);
-        // hiddenRectangleHitboxObject.setDefaultColor(Color.RED);
-        // hiddenRectangleHitboxObject.addComponent(drawableComponent);
+//        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(hiddenRectangleHitboxObject);
+//        hiddenRectangleHitboxObject.setDefaultColor(Color.RED);
+//        hiddenRectangleHitboxObject.addComponent(drawableComponent);
 
         // Hitboxes are a part of the collisionComponent
         // Collision behaviour static means it won't move after collision

@@ -154,16 +154,26 @@ public class GameObject {
             if (getComponent("right") != null) {
                 getComponent("right").setVisibile(false);
             }
-            if (getComponent("up") != null) {
-                getComponent("up").setVisibile(false);
+            if (getComponent("upRight") != null) {
+                getComponent("upRight").setVisibile(false);
             }
             if (getComponent("down") != null) {
                 getComponent("down").setVisibile(false);
+            }
+            if (getComponent("attackRight") != null) {
+                getComponent("attackRight").setVisibile(false);
+            }
+            if (getComponent("attackLeft") != null) {
+                getComponent("attackLeft").setVisibile(false);
+            }
+            if (getComponent("upLeft") != null) {
+                getComponent("upLeft").setVisibile(false);
             }
             if (getComponent(status) != null) {
                 getComponent(status).setVisibile(true);
             }
         }
+
 
     }
 

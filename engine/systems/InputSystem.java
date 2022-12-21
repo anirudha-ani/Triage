@@ -55,7 +55,7 @@ public class InputSystem extends System {
             return;
         }
         activeKeys.add(e.getCode());
-        keyEventHappened.setReleasedKey(null);
+        //keyEventHappened.setReleasedKey(null);
     }
 
     public void onKeyReleased(KeyEvent e, AffineWrapper viewPortAffine) {
