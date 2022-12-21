@@ -1,6 +1,7 @@
 package triage.gamelogics;
 
 import engine.components.PhysicsComponent;
+import engine.components.SpriteComponent;
 import engine.components.StatsComponent;
 import engine.support.Vec2d;
 import engine.systems.KeyEventHappened;
@@ -107,6 +108,26 @@ public class KeyboardInputLogics {
                     gameObject.setStatus("attackRight");
                 }
 
+                /**
+                 * This is extremely hacky way to complete the attack animation.
+                 * It assumes that your attack sprite has 3 frames
+                 * Not an ideal solution
+                 */
+                if(movementHappening == false && (gameObject.status == "attackRight" || gameObject.status == "attackLeft")) {
+                    SpriteComponent playerSprite = (SpriteComponent) gameObject.getComponent(gameObject.status);
+
+                    if(playerSprite != null && playerSprite.spriteIndexToLoad != 2) {
+                        movementHappening = true;
+                    } else {
+                        if(gameObject.status == "attackRight") {
+                            gameObject.setStatus("right");
+                        } else {
+                            gameObject.setStatus("left");
+                        }
+                        movementHappening = true;
+
+                    }
+                }
 
                 if(!movementHappening) {
                     gameObject.setStatus("idle");
