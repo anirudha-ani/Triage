@@ -11,6 +11,7 @@ import javafx.scene.input.KeyCode;
 import triage.App;
 import triage.blueprints.AudioId;
 import triage.generators.ObjectIds.GameObjectId;
+import triage.savefiles.SaveFileTags;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -130,6 +131,8 @@ public class KeyboardInputLogics {
                             StatsComponent stats = (StatsComponent) sentry.getComponent("stats");
                             if(stats.getHealth() <= 0) {
                                 currentApp.getGameState().getGameWorld().removeGameObject(sentry);
+                                int noOfCoins = Integer.parseInt(currentApp.getGameState().getSaveFile().readElements(SaveFileTags.COINS.toString()));
+                                currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(noOfCoins+100));
                             }
                         });
 
@@ -148,6 +151,8 @@ public class KeyboardInputLogics {
                             StatsComponent stats = (StatsComponent) sentry.getComponent("stats");
                             if(stats.getHealth() <= 0) {
                                 currentApp.getGameState().getGameWorld().removeGameObject(sentry);
+                                int noOfCoins = Integer.parseInt(currentApp.getGameState().getSaveFile().readElements(SaveFileTags.COINS.toString()));
+                                currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(noOfCoins+100));
                             }
                         });
 
@@ -187,6 +192,8 @@ public class KeyboardInputLogics {
                             StatsComponent stats = (StatsComponent) sentry.getComponent("stats");
                             if(stats.getHealth() <= 0) {
                                 currentApp.getGameState().getGameWorld().removeGameObject(sentry);
+                                int noOfCoins = Integer.parseInt(currentApp.getGameState().getSaveFile().readElements(SaveFileTags.COINS.toString()));
+                                currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(noOfCoins+100));
                             }
                         });
 
@@ -204,6 +211,8 @@ public class KeyboardInputLogics {
                         airSentries.forEach(sentry->{
                             StatsComponent stats = (StatsComponent) sentry.getComponent("stats");
                             if(stats.getHealth() <= 0) {
+                                int noOfCoins = Integer.parseInt(currentApp.getGameState().getSaveFile().readElements(SaveFileTags.COINS.toString()));
+                                currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), Integer.toString(noOfCoins+100));
                                 currentApp.getGameState().getGameWorld().removeGameObject(sentry);
                             }
                         });
