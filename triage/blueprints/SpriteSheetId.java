@@ -33,6 +33,8 @@ public enum SpriteSheetId {
 
     MUMMY,
 
+    PAUSE,
+
     UFO,
     COIN_IMAGE
 }

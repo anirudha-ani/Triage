@@ -78,6 +78,7 @@ public class GameWorldBluePrint {
         // Vec2d playerPositionOnWorld = new Vec2d(200,308);
         // loadPlayer(playerPositionOnWorld);
         loadGroundSentryEnemy();
+        loadPauseButton();
     }
 
     public void loadBackground(SpriteSheetId backgroundSpriteId) {
@@ -216,6 +217,21 @@ public class GameWorldBluePrint {
                 );
         currentGameState.getGameWorld().addGameObject(shopButton);
     }
+
+    public void loadPauseButton(){
+        GameObject pauseButton = new IconButtonGenerator(this.currentGameState)
+                .generate(
+                        GameObjectId.PAUSE_BUTTON,
+                        new Vec2d(850,20),
+                        new Vec2d(50,50),
+                        SpriteSheetId.PAUSE,
+                        new Vec2d(35,35),
+                        new Vec2d(857,28)
+                );
+        currentGameState.getGameWorld().addGameObject(pauseButton);
+    }
+
+
 
     public void loadUseButton(Vec2d buttonPosition, boolean boughtCharacter, boolean unlocked){
         if(boughtCharacter) {

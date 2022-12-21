@@ -20,6 +20,8 @@ public enum GameObjectId {
 
     SHOPPING_BUTTON,
 
+    PAUSE_BUTTON,
+
     USE_BUTTON,
     UNLOCK_BUTTON,
     TEXT,
