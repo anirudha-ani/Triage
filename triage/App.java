@@ -15,6 +15,7 @@ import triage.gamelogics.MouseInputLogics;
 import triage.generators.ObjectIds.GameObjectId;
 import triage.intelligence.AirSentryAI;
 import triage.intelligence.GroundSentryAI;
+import triage.savefiles.SaveFileTags;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,11 @@ public class App extends Application {
 
         // this.getGameState().getSaveFile().readElements(SaveFileTags.COINS.toString());
         // this.getGameState().getSaveFile().modifyElements(SaveFileTags.COINS.toString(), "3");
+        int coins = Integer.parseInt(this.getGameState().getSaveFile().readElements((SaveFileTags.COINS.toString())));
+        this.gameState.setCoinCount(coins);
+        String level = this.getGameState().getSaveFile().readElements(SaveFileTags.LEVEL.toString());
+        this.gameState.setLevel2Saved(level.equals("2"));
+
     }
 
     public App(String title, Vec2d windowSize, boolean debugMode, boolean fullscreen) {

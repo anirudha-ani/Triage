@@ -48,6 +48,12 @@ public class MouseInputLogics {
             if (clickedObjects.get(i).contains(GameObjectId.LOAD_BUTTON.toString())) {
                 this.currentApp.getScreenController().switchToLoadScreen();
             }
+            if (clickedObjects.get(i).contains(GameObjectId.LEVEL1_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToFirstLevelScreen();
+            }
+            if (clickedObjects.get(i).contains(GameObjectId.LEVEL2_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToSecondLevelScreen();
+            }
         }
     }
 

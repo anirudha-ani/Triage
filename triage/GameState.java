@@ -29,6 +29,8 @@ public class GameState {
     private long microSecondPassedLastTick = 0;
 
     private int coinCount=0;
+
+    private boolean isLevel2Saved;
     private long microSecondPassedLastKeyExecution = 0;
     private boolean firstTickHappened = false;
     private MapLoader map;
@@ -57,6 +59,8 @@ public class GameState {
         return gameScreen;
     }
 
+
+
     public void setGameScreen(Screen gameScreen) {
         this.gameScreen = gameScreen;
     }
@@ -75,6 +79,14 @@ public class GameState {
 
     public void setMicroSecondPassedLastTick(long secondPassedLastTick) {
         this.microSecondPassedLastTick = secondPassedLastTick;
+    }
+
+    public boolean isLevel2Saved() {
+        return isLevel2Saved;
+    }
+
+    public void setLevel2Saved(boolean level2Saved) {
+        isLevel2Saved = level2Saved;
     }
 
     public void setBoughtItem(boolean boughtItem) {
