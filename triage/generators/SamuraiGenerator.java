@@ -122,7 +122,7 @@ public class SamuraiGenerator {
             CollisionComponent gravityCollisionComponent = new CollisionComponent(player, gravityHitbox);
             gravityCollisionComponent.setTag("gravity");
 
-
+            player.setStatus("idle");
 
             player.addComponent(drawableComponent);
             player.addComponent(rayComponent);
@@ -136,7 +136,7 @@ public class SamuraiGenerator {
             player.addComponent(collisionComponent);
             player.addComponent(gravityCollisionComponent);
 
-            player.setStatus("idle");
+
 
             return player;
         }

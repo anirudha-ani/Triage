@@ -53,6 +53,7 @@ public class AirSentryGenerator {
 
         AIComponent aiComponent = new AIComponent(sentry);
 
+        sentry.setStatus("idle");
 
         sentry.addComponent(drawableComponent);
         sentry.addComponent(spriteComponent1);
@@ -61,7 +62,7 @@ public class AirSentryGenerator {
         sentry.addComponent(collisionComponent);
         sentry.addComponent(statsComponent);
 
-        sentry.setStatus("idle");
+
 
         return sentry;
     }
