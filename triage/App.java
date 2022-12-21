@@ -3,10 +3,12 @@ package triage;
 import engine.Application;
 import engine.components.AIComponent;
 import engine.components.AudioComponent;
+import engine.components.StatsComponent;
 import engine.gameobjects.GameObject;
 import engine.support.Vec2d;
 import javafx.scene.input.MouseEvent;
 import triage.controllers.ScreenController;
+import triage.controllers.ScreensNames;
 import triage.gamelogics.CollisionLogics;
 import triage.gamelogics.KeyboardInputLogics;
 import triage.gamelogics.MouseInputLogics;
@@ -73,6 +75,10 @@ public class App extends Application {
             });
         }
 
+        if(isGameOver() == true) {
+            screenController.reloadLevel();
+        }
+
     }
 
     @Override
@@ -87,6 +93,23 @@ public class App extends Application {
         getGameState().getGameScreen().onMouseReleased(e);
         MouseInputLogics clickLogics = new MouseInputLogics(this);
         clickLogics.executeClickReleaseLogic(e);
+    }
+
+    public boolean isGameOver() {
+
+        if(screenController.getCurrentScreen() == ScreensNames.LevelOne || screenController.getCurrentScreen() == ScreensNames.LevelTwo) {
+            GameObject player = getGameState().getGameWorld().getGameObject(GameObjectId.player.toString());
+            if(player != null) {
+                if(player.getTransformComponent().getPositionOnWorld().y > 540) {
+                    return true;
+                }
+                StatsComponent playerStat = (StatsComponent) player.getComponent("stats");
+                if(playerStat.getHealth()<=0) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void triggeringAI(long nanosSincePreviousTick) {

@@ -12,6 +12,7 @@ import triage.blueprints.GameWorldBluePrint;
 public class ScreenController {
 
     GameState currentGameState;
+    ScreensNames currentScreen = null;
 
     public ScreenController(GameState state) {
         this.currentGameState = state;
@@ -129,6 +130,7 @@ public class ScreenController {
     public void switchToFirstLevelScreen() {
         // This is necessary before switching to any new screen
         resetScreen();
+        currentScreen = ScreensNames.LevelOne;
 
         /**
          * I am registering this audio clip in gamestate because it needs to stay alive for the entire time
@@ -174,4 +176,16 @@ public class ScreenController {
         currentGameState.setGameWorld(new GameWorld());
     }
 
+    public void reloadLevel() {
+        if(currentScreen == ScreensNames.LevelOne) {
+            switchToFirstLevelScreen();
+        }
+        if(currentScreen == ScreensNames.LevelTwo) {
+            switchToSecondLevelScreen();
+        }
+    }
+
+    public ScreensNames getCurrentScreen() {
+        return currentScreen;
+    }
 }
