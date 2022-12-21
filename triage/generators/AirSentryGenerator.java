@@ -23,10 +23,11 @@ public class AirSentryGenerator {
                 new TransformComponent( new Vec2d(positionInWorld.x, positionInWorld.y), new Vec2d(32, 32)));
 
         sentry.setzIndex(0);
-        sentry.setDefaultColor(Color.RED);
-        sentry.setHoverColor(Color.ORANGE);
-
-        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(sentry);
+//        sentry.setDefaultColor(Color.RED);
+//        sentry.setHoverColor(Color.ORANGE);
+//
+//        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(sentry);
+//        sentry.addComponent(drawableComponent);
 
         StatsComponent statsComponent = new StatsComponent(50, 100);
 
@@ -55,7 +56,7 @@ public class AirSentryGenerator {
 
         sentry.setStatus("idle");
 
-        sentry.addComponent(drawableComponent);
+
         sentry.addComponent(spriteComponent1);
         sentry.addComponent(aiComponent);
         sentry.addComponent(physicsComponent);

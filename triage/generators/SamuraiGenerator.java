@@ -23,10 +23,11 @@ public class SamuraiGenerator {
 
         player.setzIndex(0);
         //TODO: Comment out the drawable thing to remove bounding box.
-        player.setDefaultColor(Color.RED);
-        player.setHoverColor(Color.ORANGE);
-
-        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(player);
+//        player.setDefaultColor(Color.RED);
+//        player.setHoverColor(Color.ORANGE);
+//
+//        DrawableRectangleComponent drawableComponent = new DrawableRectangleComponent(player);
+//        player.addComponent(drawableComponent);
 
         StatsComponent statsComponent = new StatsComponent(100, 100);
         statsComponent.setFacing("right");
@@ -68,7 +69,7 @@ public class SamuraiGenerator {
 
         player.setStatus("idle");
 
-        player.addComponent(drawableComponent);
+
         player.addComponent(rayComponent);
         //player.addComponent(spriteComponent3);
 
