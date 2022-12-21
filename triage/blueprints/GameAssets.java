@@ -45,6 +45,8 @@ public class GameAssets {
 
         Image pause = new Image("file:triage/spritesheets/pause.png", 512,512,false,true);
 
+        Image exit = new Image("file:triage/spritesheets/exit.png", 512,512,false,true);
+
         // Sprite height and width indicates individual sprite height and width in a sprite sheet
         gameResource.addSpriteSheet(SpriteSheetId.PLAYER_LEFT.toString(), playerLeft, 2, 2, 24, 24);
         gameResource.addSpriteSheet(SpriteSheetId.PLAYER_RIGHT.toString(), playerRight, 2, 2, 24, 24);
@@ -68,6 +70,7 @@ public class GameAssets {
         gameResource.addSpriteSheet(SpriteSheetId.MUMMY.toString(),mummyIdle,4,1,48,48);
         gameResource.addSpriteSheet(SpriteSheetId.UFO.toString(),UFO,1,1,200,200);
         gameResource.addSpriteSheet(SpriteSheetId.PAUSE.toString(),pause,1,1,512,512);
+        gameResource.addSpriteSheet(SpriteSheetId.EXIT.toString(),exit,1,1,512,512);
 
     }
 

@@ -35,6 +35,8 @@ public enum SpriteSheetId {
 
     PAUSE,
 
+    EXIT,
+
     UFO,
     COIN_IMAGE
 }
