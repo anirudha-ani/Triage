@@ -27,6 +27,9 @@ public enum GameObjectId {
 
     USEITEM_BUTTON,
     UNLOCK_BUTTON,
+
+    LEVEL1_BUTTON,
+    LEVEL2_BUTTON,
     TEXT,
 
     IMAGE,

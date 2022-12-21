@@ -131,6 +131,35 @@ public class ScreenController {
         currentGameState.setMicroSecondPassedLastTick(0);
     }
 
+    public void switchToLoadScreen() {
+        // This is necessary before switching to any new screen
+        resetScreenWithoutAudio();
+
+        currentScreen = ScreensNames.LoadScreen;
+
+        // Creating an instance of the new screen
+        currentGameState.setGameScreen(
+                new Screen(
+                        ScreensNames.LoadScreen.toString(),
+                        this.currentGameState.getCurrentApp().getCurrentScreenSize(),
+                        currentGameState.getGameWorld(),
+                        false));
+
+        // App -> Application (parent) also saves this value
+        this.currentGameState.getCurrentApp().setCurrentScreenId(ScreensNames.LoadScreen.toString());
+        this.currentGameState.getCurrentApp().setCurrentScreen(currentGameState.getGameScreen());
+
+        // Setting up the blueprint
+        this.currentGameState.setBluePrint(new GameWorldBluePrint(currentGameState));
+
+        // Invoking blueprint function to populate this particular screen
+        this.currentGameState.getBluePrint().populateLoadScreen();
+
+        // Resetting the time counter
+        currentGameState.setMicroSecondPassedLastTick(0);
+    }
+
+
     public void switchToFirstLevelScreen() {
         // This is necessary before switching to any new screen
         resetScreen();

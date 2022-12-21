@@ -27,6 +27,8 @@ public class GameState {
 
     GameWorldBluePrint bluePrint = null;
     private long microSecondPassedLastTick = 0;
+
+    private int coinCount=0;
     private long microSecondPassedLastKeyExecution = 0;
     private boolean firstTickHappened = false;
     private MapLoader map;
@@ -57,6 +59,14 @@ public class GameState {
 
     public void setGameScreen(Screen gameScreen) {
         this.gameScreen = gameScreen;
+    }
+
+    public void setCoinCount(int coinCount) {
+        this.coinCount = coinCount;
+    }
+
+    public int getCoinCount() {
+        return coinCount;
     }
 
     public long getMicroSecondPassedLastTick() {

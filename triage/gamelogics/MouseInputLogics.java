@@ -45,6 +45,9 @@ public class MouseInputLogics {
             if (clickedObjects.get(i).contains(GameObjectId.USEITEM_BUTTON.toString())) {
                 this.currentApp.getScreenController().switchToMenuScreen();
             }
+            if (clickedObjects.get(i).contains(GameObjectId.LOAD_BUTTON.toString())) {
+                this.currentApp.getScreenController().switchToLoadScreen();
+            }
         }
     }
 
