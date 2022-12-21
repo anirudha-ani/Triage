@@ -31,6 +31,7 @@ public class GameState {
     private int coinCount=0;
 
     private boolean isLevel2Saved;
+
     private long microSecondPassedLastKeyExecution = 0;
     private boolean firstTickHappened = false;
     private MapLoader map;

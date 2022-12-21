@@ -9,6 +9,7 @@ import triage.App;
 import triage.blueprints.AudioId;
 import triage.generators.BulletGenerator;
 import triage.generators.ObjectIds.GameObjectId;
+import triage.savefiles.SaveFileTags;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,7 @@ public class MouseInputLogics {
                 this.currentApp.getScreenController().switchToMenuScreen();
             }
             if (clickedObjects.get(i).contains(GameObjectId.UNLOCK_BUTTON.toString())) {
+                currentApp.getGameState().getSaveFile().modifyElements(SaveFileTags.SHURIKEN.toString(), Integer.toString(1));
                 this.currentApp.getGameState().setBoughtItem(true);
                 this.currentApp.getScreenController().switchToCartScreen();
             }

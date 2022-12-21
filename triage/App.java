@@ -40,6 +40,8 @@ public class App extends Application {
         this.gameState.setCoinCount(coins);
         String level = this.getGameState().getSaveFile().readElements(SaveFileTags.LEVEL.toString());
         this.gameState.setLevel2Saved(level.equals("2"));
+        String shuriken = this.getGameState().getSaveFile().readElements(SaveFileTags.SHURIKEN.toString());
+        this.gameState.setBoughtItem(shuriken.equals("1"));
 
     }
 

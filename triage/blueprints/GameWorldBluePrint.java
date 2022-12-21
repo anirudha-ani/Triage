@@ -64,7 +64,7 @@ public class GameWorldBluePrint {
         loadBackground(SpriteSheetId.BACKGROUND_GALAXY);
         loadBackgroundCart(SpriteSheetId.CART_BG);
         loadLevel1Button(new Vec2d(430,200), true);
-        loadLevel2Button(new Vec2d(430,250),false);
+        loadLevel2Button(new Vec2d(430,250),currentGameState.isLevel2Saved());
 
     }
 
