@@ -2,6 +2,7 @@ package triage;
 
 import engine.Application;
 import engine.components.AIComponent;
+import engine.components.AudioComponent;
 import engine.gameobjects.GameObject;
 import engine.support.Vec2d;
 import javafx.scene.input.MouseEvent;
@@ -59,6 +60,18 @@ public class App extends Application {
         CollisionLogics collisionLogics = new CollisionLogics(getGameState());
         collisionLogics.executeCollisionLogic();
         triggeringAI(nanosSincePreviousTick);
+        ArrayList<AudioComponent> runningAudio = getGameState().getRunningAudio();
+
+
+        // This hacky code is there to stop audio from playing in the middle of a video sequence
+        if(gameState.isVideoPlaying == false ) {
+            runningAudio.forEach(audioComponent -> {
+                if(audioComponent.isPlaying == false && audioComponent.playedAfterVideo == false) {
+                    audioComponent.playedAfterVideo = true;
+                    audioComponent.playAudio();
+                }
+            });
+        }
 
     }
 

@@ -56,6 +56,12 @@ public class ScreenController {
         switchToMenuScreen();
     }
 
+    public void playEndCredit() {
+        currentGameState.playVideo("triage/videofiles/EndCredit.mp4", false);
+
+        switchToMenuScreen();
+    }
+
     /**
      * These switch screen methods do three things
      * Reset the current screen/GameWorld
@@ -69,7 +75,7 @@ public class ScreenController {
 
         AudioComponent audioClip = new AudioComponent("triage/audiofiles/MainMenu.mp3", true);
         audioClip.setLocalId(AudioId.BACKGROUND_STAGE1.toString());
-        audioClip.playAudio();
+//        audioClip.playAudio();
         currentGameState.addAudio(audioClip);
 
         // Creating an instance of the new screen
@@ -130,7 +136,7 @@ public class ScreenController {
          */
         AudioComponent audioClip = new AudioComponent("triage/audiofiles/Dramatic-suspense-background-music.mp3", true);
         audioClip.setLocalId(AudioId.BACKGROUND_STAGE1.toString());
-        audioClip.playAudio();
+        // audioClip.playAudio();
         currentGameState.addAudio(audioClip);
 
         // Creating an instance of the new screen

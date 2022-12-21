@@ -10,6 +10,9 @@ public class AudioComponent extends Component {
     String source = null;
     boolean looping = false;
     String localId = "default";
+    public boolean playedAfterVideo = false;
+
+    public boolean isPlaying = false;
 
     MediaPlayer mediaPlayer;
     public AudioComponent(GameObject gameObject) {
@@ -22,6 +25,7 @@ public class AudioComponent extends Component {
     }
 
     public void playAudio() {
+        isPlaying = true;
         Media mediaFile = new Media(new File(this.source).toURI().toString());
         mediaPlayer = new MediaPlayer(mediaFile);
         mediaPlayer.play();
@@ -33,10 +37,18 @@ public class AudioComponent extends Component {
                     mediaPlayer.play();
                 }
             });
+        } else {
+            mediaPlayer.setOnEndOfMedia(new Runnable() {
+                @Override
+                public void run() {
+                    isPlaying = false;
+                }
+            });
         }
     }
 
     public void stopAudio() {
+        isPlaying = false;
         mediaPlayer.stop();
     }
 

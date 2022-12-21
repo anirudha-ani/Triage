@@ -23,6 +23,8 @@ public class GameState {
     private GameWorld gameWorld = null;
     private Screen gameScreen = null;
 
+    public boolean isVideoPlaying = false;
+
     GameWorldBluePrint bluePrint = null;
     private long microSecondPassedLastTick = 0;
     private long microSecondPassedLastKeyExecution = 0;
@@ -126,6 +128,10 @@ public class GameState {
         runningAudio.add(audioComponent);
     }
 
+    public ArrayList<AudioComponent> getRunningAudio() {
+        return runningAudio;
+    }
+
     public void removeAudio(AudioId audioId) {
         runningAudio.removeIf(audioComponent -> (audioComponent.getLocalId() == audioId.toString()));
     }
@@ -138,9 +144,11 @@ public class GameState {
     }
 
     public void playVideo(String source, boolean isLooping) {
+        this.isVideoPlaying = true;
         videoPlayer.setSource(source);
         videoPlayer.setLooping(isLooping);
         videoPlayer.playVideo(
+                this,
                 getCurrentApp().getScene(),
                 getCurrentApp().getStage(),
                 getCurrentApp().getCurrentScreenSize().x,
