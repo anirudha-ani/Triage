@@ -1,10 +1,35 @@
-# Triage Final Handin README
+# Triage: 2D Game Engine Using Java
 
 ---
-### Already uploaded demo onto Slack: https://youtu.be/Yx9lxA2dsVA
+### Demo of the game built on this engine: https://youtu.be/Yx9lxA2dsVA
 ---
 
-Instructions on how to run: 
-You can find details in the Instructions file
+### This project is tested on this configuration -
+
+1. Oracle OpenJDK version 11.0.16
+2. JavaFX SDK 19
+3. MacOS 12.2.1 Monterey
+4. IntelliJ Idea 2022.2.2 Build #IU-222.4167.29, built on September 13, 2022
+
+### Running the Game -
+
+1. Open the project and make sure all the dependency is setup correctly
+2. Run the Main.java file located in <rootDirectory>/triage/.
+3. You can skip the cut scene by pressing any button
+4. Press start to play the game
+5. Buy the shuriken from the store
+
+### Movement -
+
+6. You can use W to jump and A and D for lateral movement
+7. If the player is on platform it can jump
+8. If the player is not on platform it can not jump but lateral movements work.
+
+### Shooting-
+
+9. To shoot - first aim by pressing mouse right click, then release the button to shoot projectile
+10. To slash  - press L for slash attack
+
+
 
 Playtest report is added to another file.
